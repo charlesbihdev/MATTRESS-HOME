@@ -1,5 +1,7 @@
 import { Nunito } from 'next/font/google'
 import '@/app/global.css'
+import Navbar from './Navbar'
+import Footer from './(app)/Footer'
 
 const nunitoFont = Nunito({
     subsets: ['latin'],
@@ -9,13 +11,17 @@ const nunitoFont = Nunito({
 const RootLayout = ({ children }) => {
     return (
         <html lang="en" className={nunitoFont.className}>
-            <body className="antialiased">{children}</body>
+            <body className="antialiased bg-[#f0eeee]">
+                <Navbar />
+                {children}
+                <Footer />
+            </body>
         </html>
     )
 }
 
 export const metadata = {
-    title: 'Laravel',
+    title: 'Matress HOme',
 }
 
 export default RootLayout
