@@ -4,39 +4,39 @@ const FeaturedProducts = () => {
     const products = [
         {
             id: 1,
-            name: 'Beoplay M5 Bluetooth Speaker',
+            name: 'Floor Model - Scott Living Mattress',
             price: '$99.00',
             imageUrl:
-                'https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/item-cards/4/product-1.png',
+                'https://www.mattressfirm.com/_next/image?url=https%3A%2F%2Fimages-us-prod.cms.commerce.dynamics.com%2Fcms%2Fapi%2Fcncgmclkfv%2FimageFileData%2Fsearch%3FfileName%3D%2FProducts%2F143946P%2520%255E%2520%2520%255E%2520Queen%2520%255E%2520%2520%255E%2520Prime_000_001.png%26fallback%3D%2FProducts%2F143946P_000_001.png',
             isNew: true,
             rating: 4,
         },
         {
             id: 2,
-            name: 'Apple Smart Watch 6 - Special Edition',
+            name: 'Sealy Posturepedic® High Plush Mattress',
             price: '$299.00',
             imageUrl:
-                'https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/item-cards/4/product-2.png',
+                'https://www.mattressfirm.com/_next/image?url=https%3A%2F%2Fimages-us-prod.cms.dynamics365commerce.ms%2Fcms%2Fapi%2Fcncgmclkfv%2FimageFileData%2Fsearch%3FfileName%3D%2FProducts%2F143959P%2520%255E%2520%2520%255E%2520Queen%2520%255E%2520%2520%255E%2520Prime_000_001.png%26fallback%3D%2FProducts%2F143959P_000_001.png',
             isNew: false,
             rating: 5,
         },
         {
             id: 3,
-            name: 'Beylob 90 Speaker',
+            name: "Sleepy's By Sealy Memory Foam",
             price: '$199.00',
             imageUrl:
-                'https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/item-cards/4/product-3.png',
+                'https://www.americanmattress.com/cdn/shop/files/BeautyrestHarmonyFremont13_Mattresscroppedroomshot_1400x.png',
             isNew: false,
             rating: 3,
         },
         {
             id: 3,
-            name: 'Beylob 90 Speaker',
+            name: "Sleepy's Medium Euro Top Mattress",
             price: '$199.00',
             imageUrl:
-                'https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/item-cards/4/product-3.png',
+                'https://www.mattressfirm.com/_next/image?url=https%3A%2F%2Fimages-us-prod.cms.commerce.dynamics.com%2Fcms%2Fapi%2Fcncgmclkfv%2FimageFileData%2Fsearch%3FfileName%3D%2FProducts%2F144077P%2520%255E%2520%2520%255E%2520Queen%2520%255E%2520%2520%255E%2520Prime_000_001.png%26fallback%3D%2FProducts%2F144077P_000_001.png',
             isNew: true,
-            rating: 3,
+            rating: 4,
         },
     ]
 
@@ -56,8 +56,10 @@ const FeaturedProducts = () => {
 
                     <div className="grid grid-cols-2 gap-6 mt-10 lg:mt-16 lg:gap-4 lg:grid-cols-4">
                         {products.map(product => (
-                            <div key={product.id} className="relative group">
-                                <div className="overflow-hidden aspect-w-1 aspect-h-1">
+                            <div
+                                key={product.id}
+                                className="relative group mb-12 md:mb-1">
+                                <div className="overflow-hidden aspect-w-1 aspect-h-1 h-4/5">
                                     <img
                                         className="object-cover w-full h-full transition-all duration-300 group-hover:scale-125"
                                         src={product.imageUrl}
@@ -66,8 +68,8 @@ const FeaturedProducts = () => {
                                 </div>
                                 {product.isNew && (
                                     <div className="absolute left-3 top-3">
-                                        <p className="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-gray-900 uppercase bg-white rounded-full">
-                                            New
+                                        <p className="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-gray-900 uppercase bg-red-500 rounded-full">
+                                            Hot
                                         </p>
                                     </div>
                                 )}

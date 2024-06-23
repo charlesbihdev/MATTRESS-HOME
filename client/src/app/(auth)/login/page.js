@@ -15,7 +15,7 @@ const Login = () => {
 
     const { login } = useAuth({
         middleware: 'guest',
-        redirectIfAuthenticated: '/verify-email',
+        redirectIfAuthenticated: '/dashboard',
     })
 
     const [email, setEmail] = useState('')
@@ -79,10 +79,7 @@ const Login = () => {
                         autoComplete="current-password"
                     />
 
-                    <InputError
-                        messages={errors.password}
-                        className="mt-2"
-                    />
+                    <InputError messages={errors.password} className="mt-2" />
                 </div>
 
                 {/* Remember Me */}
@@ -119,5 +116,7 @@ const Login = () => {
         </>
     )
 }
+
+Login.noLayout = true
 
 export default Login
