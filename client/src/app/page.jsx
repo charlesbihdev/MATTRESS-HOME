@@ -5,6 +5,7 @@ import FeaturedProducts from './FeaturedProducts'
 import brandData from '@/data/BrandData'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import FloatingButton from '@/components/FloatingButton'
 
 export const metadata = {
     title: 'Mattress Home',
@@ -31,7 +32,7 @@ const Home = () => {
 
                 <FeaturedProducts />
             </main>
-
+            <FloatingButton />
             <Footer />
         </>
     )

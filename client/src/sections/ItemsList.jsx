@@ -1,17 +1,18 @@
 'use client'
+import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import items from '../data/ProductData' // Assuming this import is correct
+import items from '../data/ProductData' // Ensure this import path is correct
 
 // Define category colors and names
 const getCategoryLabelColor = category => {
     switch (category) {
         case 1:
-            return 'bg-violet-500'
+            return 'bg-[#7e00a9]'
         case 2:
             return 'bg-red-500'
         case 3:
-            return 'bg-yellow-400'
+            return 'bg-[#f6d00c]'
         default:
             return 'bg-black'
     }
@@ -26,7 +27,7 @@ const getCategoryName = category => {
         case 3:
             return 'Ashfoam'
         default:
-            return 'Foreign Brand'
+            return 'Foreign Brands'
     }
 }
 
@@ -39,19 +40,36 @@ const fetchCategory = [
 ]
 
 const ItemList = () => {
-    const [filterList, setFilterList] = useState([]) // State for selected filters
-    const [filteredItems, setFilteredItems] = useState([]) // State for filtered items
+    const searchParams = useSearchParams()
+    const router = useRouter()
+    const pathname = usePathname()
+
+    const [filterList, setFilterList] = useState(() => {
+        const filters = searchParams.get('filters')
+        return filters ? filters.split(',').map(Number) : []
+    })
+    const [filteredItems, setFilteredItems] = useState(items)
+
+    const updateQueryString = filters => {
+        const params = new URLSearchParams(searchParams)
+        if (filters.length) {
+            params.set('filters', filters.join(','))
+        } else {
+            params.delete('filters')
+        }
+        router.replace(`${pathname}?${params.toString()}`, undefined, {
+            shallow: true,
+        })
+    }
 
     // Handle category click event
     const handleCategoryClick = id => {
-        if (filterList.includes(id)) {
-            // Remove category from filterList
-            const updatedFilter = filterList.filter(filter => filter !== id)
-            setFilterList(updatedFilter)
-        } else {
-            // Add category to filterList
-            setFilterList([...filterList, id])
-        }
+        const updatedFilterList = filterList.includes(id)
+            ? filterList.filter(filter => filter !== id)
+            : [...filterList, id]
+
+        setFilterList(updatedFilterList)
+        updateQueryString(updatedFilterList)
     }
 
     // Effect to filter items based on filterList changes
@@ -69,13 +87,21 @@ const ItemList = () => {
 
     return (
         <>
+            <h2 className="text-xl text-center mb-5 font-bold">
+                Choose a filter:
+            </h2>
+
             {/* Render Filters component */}
-            <div className="overflow-x-auto flex justify-around mb-8">
+            <div className=" flex justify-center gap-3 mb-8 flex-wrap mx-3">
                 {fetchCategory.map(category => (
                     <div
                         onClick={() => handleCategoryClick(category.id)}
                         key={category.id}
-                        className={`border border-black px-5 py-2 rounded-lg cursor-pointer ${filterList.includes(category.id) ? 'bg-yellow-400 text-black' : ''} `}>
+                        className={`border-2 border-[#f6d00c] font-bold px-5 py-1 rounded-lg cursor-pointer min-w-36 text-center ${
+                            filterList.includes(category.id)
+                                ? 'bg-black text-white'
+                                : 'bg-white'
+                        } `}>
                         {category.name}
                     </div>
                 ))}
@@ -94,7 +120,9 @@ const ItemList = () => {
                             className="relative card bg-white shadow-md rounded-lg overflow-hidden mb-6 lg:mb-4 w-[320px] lg:w-[250px]"
                             style={{ minHeight: '420px' }}>
                             <div
-                                className={`absolute top-0 right-0 text-white text-sm font-bold px-2 py-1 rounded-bl ${getCategoryLabelColor(item.category)}`}>
+                                className={`absolute top-0 right-0 text-white text-sm font-bold px-2 py-1 rounded-bl ${getCategoryLabelColor(
+                                    item.category,
+                                )}`}>
                                 {getCategoryName(item.category)}
                             </div>
                             <img
@@ -113,11 +141,11 @@ const ItemList = () => {
                                 <p className="text-gray-700 text-sm mb-4">
                                     {item.description}
                                 </p>
-                                <Link
+                                <button
                                     href={item.link}
                                     className=" inline-block px-4 py-2 text-sm text-white bg-gray-700 rounded-md hover:bg-gray-800">
                                     View Product
-                                </Link>
+                                </button>
                             </div>
                         </div>
                     </Link>

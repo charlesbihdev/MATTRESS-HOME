@@ -22,5 +22,7 @@ const Shop = () => {
         </>
     )
 }
-
+export const metadata = {
+    title: 'Shop | Matress Home',
+}
 export default Shop

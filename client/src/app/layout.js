@@ -21,7 +21,7 @@ const RootLayout = ({ children }) => {
 }
 
 export const metadata = {
-    title: 'Matress HOme',
+    title: 'Matress Home',
 }
 
 export default RootLayout

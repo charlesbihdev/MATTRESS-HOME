@@ -5,28 +5,29 @@ const brandData = [
         name: 'Royal Foam',
         imageUrl: '/images/royalfoam.jpg',
         description: 'Royal foam mattresses for luxurious sleep',
-        url: '/brand/royalfoam',
+        url: '/shop?filters=1',
     },
+
     {
         id: 2,
-        name: 'Ash Foam',
-        imageUrl: '/images/ashfoam.jpg',
-        description: 'Ash foam mattresses for premium comfort',
-        url: '/brand/ashfoam',
-    },
-    {
-        id: 3,
         name: 'Latex Foam',
         imageUrl: '/images/latexfoam.jpg',
         description: 'Latex foam mattresses for your comfort',
-        url: '/brand/latexfoam',
+        url: '/shop?filters=2',
+    },
+    {
+        id: 3,
+        name: 'Ash Foam',
+        imageUrl: '/images/ashfoam.jpg',
+        description: 'Ash foam mattresses for premium comfort',
+        url: '/shop?filters=3',
     },
     {
         id: 4,
         name: 'Other Brand',
         imageUrl: '/images/sleepscience.jpg',
         description: 'Other brand mattresses for various needs',
-        url: '/brand/sleepscience',
+        url: '/shop?filters=4',
     },
 ]
 
