@@ -2,11 +2,13 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ItemsList from '../../sections/ItemsList'
 import FloatingButton from '@/components/FloatingButton'
+import items from '../../data/ProductData'
 
 const fetchCategory = [
-    { id: 1, name: 'Category 1' },
-    { id: 2, name: 'Category 2' },
-    { id: 3, name: 'Category 3' },
+    { id: 1, name: 'Royal Foam' },
+    { id: 2, name: 'Latex Foam' },
+    { id: 3, name: 'Ashfoam' },
+    { id: 4, name: 'Foreign Brand' },
 ]
 
 const Shop = () => {
@@ -14,7 +16,7 @@ const Shop = () => {
         <>
             <Navbar />
             <div className="mt-[160px] sm:!mt-[170px] lg:!mt-[190px]">
-                <ItemsList />
+                <ItemsList items={items} fetchCategory={fetchCategory} />
             </div>
             <FloatingButton />
 

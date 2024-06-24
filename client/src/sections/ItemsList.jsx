@@ -2,7 +2,7 @@
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import items from '../data/ProductData' // Ensure this import path is correct
+import { Pagination } from 'flowbite-react'
 
 // Define category colors and names
 const getCategoryLabelColor = category => {
@@ -31,15 +31,7 @@ const getCategoryName = category => {
     }
 }
 
-// Static list of categories
-const fetchCategory = [
-    { id: 1, name: 'Royal Foam' },
-    { id: 2, name: 'Latex Foam' },
-    { id: 3, name: 'Ashfoam' },
-    { id: 4, name: 'Foreign Brand' },
-]
-
-const ItemList = () => {
+const ItemList = ({ items, fetchCategory }) => {
     const searchParams = useSearchParams()
     const router = useRouter()
     const pathname = usePathname()
@@ -48,17 +40,27 @@ const ItemList = () => {
         const filters = searchParams.get('filters')
         return filters ? filters.split(',').map(Number) : []
     })
+
+    const [page, setPage] = useState(() => {
+        const pageParam = searchParams.get('page')
+        return pageParam ? Number(pageParam) : 1
+    })
+
+    const perPage = 6
+
     const [filteredItems, setFilteredItems] = useState(items)
 
-    const updateQueryString = filters => {
+    const updateQueryString = (filters, page) => {
         const params = new URLSearchParams(searchParams)
         if (filters.length) {
             params.set('filters', filters.join(','))
         } else {
             params.delete('filters')
         }
-        router.replace(`${pathname}?${params.toString()}`, undefined, {
+        params.set('page', page)
+        router.push(`${pathname}?${params.toString()}`, undefined, {
             shallow: true,
+            scroll: false,
         })
     }
 
@@ -69,21 +71,32 @@ const ItemList = () => {
             : [...filterList, id]
 
         setFilterList(updatedFilterList)
-        updateQueryString(updatedFilterList)
+        setPage(1) // Reset to first page when filters change
+        updateQueryString(updatedFilterList, 1)
     }
 
-    // Effect to filter items based on filterList changes
+    // Handle page change
+    const handlePageChange = newPage => {
+        setPage(newPage)
+        updateQueryString(filterList, newPage)
+    }
+
+    // Effect to filter items based on filterList changes and handle pagination
     useEffect(() => {
+        let itemsToDisplay = items
         if (filterList.length > 0) {
-            const filteredItems = items.filter(item =>
+            itemsToDisplay = items.filter(item =>
                 filterList.includes(item.category),
             )
-            setFilteredItems(filteredItems)
-        } else {
-            // If no filters selected, show all items
-            setFilteredItems(items)
         }
-    }, [filterList])
+        setFilteredItems(itemsToDisplay)
+    }, [filterList, items])
+
+    // Calculate the total pages and the items to display for the current page
+    const start = (page - 1) * perPage
+    const end = start + perPage
+    const itemsToShow = filteredItems.slice(start, end)
+    const totalPages = Math.ceil(filteredItems.length / perPage)
 
     return (
         <>
@@ -92,7 +105,7 @@ const ItemList = () => {
             </h2>
 
             {/* Render Filters component */}
-            <div className=" flex justify-center gap-3 mb-8 flex-wrap mx-3">
+            <div className="flex justify-center gap-3 mb-8 flex-wrap mx-3">
                 {fetchCategory.map(category => (
                     <div
                         onClick={() => handleCategoryClick(category.id)}
@@ -111,13 +124,13 @@ const ItemList = () => {
             <div
                 id="items"
                 className="flex gap-3 flex-wrap justify-around mx-4 sm:mx-12">
-                {filteredItems.map(item => (
+                {itemsToShow.map(item => (
                     <Link
                         href={item.link}
                         key={item.id}
                         className="block transform transition-transform duration-300 hover:scale-105">
                         <div
-                            className="relative card bg-white shadow-md rounded-lg overflow-hidden mb-6 lg:mb-4 w-[320px] lg:w-[250px]"
+                            className="relative card bg-white shadow-md rounded-lg overflow-hidden mb-6 lg:mb-4 w-[320px] lg:w-[260px]"
                             style={{ minHeight: '420px' }}>
                             <div
                                 className={`absolute top-0 right-0 text-white text-sm font-bold px-2 py-1 rounded-bl ${getCategoryLabelColor(
@@ -143,7 +156,7 @@ const ItemList = () => {
                                 </p>
                                 <button
                                     href={item.link}
-                                    className=" inline-block px-4 py-2 text-sm text-white bg-gray-700 rounded-md hover:bg-gray-800">
+                                    className="inline-block px-4 py-2 text-sm text-white bg-gray-700 rounded-md hover:bg-gray-800">
                                     View Product
                                 </button>
                             </div>
@@ -151,6 +164,15 @@ const ItemList = () => {
                     </Link>
                 ))}
             </div>
+            <Pagination
+                className="block my-8 mx-auto"
+                currentPage={page}
+                layout="pagination"
+                nextLabel="Next"
+                onPageChange={handlePageChange}
+                previousLabel="Previous"
+                totalPages={String(totalPages)}
+            />
         </>
     )
 }
