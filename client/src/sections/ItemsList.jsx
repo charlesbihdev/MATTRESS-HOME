@@ -1,6 +1,7 @@
 'use client'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
+import './Pagination.css'
 import { useState, useEffect } from 'react'
 import { Pagination } from 'flowbite-react'
 
@@ -46,7 +47,7 @@ const ItemList = ({ items, fetchCategory }) => {
         return pageParam ? Number(pageParam) : 1
     })
 
-    const perPage = 6
+    const perPage = 2
 
     const [filteredItems, setFilteredItems] = useState(items)
 
@@ -103,7 +104,6 @@ const ItemList = ({ items, fetchCategory }) => {
             <h2 className="text-xl text-center mb-5 font-bold">
                 Choose a filter:
             </h2>
-
             {/* Render Filters component */}
             <div className="flex justify-center gap-3 mb-8 flex-wrap mx-3">
                 {fetchCategory.map(category => (
@@ -112,14 +112,14 @@ const ItemList = ({ items, fetchCategory }) => {
                         key={category.id}
                         className={`border-2 border-[#f6d00c] font-bold px-5 py-1 rounded-lg cursor-pointer min-w-36 text-center ${
                             filterList.includes(category.id)
-                                ? 'bg-black text-white'
+                                ? getCategoryLabelColor(category.id) +
+                                  ' text-white'
                                 : 'bg-white'
                         } `}>
                         {category.name}
                     </div>
                 ))}
             </div>
-
             {/* Render filtered items */}
             <div
                 id="items"
@@ -165,7 +165,8 @@ const ItemList = ({ items, fetchCategory }) => {
                 ))}
             </div>
             <Pagination
-                className="block mx-3 my-8 mx-auto"
+                id="pagination"
+                className="block mb-8 mx-4 md:mx-10"
                 currentPage={page}
                 layout="pagination"
                 nextLabel="Next"

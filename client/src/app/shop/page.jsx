@@ -15,7 +15,7 @@ const Shop = () => {
     return (
         <>
             <Navbar />
-            <div className="mt-[160px] sm:!mt-[170px] lg:!mt-[190px]">
+            <div className="mt-[160px]">
                 <ItemsList items={items} fetchCategory={fetchCategory} />
             </div>
             <FloatingButton />
