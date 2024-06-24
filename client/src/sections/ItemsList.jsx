@@ -165,7 +165,7 @@ const ItemList = ({ items, fetchCategory }) => {
                 ))}
             </div>
             <Pagination
-                className="block my-8 mx-auto"
+                className="block mx-3 my-8 mx-auto"
                 currentPage={page}
                 layout="pagination"
                 nextLabel="Next"
