@@ -30,7 +30,7 @@ const FeaturedProducts = () => {
             rating: 3,
         },
         {
-            id: 3,
+            id: 4,
             name: "Sleepy's Medium Euro Top Mattress",
             price: '$199.00',
             imageUrl:

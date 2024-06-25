@@ -13,7 +13,7 @@ const getCategoryLabelColor = category => {
         case 2:
             return 'bg-red-500'
         case 3:
-            return 'bg-[#f6d00c]'
+            return 'bg-[#f6d00c] !text-black'
         default:
             return 'bg-black'
     }
@@ -47,7 +47,7 @@ const ItemList = ({ items, fetchCategory }) => {
         return pageParam ? Number(pageParam) : 1
     })
 
-    const perPage = 2
+    const perPage = 8
 
     const [filteredItems, setFilteredItems] = useState(items)
 
@@ -123,10 +123,10 @@ const ItemList = ({ items, fetchCategory }) => {
             {/* Render filtered items */}
             <div
                 id="items"
-                className="flex gap-3 flex-wrap justify-around mx-4 sm:mx-12">
+                className="flex gap-3 flex-wrap justify-center mx-4 sm:mx-12">
                 {itemsToShow.map(item => (
                     <Link
-                        href={item.link}
+                        href={`/product/${item.id}`}
                         key={item.id}
                         className="block transform transition-transform duration-300 hover:scale-105">
                         <div

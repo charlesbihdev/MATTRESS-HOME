@@ -1,4 +1,5 @@
 // src/data/brandData.js
+
 const brandData = [
     {
         id: 1,

@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import Link from 'next/link'
+import NavbarLinks from './NavbarLinks'
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -74,18 +75,7 @@ const Navbar = () => {
             </div>
             <div className="hidden md:block w-full">
                 <div className="text-lg ml-10 flex justify-center items-baseline space-x-8 !mx-auto">
-                    <NavLink href="/">Home</NavLink>
-                    <NavLink href="/shop">Shop</NavLink>
-                    <NavLink href="#" prefetch={false}>
-                        Services
-                    </NavLink>
-                    <NavLink href="#" prefetch={false}>
-                        About
-                    </NavLink>
-
-                    <NavLink href="#" prefetch={false}>
-                        Contact
-                    </NavLink>
+                    <NavbarLinks />
                 </div>
             </div>
 
@@ -93,33 +83,11 @@ const Navbar = () => {
             {isOpen && (
                 <div className="md:hidden">
                     <div className="absolute px-2 pb-3 space-y-1 pt-2 z-10 bg-[#f40000] w-full">
-                        <NavLink href="/">Home</NavLink>
-                        <NavLink href="/shop">Shop</NavLink>
-                        <NavLink href="#" prefetch={false}>
-                            Services
-                        </NavLink>
-                        <NavLink href="#" prefetch={false}>
-                            About
-                        </NavLink>
-
-                        <NavLink href="#" prefetch={false}>
-                            Contact
-                        </NavLink>
+                        <NavbarLinks />
                     </div>
                 </div>
             )}
         </header>
-    )
-}
-
-const NavLink = ({ href, children, prefetch }) => {
-    return (
-        <Link
-            className="text-white hover:text-[#f6d00c] hover:border-b border-[#f6d00c] dark:hover:text-white px-3 py-1 mb-1 rounded-md text-lg font-bold block"
-            href={href}
-            prefetch={prefetch}>
-            {children}
-        </Link>
     )
 }
 
