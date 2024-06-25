@@ -4,6 +4,7 @@ import Link from 'next/link'
 import './Pagination.css'
 import { useState, useEffect } from 'react'
 import { Pagination } from 'flowbite-react'
+import { useFetch } from '@/hooks/fetch'
 
 // Define category colors and names
 const getCategoryLabelColor = category => {
@@ -36,6 +37,8 @@ const ItemList = ({ items, fetchCategory }) => {
     const searchParams = useSearchParams()
     const router = useRouter()
     const pathname = usePathname()
+    const { products, productsError } = useFetch()
+    console.log(products)
 
     const [filterList, setFilterList] = useState(() => {
         const filters = searchParams.get('filters')

@@ -1,8 +1,11 @@
+'use client'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ItemsList from '../../sections/ItemsList'
 import FloatingButton from '@/components/FloatingButton'
-import items from '../../data/ProductData'
+// import products from '../../data/ProductData'
+import { useFetch } from '@/hooks/fetch'
+import items from '@/data/ProductData'
 
 const fetchCategory = [
     { id: 1, name: 'Royal Foam' },
@@ -24,7 +27,7 @@ const Shop = () => {
         </>
     )
 }
-export const metadata = {
-    title: 'Shop | Matress Home',
-}
+// export const metadata = {
+//     title: 'Shop | Matress Home',
+// }
 export default Shop

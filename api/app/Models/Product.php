@@ -11,7 +11,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description', 'category'];
 
     public function sizes()
     {
@@ -28,5 +28,10 @@ class Product extends Model
     public function pictures()
     {
         return $this->hasMany(ProductPicture::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import items from '@/data/ProductData'
 import BackArrow from '@/components/BackArrow'

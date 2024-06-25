@@ -18,8 +18,8 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
+            'category_id' => $this->faker->numberBetween(1, 4),
             'description' => $this->faker->sentence,
-            // 'image' => $this->faker->imageUrl,
             'created_at' => now(),
             'updated_at' => now(),
         ];

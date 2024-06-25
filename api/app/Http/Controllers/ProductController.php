@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Size;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -31,7 +32,8 @@ class ProductController extends Controller
             'prices.size',
             'pictures' => function ($query) {
                 $query->orderBy('id', 'asc')->limit(1); // Fetch the first image
-            }
+            },
+
         ])->get();
 
         return response()->json(['products' => $products]);
@@ -43,6 +45,8 @@ class ProductController extends Controller
         // Load sizes and prices related to the product
         $product->load('sizes');
         $product->load('pictures');
+        // $product->load('category');
+
 
         return response()->json(['product' => $product]);
     }
@@ -57,6 +61,7 @@ class ProductController extends Controller
             'product' => [
                 'id' => $product->id,
                 'name' => $product->name,
+                'category' => $product->category,
                 'description' => $product->description,
                 'size' => $size->name,
                 'price' => $price,
@@ -64,5 +69,12 @@ class ProductController extends Controller
 
             ],
         ]);
+    }
+
+    public function getCategories()
+    {
+        // Fetch all categories
+        $categories = Category::all();
+        return response()->json(['categories' => $categories]);
     }
 }

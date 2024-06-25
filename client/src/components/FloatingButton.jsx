@@ -1,4 +1,4 @@
-import { PhoneArrowUpRightIcon } from '@heroicons/react/24/outline'
+// import { PhoneArrowUpRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 
 const FloatingButton = () => {
@@ -28,7 +28,10 @@ const FloatingButton = () => {
                 href="tel:+233548715098">
                 <div>
                     {/* <EyeSlashIcon className="w-5 h-5 text-black" /> */}
-                    <PhoneArrowUpRightIcon class="h-8 w-8 text-black" />
+                    <img
+                        src="/svg/whatsapp-black.svg"
+                        className="w-8 h-8 text-black"
+                    />
                 </div>
             </Link>
         </div>
