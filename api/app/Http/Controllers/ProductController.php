@@ -39,6 +39,36 @@ class ProductController extends Controller
         return response()->json(['products' => $products]);
     }
 
+
+    // get products with limit 
+    public function getProductsWithLimit($limit)
+    {
+        // Fetch products with a limit
+        $products = Product::with([
+            'prices' => function ($query) {
+                $query->whereIn('size_id', function ($subQuery) {
+                    $subQuery->select('id')
+                        ->from('sizes')
+                        ->orderBy('id', 'asc')
+                        ->limit(1)
+                        ->union(
+                            DB::table('sizes')
+                                ->select('id')
+                                ->orderBy('id', 'desc')
+                                ->limit(1)
+                        );
+                });
+            },
+            'prices.size',
+            'pictures' => function ($query) {
+                $query->orderBy('id', 'asc')->limit(1);
+            },
+            'category'
+        ])->limit($limit)->get();
+
+        return response()->json(['products' => $products]);
+    }
+
     // Fetch a specific product by product_id
     public function show(Product $product)
     {
