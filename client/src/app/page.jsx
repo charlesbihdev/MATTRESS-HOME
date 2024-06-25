@@ -1,11 +1,11 @@
 import LoginLinks from '@/app/LoginLinks'
 import CarouselSlideshow from '@/components/CarouselSlideshow'
 import BrandCard from './BrandCard'
-import FeaturedProducts from './FeaturedProducts'
 import brandData from '@/data/BrandData'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FloatingButton from '@/components/FloatingButton'
+import FetchFeaturedProducts from './FetchFeaturedProducts'
 
 export const metadata = {
     title: 'Mattress Home',
@@ -30,7 +30,7 @@ const Home = () => {
                     </div>
                 </div>
 
-                <FeaturedProducts />
+                <FetchFeaturedProducts number={8} />
             </main>
             <FloatingButton />
             <Footer />

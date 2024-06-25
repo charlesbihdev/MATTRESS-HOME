@@ -4,10 +4,23 @@ import Image from 'next/image'
 import items from '@/data/ProductData'
 import BackArrow from '@/components/BackArrow'
 import sizes from '@/data/SizeData'
+import { useState, useEffect } from 'react'
 
-export default function ViewProduct({ id }) {
-    const product = items.find(item => item.id === Number(id))
+export default function Product({ product }) {
+    const [chosenSize, setChosenSize] = useState(1)
+    const [productPrice, setProductPrice] = useState(
+        product.sizes[0].pivot.price,
+    )
+    // const product = items.find(item => item.id === Number(id))
 
+    const handleSizeChange = id => {
+        setChosenSize(id)
+    }
+
+    useEffect(() => {
+        console.log(chosenSize)
+        setProductPrice(product.sizes[chosenSize - 1].pivot.price)
+    }, [chosenSize])
     return (
         <div className="my-7 pt-2 mx-5 font-sans bg-[honeydew]">
             <BackArrow />
@@ -17,7 +30,7 @@ export default function ViewProduct({ id }) {
                     <div className=" lg:col-span-3 w-full lg:sticky top-0 text-center">
                         <div className="px-4 py-10 rounded-lg shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] relative">
                             <img
-                                src={product.imageSrc}
+                                src={product.pictures[0].image_path}
                                 alt={product.name}
                                 className="w-3/4 rounded object-cover mx-auto"
                                 width={300}
@@ -39,42 +52,19 @@ export default function ViewProduct({ id }) {
                             </button>
                         </div>
                         <div className="mt-6 flex flex-wrap justify-center gap-6 mx-auto">
-                            <div className="w-24 h-20 flex items-center justify-center rounded-lg p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] cursor-pointer">
-                                <img
-                                    src="https://readymadeui.com/images/laptop2.webp"
-                                    alt="Product2"
-                                    className="w-full"
-                                    width={100}
-                                    height={50}
-                                />
-                            </div>
-                            <div className="w-24 h-20 flex items-center justify-center rounded-lg p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] cursor-pointer">
-                                <img
-                                    src="https://readymadeui.com/images/laptop3.webp"
-                                    alt="Product2"
-                                    className="w-full"
-                                    width={100}
-                                    height={50}
-                                />
-                            </div>
-                            <div className="w-24 h-20 flex items-center justify-center rounded-lg p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] cursor-pointer">
-                                <img
-                                    src="https://readymadeui.com/images/laptop4.webp"
-                                    alt="Product2"
-                                    className="w-full"
-                                    width={100}
-                                    height={50}
-                                />
-                            </div>
-                            <div className="w-24 h-20 flex items-center justify-center rounded-lg p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] cursor-pointer">
-                                <img
-                                    src="https://readymadeui.com/images/laptop5.webp"
-                                    alt="Product2"
-                                    className="w-full"
-                                    width={100}
-                                    height={50}
-                                />
-                            </div>
+                            {product.pictures.map(picture => {
+                                return (
+                                    <div className="w-24 h-20 flex items-center justify-center rounded-lg p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] cursor-pointer">
+                                        <img
+                                            src={picture.image_path}
+                                            alt={product.name}
+                                            className="w-full"
+                                            width={100}
+                                            height={50}
+                                        />
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
                     <div className="lg:col-span-2">
@@ -123,10 +113,12 @@ export default function ViewProduct({ id }) {
                         </div>
                         <div className="flex flex-wrap gap-4 mt-8">
                             <p className="text-gray-800 text-3xl font-bold">
-                                GH₵ {product.price}
+                                GH₵ {productPrice}
                             </p>
                             <p className="text-gray-400 text-base">
-                                <strike>GH₵ {product.price + 26}</strike>{' '}
+                                <strike>
+                                    GH₵ {Math.round(productPrice + 26)}
+                                </strike>{' '}
                                 <span className="text-sm ml-1">
                                     Tax included
                                 </span>
@@ -138,11 +130,14 @@ export default function ViewProduct({ id }) {
                             </h3>
                             <div className="mb-4">
                                 <div className="flex items-center mt-2">
-                                    {sizes.map(size => {
+                                    {product.sizes.map(size => {
                                         return (
                                             <button
+                                                onClick={() => {
+                                                    handleSizeChange(size.id)
+                                                }}
                                                 key={size.id}
-                                                className="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600">
+                                                className={`bg-gray-300 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600 ${chosenSize == size.id ? '!bg-blue-400' : ''}`}>
                                                 {size.name}
                                             </button>
                                         )
@@ -151,7 +146,7 @@ export default function ViewProduct({ id }) {
                             </div>
                         </div>
                         <div className="flex flex-col gap-4 mt-10">
-                            <button className="relative flex items-center justify-center w-full px-5 py-2.5 text-white bg-yellow-400 border border-transparent rounded-lg shadow-sm hover:bg-blue-700">
+                            <button className="relative flex items-center justify-center w-full px-5 py-2.5 text-white bg-yellow-400 border border-transparent rounded-lg shadow-sm hover:bg-yellow-500">
                                 <span className="absolute left-0 flex items-center pl-3">
                                     <svg
                                         className="w-5 h-5 text-white"

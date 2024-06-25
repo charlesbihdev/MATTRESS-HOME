@@ -20,6 +20,14 @@ export const useFetch = () => {
         return { data, error }
     }
 
+    const fetchProductWithLimit = limit => {
+        const { data, error } = useSWR(
+            limit ? `/api/products/limit/${limit}` : null,
+            fetcher,
+        )
+        return { data, error }
+    }
+
     // Fetch a product by ID and size
     const fetchProductByIdAndSize = (id, sizeId) => {
         const { data, error } = useSWR(
@@ -34,6 +42,7 @@ export const useFetch = () => {
         productsError,
         mutateProducts,
         fetchProductById,
+        fetchProductWithLimit,
         fetchProductByIdAndSize,
     }
 }

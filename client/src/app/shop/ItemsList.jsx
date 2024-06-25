@@ -33,26 +33,33 @@ const getCategoryName = category => {
     }
 }
 
-const ItemList = ({ items, fetchCategory }) => {
+const ItemList = ({ fetchCategory }) => {
     const searchParams = useSearchParams()
     const router = useRouter()
     const pathname = usePathname()
     const { products, productsError } = useFetch()
-    console.log(products)
 
+    const [filteredItems, setFilteredItems] = useState([])
     const [filterList, setFilterList] = useState(() => {
         const filters = searchParams.get('filters')
         return filters ? filters.split(',').map(Number) : []
     })
-
     const [page, setPage] = useState(() => {
         const pageParam = searchParams.get('page')
         return pageParam ? Number(pageParam) : 1
     })
 
-    const perPage = 8
-
-    const [filteredItems, setFilteredItems] = useState(items)
+    useEffect(() => {
+        if (products) {
+            let itemsToDisplay = products['products']
+            if (filterList.length > 0) {
+                itemsToDisplay = products['products'].filter(item =>
+                    filterList.includes(item.category_id),
+                )
+            }
+            setFilteredItems(itemsToDisplay)
+        }
+    }, [filterList, products])
 
     const updateQueryString = (filters, page) => {
         const params = new URLSearchParams(searchParams)
@@ -85,18 +92,8 @@ const ItemList = ({ items, fetchCategory }) => {
         updateQueryString(filterList, newPage)
     }
 
-    // Effect to filter items based on filterList changes and handle pagination
-    useEffect(() => {
-        let itemsToDisplay = items
-        if (filterList.length > 0) {
-            itemsToDisplay = items.filter(item =>
-                filterList.includes(item.category),
-            )
-        }
-        setFilteredItems(itemsToDisplay)
-    }, [filterList, items])
-
     // Calculate the total pages and the items to display for the current page
+    const perPage = 8
     const start = (page - 1) * perPage
     const end = start + perPage
     const itemsToShow = filteredItems.slice(start, end)
@@ -137,13 +134,13 @@ const ItemList = ({ items, fetchCategory }) => {
                             style={{ minHeight: '420px' }}>
                             <div
                                 className={`absolute top-0 right-0 text-white text-sm font-bold px-2 py-1 rounded-bl ${getCategoryLabelColor(
-                                    item.category,
+                                    item.category_id,
                                 )}`}>
-                                {getCategoryName(item.category)}
+                                {getCategoryName(item.category_id)}
                             </div>
                             <img
                                 className="w-full h-48 object-cover"
-                                src={item.imageSrc}
+                                src={item.pictures[0].image_path}
                                 alt="Card image cap"
                             />
                             <hr className="m-0" />
@@ -152,13 +149,14 @@ const ItemList = ({ items, fetchCategory }) => {
                                     {item.name}
                                 </h4>
                                 <h4 className="font-bold text-red-500 text-lg mb-2">
-                                    GH₵ {item.price}
+                                    GH₵{' '}
+                                    {`${item.prices[0].price} ${' - '} GH₵ ${item.prices[1].price}`}
                                 </h4>
                                 <p className="text-gray-700 text-sm mb-4">
                                     {item.description}
                                 </p>
                                 <button
-                                    href={item.link}
+                                    href={`/product/${item.id}`}
                                     className="inline-block px-4 py-2 text-sm text-white bg-gray-700 rounded-md hover:bg-gray-800">
                                     View Product
                                 </button>

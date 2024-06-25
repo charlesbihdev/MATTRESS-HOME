@@ -1,11 +1,10 @@
-'use client'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import ItemsList from '../../sections/ItemsList'
+import ItemsList from './ItemsList'
 import FloatingButton from '@/components/FloatingButton'
 // import products from '../../data/ProductData'
-import { useFetch } from '@/hooks/fetch'
-import items from '@/data/ProductData'
+// import { useFetch } from '@/hooks/fetch'
+// import items from '@/data/ProductData'
 
 const fetchCategory = [
     { id: 1, name: 'Royal Foam' },
@@ -19,7 +18,7 @@ const Shop = () => {
         <>
             <Navbar />
             <div className="mt-[160px]">
-                <ItemsList items={items} fetchCategory={fetchCategory} />
+                <ItemsList fetchCategory={fetchCategory} />
             </div>
             <FloatingButton />
 

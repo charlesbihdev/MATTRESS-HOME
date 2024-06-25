@@ -1,45 +1,7 @@
+import Link from 'next/link'
 import React from 'react'
 
-const FeaturedProducts = () => {
-    const products = [
-        {
-            id: 1,
-            name: 'Floor Model - Scott Living Mattress',
-            price: '$99.00',
-            imageUrl:
-                'https://www.mattressfirm.com/_next/image?url=https%3A%2F%2Fimages-us-prod.cms.commerce.dynamics.com%2Fcms%2Fapi%2Fcncgmclkfv%2FimageFileData%2Fsearch%3FfileName%3D%2FProducts%2F143946P%2520%255E%2520%2520%255E%2520Queen%2520%255E%2520%2520%255E%2520Prime_000_001.png%26fallback%3D%2FProducts%2F143946P_000_001.png',
-            isNew: true,
-            rating: 4,
-        },
-        {
-            id: 2,
-            name: 'Sealy Posturepedic® High Plush Mattress',
-            price: '$299.00',
-            imageUrl:
-                'https://www.mattressfirm.com/_next/image?url=https%3A%2F%2Fimages-us-prod.cms.dynamics365commerce.ms%2Fcms%2Fapi%2Fcncgmclkfv%2FimageFileData%2Fsearch%3FfileName%3D%2FProducts%2F143959P%2520%255E%2520%2520%255E%2520Queen%2520%255E%2520%2520%255E%2520Prime_000_001.png%26fallback%3D%2FProducts%2F143959P_000_001.png',
-            isNew: false,
-            rating: 5,
-        },
-        {
-            id: 3,
-            name: "Sleepy's By Sealy Memory Foam",
-            price: '$199.00',
-            imageUrl:
-                'https://www.americanmattress.com/cdn/shop/files/BeautyrestHarmonyFremont13_Mattresscroppedroomshot_1400x.png',
-            isNew: false,
-            rating: 3,
-        },
-        {
-            id: 4,
-            name: "Sleepy's Medium Euro Top Mattress",
-            price: '$199.00',
-            imageUrl:
-                'https://www.mattressfirm.com/_next/image?url=https%3A%2F%2Fimages-us-prod.cms.commerce.dynamics.com%2Fcms%2Fapi%2Fcncgmclkfv%2FimageFileData%2Fsearch%3FfileName%3D%2FProducts%2F144077P%2520%255E%2520%2520%255E%2520Queen%2520%255E%2520%2520%255E%2520Prime_000_001.png%26fallback%3D%2FProducts%2F144077P_000_001.png',
-            isNew: true,
-            rating: 4,
-        },
-    ]
-
+const FeaturedProducts = ({ products }) => {
     return (
         <div>
             <section className="py-12 bg-white sm:py-16 lg:py-20">
@@ -58,17 +20,17 @@ const FeaturedProducts = () => {
                         {products.map(product => (
                             <div
                                 key={product.id}
-                                className="relative group mb-12 md:mb-1">
+                                className="relative group mb-12 md:mb-8">
                                 <div className="overflow-hidden aspect-w-1 aspect-h-1 h-4/5">
                                     <img
                                         className="object-cover w-full h-full transition-all duration-300 group-hover:scale-125"
-                                        src={product.imageUrl}
+                                        src={product.pictures[0].image_path}
                                         alt={product.name}
                                     />
                                 </div>
-                                {product.isNew && (
+                                {product.isHot || (
                                     <div className="absolute left-3 top-3">
-                                        <p className="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-gray-900 uppercase bg-red-500 rounded-full">
+                                        <p className="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-gray-900 uppercase bg-yellow-400 rounded-full">
                                             Hot
                                         </p>
                                     </div>
@@ -76,9 +38,11 @@ const FeaturedProducts = () => {
                                 <div className="flex items-start justify-between mt-4 space-x-4">
                                     <div>
                                         <h3 className="text-xs font-bold text-gray-900 sm:text-sm md:text-base">
-                                            <a href="#" title={product.name}>
+                                            <Link
+                                                href={`/product/${product.id}`}
+                                                title={product.name}>
                                                 {product.name}
-                                            </a>
+                                            </Link>
                                         </h3>
                                         <div className="flex items-center mt-2.5 space-x-px">
                                             {Array.from(
@@ -86,7 +50,7 @@ const FeaturedProducts = () => {
                                                 (_, index) => (
                                                     <svg
                                                         key={index}
-                                                        className={`w-3 h-3 ${index < product.rating ? 'text-yellow-400' : 'text-gray-300'} sm:w-4 sm:h-4`}
+                                                        className={`w-3 h-3 ${index < Math.floor(Math.random() * 5 + 4) ? 'text-yellow-400' : 'text-gray-300'} sm:w-4 sm:h-4`}
                                                         xmlns="http://www.w3.org/2000/svg"
                                                         viewBox="0 0 20 20"
                                                         fill="currentColor">
@@ -98,7 +62,7 @@ const FeaturedProducts = () => {
                                     </div>
                                     <div className="text-right">
                                         <p className="text-xs font-bold text-gray-900 sm:text-sm md:text-base">
-                                            {product.price}
+                                            GH₵ {product.prices[0].price}
                                         </p>
                                     </div>
                                 </div>

@@ -1,14 +1,14 @@
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import React from 'react'
-import ViewProduct from './ViewProduct'
+import FetchProduct from './FetchProduct'
 
 const page = ({ params }) => {
     return (
         <>
             <Navbar />
             <main className="mt-[160px]">
-                <ViewProduct id={params.id} />
+                <FetchProduct id={params.id} />
             </main>
             <Footer />
         </>
