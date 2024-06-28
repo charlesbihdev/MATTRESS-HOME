@@ -2,9 +2,6 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ItemsList from './ItemsList'
 import FloatingButton from '@/components/FloatingButton'
-// import products from '../../data/ProductData'
-// import { useFetch } from '@/hooks/fetch'
-// import items from '@/data/ProductData'
 
 const fetchCategory = [
     { id: 1, name: 'Royal Foam' },

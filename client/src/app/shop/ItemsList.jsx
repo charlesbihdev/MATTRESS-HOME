@@ -39,7 +39,7 @@ const ItemList = ({ fetchCategory }) => {
     const pathname = usePathname()
     const { products, productsError } = useFetch()
 
-    console.log(products)
+    // console.log(products)
 
     const [filteredItems, setFilteredItems] = useState([])
     const [filterList, setFilterList] = useState(() => {

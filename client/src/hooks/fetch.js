@@ -11,6 +11,11 @@ export const useFetch = () => {
         mutate: mutateProducts,
     } = useSWR('/api/products', fetcher)
 
+    const fetchWithAllPrices = () => {
+        const { data, error } = useSWR('/api/products/sizes', fetcher)
+        return { data, error }
+    }
+
     // Fetch a particular product by ID
     const fetchProductById = id => {
         const { data, error } = useSWR(
@@ -43,6 +48,7 @@ export const useFetch = () => {
         mutateProducts,
         fetchProductById,
         fetchProductWithLimit,
+        fetchWithAllPrices,
         fetchProductByIdAndSize,
     }
 }

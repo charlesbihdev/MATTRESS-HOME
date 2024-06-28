@@ -1,8 +1,11 @@
+'use client'
 import Link from 'next/link'
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function Sidebar({ showSidebar }) {
     const [isOpen, setIsOpen] = useState(false)
+    const pathname = usePathname()
 
     return (
         <aside
@@ -42,7 +45,7 @@ export default function Sidebar({ showSidebar }) {
                     <li>
                         <Link
                             href="/admin"
-                            className="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            className={`flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${pathname == '/admin' ? 'bg-gray-100' : ''} `}>
                             <svg
                                 aria-hidden="true"
                                 className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -58,8 +61,8 @@ export default function Sidebar({ showSidebar }) {
 
                     <li>
                         <Link
-                            href="admin/products"
-                            className="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            href="/admin/products"
+                            className={`flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${pathname == '/admin/products' ? 'bg-gray-100' : ''}`}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -67,9 +70,9 @@ export default function Sidebar({ showSidebar }) {
                                 viewBox="0 0 24 24"
                                 fill="none"
                                 stroke="gray"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round">
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round">
                                 <rect x="3" y="3" width="7" height="7" />
                                 <rect x="14" y="3" width="7" height="7" />
                                 <rect x="3" y="14" width="7" height="7" />
