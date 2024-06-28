@@ -18,9 +18,37 @@ export default function Product({ product }) {
     }
 
     useEffect(() => {
-        console.log(chosenSize)
         setProductPrice(product.sizes[chosenSize - 1].pivot.price)
     }, [chosenSize])
+
+    const getCategoryName = category => {
+        switch (category) {
+            case 1:
+                return 'Royal Foam'
+            case 2:
+                return 'Latex Foam'
+            case 3:
+                return 'Ashfoam'
+            default:
+                return 'Foreign Brands'
+        }
+    }
+
+    const getCategoryLabelColor = category => {
+        switch (category) {
+            case 1:
+                return 'bg-[#7e00a9]'
+            case 2:
+                return 'bg-red-500'
+            case 3:
+                return 'bg-[#f6d00c] !text-black'
+            default:
+                return 'bg-black text-white'
+        }
+    }
+
+    // console.log(product)
+
     return (
         <div className="my-7 pt-2 mx-5 font-sans bg-[honeydew]">
             <BackArrow />
@@ -53,8 +81,11 @@ export default function Product({ product }) {
                         </div>
                         <div className="mt-6 flex flex-wrap justify-center gap-6 mx-auto">
                             {product.pictures.map(picture => {
+                                // console.log(picture.id)
                                 return (
-                                    <div className="w-24 h-20 flex items-center justify-center rounded-lg p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] cursor-pointer">
+                                    <div
+                                        key={picture.id}
+                                        className="w-24 h-20 flex items-center justify-center rounded-lg p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] cursor-pointer">
                                         <img
                                             src={picture.image_path}
                                             alt={product.name}
@@ -71,44 +102,48 @@ export default function Product({ product }) {
                         <h2 className="text-2xl font-extrabold text-gray-800">
                             {product.name}
                         </h2>
-                        <div className="flex space-x-2 mt-4">
-                            <svg
-                                className="w-5 fill-blue-600"
-                                viewBox="0 0 14 13"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                            <svg
-                                className="w-5 fill-blue-600"
-                                viewBox="0 0 14 13"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                            <svg
-                                className="w-5 fill-blue-600"
-                                viewBox="0 0 14 13"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                            <svg
-                                className="w-5 fill-blue-600"
-                                viewBox="0 0 14 13"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                            <svg
-                                className="w-5 fill-[#CED5D8]"
-                                viewBox="0 0 14 13"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                            <h4 className="text-gray-800 text-base">
-                                500 Reviews
+                        <div className="sm:flex justify-between mt-2 sm:mt-0">
+                            <div className="flex space-x-2 mt-4">
+                                <svg
+                                    className="w-5 fill-blue-600"
+                                    viewBox="0 0 14 13"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                                </svg>
+                                <svg
+                                    className="w-5 fill-blue-600"
+                                    viewBox="0 0 14 13"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                                </svg>
+                                <svg
+                                    className="w-5 fill-blue-600"
+                                    viewBox="0 0 14 13"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                                </svg>
+                                <svg
+                                    className="w-5 fill-blue-600"
+                                    viewBox="0 0 14 13"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                                </svg>
+                                <svg
+                                    className="w-5 fill-[#CED5D8]"
+                                    viewBox="0 0 14 13"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                                </svg>
+                            </div>
+
+                            <h4
+                                className={`${getCategoryLabelColor(product.category_id)} text-white px-3 py-1 mt-5 font-mono text-lg rounded-lg text-center w-1/2 sm:w-auto`}>
+                                {getCategoryName(product.category_id)}
                             </h4>
                         </div>
                         <div className="flex flex-wrap gap-4 mt-8">
@@ -129,7 +164,7 @@ export default function Product({ product }) {
                                 Select Size:
                             </h3>
                             <div className="mb-4">
-                                <div className="flex items-center mt-2">
+                                <div className="flex flex-wrap items-center mt-2">
                                     {product.sizes.map(size => {
                                         return (
                                             <button
@@ -137,7 +172,7 @@ export default function Product({ product }) {
                                                     handleSizeChange(size.id)
                                                 }}
                                                 key={size.id}
-                                                className={`bg-gray-300 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600 ${chosenSize == size.id ? '!bg-blue-400' : ''}`}>
+                                                className={`bg-gray-300 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600 my-1 ${chosenSize == size.id ? '!bg-blue-400' : ''}`}>
                                                 {size.name}
                                             </button>
                                         )

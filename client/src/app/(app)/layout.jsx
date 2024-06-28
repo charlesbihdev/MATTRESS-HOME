@@ -4,8 +4,15 @@ import { useAuth } from '@/hooks/auth'
 import Navigation from '@/app/(app)/Navigation'
 import Loading from '@/app/(app)/Loading'
 
+// import Sidebar from '@/components/Sidebar'
+
+import { useState } from 'react'
+import Sidebar from './Sidebar'
+
 const AppLayout = ({ children }) => {
     const { user } = useAuth({ middleware: 'auth' })
+
+    // const [sidebarOpen, setSidebarOpen] = useState(false)
 
     if (!user) {
         return <Loading />
@@ -15,7 +22,7 @@ const AppLayout = ({ children }) => {
         <div className="min-h-screen bg-gray-100">
             <Navigation user={user} />
 
-            <main>{children}</main>
+            <main className="md:ml-[16rem]">{children}</main>
         </div>
     )
 }
