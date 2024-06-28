@@ -10,15 +10,15 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
     const [status, setStatus] = useState(null)
     const [productData, setProductData] = useState({
         name: '',
-        stars: '',
+        ratings: '',
         category_id: '',
         description: '',
         prices: {
             ks: '',
-            qd: '',
-            ld: '',
-            md: '',
-            sd: '',
+            qs: '',
+            ls: '',
+            ms: '',
+            ss: '',
         },
     })
     const [images, setImages] = useState([])
@@ -33,10 +33,10 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
         const { name, value } = e.target
         if (
             name === 'ks' ||
-            name === 'qd' ||
-            name === 'ld' ||
-            name === 'md' ||
-            name === 'sd'
+            name === 'qs' ||
+            name === 'ls' ||
+            name === 'ms' ||
+            name === 'ss'
         ) {
             setProductData({
                 ...productData,
@@ -62,7 +62,7 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
 
         const formData = new FormData()
         formData.append('name', productData.name)
-        formData.append('stars', productData.stars)
+        formData.append('ratings', productData.ratings)
         formData.append('category_id', productData.category_id)
         formData.append('description', productData.description)
         Object.keys(productData.prices).forEach(key => {
@@ -72,24 +72,16 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
             formData.append(`images[${index}]`, image)
         })
 
-        try {
-            const response = await addProduct({
-                formData,
-                setErrors,
-                setStatus,
-            })
-            setStatus(response.data.message)
-        } catch (error) {
-            if (
-                error.response &&
-                error.response.data &&
-                error.response.data.errors
-            ) {
-                setErrors(Object.values(error.response.data.errors).flat())
-            } else {
-                setErrors(['An unexpected error occurred. Please try again.'])
-            }
-        }
+        const response = await addProduct({
+            formData,
+            setErrors,
+            setStatus,
+        })
+
+        setStatus(response?.data.message)
+
+        console.log(errors)
+        console.log(status)
     }
 
     return (
@@ -126,6 +118,10 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                                         value={productData.name}
                                         onChange={handleChange}
                                     />
+                                    <InputError
+                                        messages={errors.name}
+                                        className="mt-2"
+                                    />
                                 </div>
                                 <div>
                                     <Label
@@ -150,24 +146,33 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                                             Foreign Brands
                                         </option>
                                     </select>
+                                    <InputError
+                                        messages={errors.category_id}
+                                        className="mt-2"
+                                    />
                                 </div>
                                 <div>
                                     <Label
-                                        htmlFor="stars"
+                                        htmlFor="ratings"
                                         className="block mb-2 font-medium text-gray-900 dark:text-white">
                                         Rating
                                     </Label>
                                     <input
                                         type="number"
-                                        name="stars"
-                                        id="stars"
+                                        name="ratings"
+                                        id="ratings"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                         placeholder="Rating"
                                         required
-                                        value={productData.stars}
+                                        value={productData.ratings}
                                         onChange={handleChange}
                                     />
+                                    <InputError
+                                        messages={errors.ratings}
+                                        className="mt-2"
+                                    />
                                 </div>
+
                                 <div>
                                     <Label
                                         htmlFor="ks"
@@ -184,73 +189,93 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                                         value={productData.prices.ks}
                                         onChange={handleChange}
                                     />
-                                </div>
-                                <div>
-                                    <Label
-                                        htmlFor="qd"
-                                        className="block mb-2 font-medium text-gray-900 dark:text-white">
-                                        Price (Q/D)
-                                    </Label>
-                                    <input
-                                        type="number"
-                                        name="qd"
-                                        id="qd"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        placeholder="Q/D"
-                                        required
-                                        value={productData.prices.qd}
-                                        onChange={handleChange}
+                                    <InputError
+                                        messages={errors.ks}
+                                        className="mt-2"
                                     />
                                 </div>
                                 <div>
                                     <Label
-                                        htmlFor="ld"
+                                        htmlFor="qs"
                                         className="block mb-2 font-medium text-gray-900 dark:text-white">
-                                        Price (L/D)
+                                        Price (Q/S)
                                     </Label>
                                     <input
                                         type="number"
-                                        name="ld"
-                                        id="ld"
+                                        name="qs"
+                                        id="qs"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        placeholder="L/D"
+                                        placeholder="Q/S"
                                         required
-                                        value={productData.prices.ld}
+                                        value={productData.prices.qs}
                                         onChange={handleChange}
+                                    />
+                                    <InputError
+                                        messages={errors.qs}
+                                        className="mt-2"
                                     />
                                 </div>
                                 <div>
                                     <Label
-                                        htmlFor="md"
+                                        htmlFor="ls"
                                         className="block mb-2 font-medium text-gray-900 dark:text-white">
-                                        Price (M/D)
+                                        Price (L/S)
                                     </Label>
                                     <input
                                         type="number"
-                                        name="md"
-                                        id="md"
+                                        name="ls"
+                                        id="ls"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        placeholder="M/D"
+                                        placeholder="L/S"
                                         required
-                                        value={productData.prices.md}
+                                        value={productData.prices.ls}
                                         onChange={handleChange}
+                                    />
+                                    <InputError
+                                        messages={errors.ls}
+                                        className="mt-2"
                                     />
                                 </div>
                                 <div>
                                     <Label
-                                        htmlFor="sd"
+                                        htmlFor="ms"
                                         className="block mb-2 font-medium text-gray-900 dark:text-white">
-                                        Price (S/D)
+                                        Price (M/S)
                                     </Label>
                                     <input
                                         type="number"
-                                        name="sd"
-                                        id="sd"
+                                        name="ms"
+                                        id="ms"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        placeholder="S/D"
+                                        placeholder="M/S"
                                         required
-                                        value={productData.prices.sd}
+                                        value={productData.prices.ms}
                                         onChange={handleChange}
+                                    />
+                                    <InputError
+                                        messages={errors.ms}
+                                        className="mt-2"
+                                    />
+                                </div>
+                                <div>
+                                    <Label
+                                        htmlFor="ss"
+                                        className="block mb-2 font-medium text-gray-900 dark:text-white">
+                                        Price (S/S)
+                                    </Label>
+                                    <input
+                                        type="number"
+                                        name="ss"
+                                        id="ss"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        placeholder="S/S"
+                                        required
+                                        value={productData.prices.ss}
+                                        onChange={handleChange}
+                                    />
+                                    <InputError
+                                        messages={errors.ss}
+                                        className="mt-2"
                                     />
                                 </div>
                                 <div className="sm:col-span-2">
@@ -270,6 +295,10 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                                         onChange={handleChange}
                                     />
                                 </div>
+                                <InputError
+                                    messages={errors.description}
+                                    className="mt-2"
+                                />
                                 <div className="sm:col-span-2">
                                     <Label
                                         htmlFor="images"
@@ -284,6 +313,7 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                                             multiple
                                             className="w-full cursor-pointer"
                                             onChange={handleImageChange}
+                                            required
                                         />
                                         {images.length > 0 && (
                                             <div className="mt-2">

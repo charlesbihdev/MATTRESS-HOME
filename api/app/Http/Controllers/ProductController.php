@@ -48,14 +48,14 @@ class ProductController extends Controller
         // Validate incoming request
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            'stars' => 'required|integer',
+            'ratings' => 'required|integer|min:1|max:5',
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',
             'ks' => 'required|numeric',
-            'qd' => 'required|numeric',
-            'ld' => 'required|numeric',
-            'md' => 'required|numeric',
-            'sd' => 'required|numeric',
+            'qs' => 'required|numeric',
+            'ls' => 'required|numeric',
+            'ms' => 'required|numeric',
+            'ss' => 'required|numeric',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -66,18 +66,18 @@ class ProductController extends Controller
         // Create new product
         $product = new Product();
         $product->name = $request->name;
-        $product->stars = $request->stars;
+        $product->stars = $request->ratings;
         $product->category_id = $request->category_id;
         $product->description = $request->description;
         $product->save();
 
         // Save prices
         $prices = [
-            ['size' => 'ks', 'price' => $request->ks],
-            ['size' => 'qd', 'price' => $request->qd],
-            ['size' => 'ld', 'price' => $request->ld],
-            ['size' => 'md', 'price' => $request->md],
-            ['size' => 'sd', 'price' => $request->sd],
+            ['size' => 'K/S', 'price' => $request->ks],
+            ['size' => 'Q/S', 'price' => $request->qs],
+            ['size' => 'L/S', 'price' => $request->ls],
+            ['size' => 'M/S', 'price' => $request->ms],
+            ['size' => 'S/S', 'price' => $request->ss],
         ];
 
         foreach ($prices as $price) {
