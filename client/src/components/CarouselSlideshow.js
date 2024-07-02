@@ -18,14 +18,6 @@ export default function CarouselSlideshow() {
                     src="https://www.americanmattress.com/cdn/shop/collections/Scott_Living_By_Restonic_Collection_2d7638ec-5b0d-4a71-a282-e049bdc551ff_1296x.jpg"
                     alt="..."
                 />
-                <img
-                    src="https://flowbite.com/docs/images/carousel/carousel-4.svg"
-                    alt="..."
-                />
-                <img
-                    src="https://flowbite.com/docs/images/carousel/carousel-5.svg"
-                    alt="..."
-                />
             </Carousel>
         </div>
     )

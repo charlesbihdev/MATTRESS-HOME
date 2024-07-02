@@ -2,12 +2,11 @@ import { useState } from 'react'
 import { useAuth } from '@/hooks/auth'
 import InputError from '@/components/InputError'
 import Label from '@/components/Label'
-import Button from '@/components/Button'
 
 const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
     const { addProduct } = useAuth()
     const [errors, setErrors] = useState([])
-    const [status, setStatus] = useState(null)
+    const [status, setStatus] = useState()
     const [productData, setProductData] = useState({
         name: '',
         ratings: '',
@@ -72,27 +71,23 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
             formData.append(`images[${index}]`, image)
         })
 
-        const response = await addProduct({
-            formData,
-            setErrors,
-            setStatus,
-        })
-
-        setStatus(response?.data.message)
-
-        console.log(errors)
-        console.log(status)
+        try {
+            await addProduct({ setErrors, setStatus, formData })
+        } catch (error) {
+            // Handle any other errors that might occur
+            setErrors(['An unexpected error occurred. Please try again.'])
+        }
     }
-
     return (
         <>
             <div
-                id="createProductModal"
                 tabIndex="-1"
                 aria-hidden="true"
-                className={`pt-40 text-left fixed inset-0 z-50 overflow-y-auto overflow-x-hidden flex justify-center items-center h-full w-full ${
+                className={`pt-10 sm:pt-20 md:pt-60 text-left fixed inset-0 z-50 overflow-y-auto overflow-x-hidden flex justify-center items-center h-full w-full ${
                     showAddProductModal ? 'flex' : '!hidden'
                 }`}>
+                {/* Display status message if there is one */}
+
                 <div className="relative p-4 w-full max-w-3xl h-full md:h-auto">
                     <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
                         <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
@@ -100,6 +95,7 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                                 Add Product
                             </h3>
                         </div>
+
                         <form onSubmit={handleSubmit}>
                             <div className="grid gap-4 mb-4 sm:grid-cols-2">
                                 <div>
@@ -112,7 +108,7 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                                         type="text"
                                         name="name"
                                         id="productName"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="Type product name"
                                         required
                                         value={productData.name}
@@ -132,7 +128,7 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                                     <select
                                         id="category_id"
                                         name="category_id"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         onChange={handleChange}
                                         value={productData.category_id}
                                         required>
@@ -161,7 +157,7 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                                         type="number"
                                         name="ratings"
                                         id="ratings"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="Rating"
                                         required
                                         value={productData.ratings}
@@ -183,7 +179,7 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                                         type="number"
                                         name="ks"
                                         id="ks"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="K/S"
                                         required
                                         value={productData.prices.ks}
@@ -204,7 +200,7 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                                         type="number"
                                         name="qs"
                                         id="qs"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="Q/S"
                                         required
                                         value={productData.prices.qs}
@@ -225,7 +221,7 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                                         type="number"
                                         name="ls"
                                         id="ls"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="L/S"
                                         required
                                         value={productData.prices.ls}
@@ -246,7 +242,7 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                                         type="number"
                                         name="ms"
                                         id="ms"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="M/S"
                                         required
                                         value={productData.prices.ms}
@@ -267,7 +263,7 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                                         type="number"
                                         name="ss"
                                         id="ss"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="S/S"
                                         required
                                         value={productData.prices.ss}
@@ -288,7 +284,7 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                                         id="description"
                                         name="description"
                                         rows="5"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="Enter product description"
                                         required
                                         value={productData.description}
@@ -305,7 +301,7 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                                         className="block mb-2 font-medium text-gray-900 dark:text-white">
                                         Images
                                     </Label>
-                                    <div className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 h-40 overflow-auto">
+                                    <div className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-40 overflow-auto">
                                         <input
                                             type="file"
                                             name="images"
@@ -338,6 +334,16 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                                     </div>
                                 </div>
                             </div>
+                            {status && (
+                                <div
+                                    className={`mt-4 p-2 text-sm ${
+                                        status === 'Product added successfully'
+                                            ? 'text-green-700 bg-green-100'
+                                            : 'text-red-700 bg-red-100'
+                                    }`}>
+                                    {status}
+                                </div>
+                            )}
                             <div className="flex justify-end space-x-2">
                                 <div>
                                     <button
@@ -355,21 +361,6 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                             </div>
                         </form>
                         {/* Display errors if there are any */}
-                        {errors.length > 0 && (
-                            <div className="mt-4">
-                                {errors.map((error, index) => (
-                                    <p key={index} className="text-red-500">
-                                        {error}
-                                    </p>
-                                ))}
-                            </div>
-                        )}
-                        {/* Display status message if there is one */}
-                        {status && (
-                            <div className="mt-4">
-                                <p className="text-green-500">{status}</p>
-                            </div>
-                        )}
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import './Pagination.css'
 import { useState, useEffect } from 'react'
 import { Pagination } from 'flowbite-react'
 import { useFetch } from '@/hooks/fetch'
+import Image from 'next/image'
 
 // Define category colors and names
 const getCategoryLabelColor = category => {
@@ -38,8 +39,6 @@ const ItemList = ({ fetchCategory }) => {
     const router = useRouter()
     const pathname = usePathname()
     const { products, productsError } = useFetch()
-
-    // console.log(products)
 
     const [filteredItems, setFilteredItems] = useState([])
     const [filterList, setFilterList] = useState(() => {
@@ -140,10 +139,12 @@ const ItemList = ({ fetchCategory }) => {
                                 )}`}>
                                 {getCategoryName(item.category_id)}
                             </div>
-                            <img
+                            <Image
                                 className="w-full h-48 object-cover"
-                                src={item.pictures[0].image_path}
-                                alt="Card image cap"
+                                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${item.pictures[0].image_path}`}
+                                alt={item.name}
+                                width={200}
+                                height={200}
                             />
                             <hr className="m-0" />
                             <div className="card-body p-4">

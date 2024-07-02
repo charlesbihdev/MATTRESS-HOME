@@ -107,7 +107,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         await csrf()
 
         setErrors([])
-        setStatus(null)
+        setStatus()
 
         return axios
             .post('/api/products', formData)
@@ -116,9 +116,26 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
                 if (error.response.status !== 422) throw error
 
                 setErrors(error.response.data.errors)
+                // setStatus(error.response.data.errors)
+            })
+
+        console.log(response.data.status)
+    }
+    const deleteProduct = async ({ setErrors, setStatus, productId }) => {
+        await csrf()
+
+        setErrors([])
+        setStatus(null)
+
+        return axios
+            .delete(`/api/products/${productId}`)
+            .then(response => setStatus(response.data.status))
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(error.response.data.errors)
             })
     }
-
     useEffect(() => {
         if (middleware === 'guest' && redirectIfAuthenticated && user)
             router.push(redirectIfAuthenticated)
@@ -139,5 +156,6 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         resendEmailVerification,
         logout,
         addProduct,
+        deleteProduct,
     }
 }

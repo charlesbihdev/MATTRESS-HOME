@@ -103,7 +103,27 @@ class ProductController extends Controller
             }
         }
 
-        return response()->json(['message' => 'Product added successfully'], 201);
+        return response()->json(['status' => 'Product added successfully'], 201);
+    }
+
+    public function destroy($id)
+    {
+        try {
+            DB::beginTransaction();
+
+            // Find the product by ID
+            $product = Product::findOrFail($id);
+
+            // Delete the product (this will also delete related records due to cascade)
+            $product->delete();
+
+            DB::commit();
+
+            return response()->json(['status' => 'Product deleted successfully'], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['errors' => ['An error occurred while deleting the product']], 500);
+        }
     }
     public function showWithSizesAndPrices()
     {
