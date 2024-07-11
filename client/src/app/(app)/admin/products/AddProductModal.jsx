@@ -2,8 +2,11 @@ import { useState } from 'react'
 import { useAuth } from '@/hooks/auth'
 import InputError from '@/components/InputError'
 import Label from '@/components/Label'
+import { useRouter } from 'next/navigation'
 
 const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
+    const router = useRouter()
+
     const { addProduct } = useAuth()
     const [errors, setErrors] = useState([])
     const [status, setStatus] = useState()
@@ -73,6 +76,7 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
 
         try {
             await addProduct({ setErrors, setStatus, formData })
+            router.refresh()
         } catch (error) {
             // Handle any other errors that might occur
             setErrors(['An unexpected error occurred. Please try again.'])

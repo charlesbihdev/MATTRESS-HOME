@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { PaystackButton } from 'react-paystack'
 import { useAuth } from '@/hooks/auth'
+import BackArrow from '@/components/BackArrow'
 
 const OrderSummary = ({ product }) => {
     // const { addPayment } = useAuth()
@@ -70,6 +71,7 @@ const OrderSummary = ({ product }) => {
 
     return (
         <section className="bg-white py-8 px-4 antialiased dark:bg-gray-900 md:py-16">
+            <BackArrow />
             <form
                 onSubmit={handleSubmit}
                 className="mx-auto max-w-screen-xl px-4 2xl:px-0">

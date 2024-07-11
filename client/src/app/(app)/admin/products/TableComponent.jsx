@@ -6,6 +6,7 @@ import AddProductModal from './AddProductModal'
 import { useFetch } from '@/hooks/fetch'
 import { useAuth } from '@/hooks/auth'
 import Loader from '@/components/Loader'
+import { useRouter } from 'next/navigation'
 
 const getCategoryName = category => {
     switch (category) {
@@ -21,6 +22,8 @@ const getCategoryName = category => {
 }
 
 const TableComponent = () => {
+    const router = useRouter()
+
     const { deleteProduct } = useAuth()
     const { data, error } = useFetch().fetchWithAllPrices()
 
@@ -39,6 +42,7 @@ const TableComponent = () => {
     const handleDeleteProduct = async (setErrors, setStatus, productId) => {
         try {
             await deleteProduct({ setErrors, setStatus, productId })
+            router.refresh()
         } catch (error) {
             // Handle any other errors that might occur
             setErrors(['An unexpected error occurred. Please try again.'])

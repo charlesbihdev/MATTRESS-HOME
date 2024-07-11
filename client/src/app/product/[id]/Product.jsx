@@ -12,10 +12,25 @@ export default function Product({ product }) {
     const [productPrice, setProductPrice] = useState(
         product.sizes[0].pivot.price,
     )
+    const [activeImage, setActiveImage] = useState(
+        process.env.NEXT_PUBLIC_BACKEND_URL +
+            '/' +
+            product.pictures[0].image_path,
+    )
+
     // const product = items.find(item => item.id === Number(id))
 
     const handleSizeChange = id => {
         setChosenSize(id)
+    }
+
+    const handleImageChange = id => {
+        // console.log(id)
+        setActiveImage(
+            process.env.NEXT_PUBLIC_BACKEND_URL +
+                '/' +
+                product.pictures[id].image_path,
+        )
     }
 
     useEffect(() => {
@@ -59,7 +74,7 @@ export default function Product({ product }) {
                     <div className=" lg:col-span-3 w-full lg:sticky top-0 text-center">
                         <div className="px-4 py-10 rounded-lg shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] relative">
                             <Image
-                                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${product.pictures[0].image_path}`}
+                                src={activeImage}
                                 alt={product.name}
                                 className="w-3/4 rounded object-cover mx-auto"
                                 width={300}
@@ -81,10 +96,11 @@ export default function Product({ product }) {
                             </button>
                         </div>
                         <div className="mt-6 flex flex-wrap justify-center gap-6 mx-auto">
-                            {product.pictures.map(picture => {
-                                // console.log(picture.id)
+                            {product.pictures.map((picture, index) => {
+                                // console.log(picture)
                                 return (
                                     <div
+                                        onClick={() => handleImageChange(index)}
                                         key={picture.id}
                                         className="w-24 h-20 flex items-center justify-center rounded-lg p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] cursor-pointer">
                                         <Image
