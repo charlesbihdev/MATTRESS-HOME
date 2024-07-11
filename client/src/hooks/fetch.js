@@ -42,6 +42,12 @@ export const useFetch = () => {
         return { data, error }
     }
 
+    // Fetch all payments
+    const fetchPayments = () => {
+        const { data, error } = useSWR(`/api/payments/`, fetcher)
+        return { data, error }
+    }
+
     return {
         products,
         productsError,
@@ -50,5 +56,6 @@ export const useFetch = () => {
         fetchProductWithLimit,
         fetchWithAllPrices,
         fetchProductByIdAndSize,
+        fetchPayments,
     }
 }

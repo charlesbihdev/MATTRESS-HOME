@@ -17,10 +17,14 @@ Route::delete('/products/{id}', [ProductController::class, 'destroy'])->middlewa
 
 Route::get('/products/{product}/size/{size}', [ProductController::class, 'showWithPrice']);
 
-Route::get('/products/sizes', [ProductController::class, 'showWithSizesAndPrices'])->middleware('auth');;
+Route::get('/products/sizes', [ProductController::class, 'showWithSizesAndPrices'])->middleware('auth');
 
 Route::get('/products/limit/{limit}', [ProductController::class, 'getProductsWithLimit']);
 
 Route::get('/products/{product}', [ProductController::class, 'show']);
 
 Route::get('/categories', [ProductController::class, 'getCategories']);
+
+Route::get('/payments', [ProductController::class, 'showPayment']);
+
+Route::post('/payments', [ProductController::class, 'createPayment'])->middleware('auth');

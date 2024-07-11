@@ -5,6 +5,7 @@ import DeleteModal from './DeleteModal'
 import AddProductModal from './AddProductModal'
 import { useFetch } from '@/hooks/fetch'
 import { useAuth } from '@/hooks/auth'
+import Loader from '@/components/Loader'
 
 const getCategoryName = category => {
     switch (category) {
@@ -20,7 +21,7 @@ const getCategoryName = category => {
 }
 
 const TableComponent = () => {
-    const { addProduct, deleteProduct } = useAuth()
+    const { deleteProduct } = useAuth()
     const { data, error } = useFetch().fetchWithAllPrices()
 
     const [errors, setErrors] = useState([])
@@ -55,7 +56,11 @@ const TableComponent = () => {
     }
 
     if (!data) {
-        return <div className="text-center my-20"> Loading...</div>
+        return (
+            <div className="text-center my-20">
+                <Loader />
+            </div>
+        )
     }
     const productsList = data['products']
 

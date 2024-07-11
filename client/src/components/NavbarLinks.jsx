@@ -35,7 +35,7 @@ const NavbarLinks = () => {
             <NavLink href="#" prefetch={false}>
                 Services
             </NavLink>
-            <NavLink href="#" prefetch={false}>
+            <NavLink href="/about" prefetch={false}>
                 About
             </NavLink>
 

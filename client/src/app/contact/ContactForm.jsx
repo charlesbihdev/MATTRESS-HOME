@@ -57,14 +57,14 @@ const ContactForm = () => {
                         <div className="group w-full h-full">
                             <div className="relative h-full">
                                 <img
-                                    src="https://pagedone.io/asset/uploads/1696488602.png"
+                                    src="/images/helpdesk1.jpg"
                                     alt="ContactUs tailwind section"
-                                    className="w-full h-full lg:rounded-l-2xl rounded-2xl bg-blend-multiply bg-yellow-300"
+                                    className="w-full h-full lg:rounded-l-2xl rounded-2xl bg-blend-multiply"
                                 />
                                 <h1 className="font-manrope text-white text-4xl font-bold leading-10 absolute top-11 left-11">
                                     Contact us
                                 </h1>
-                                <div className="absolute bottom-0 w-full lg:p-11 p-5">
+                                <div className="absolute bottom-0 w-full lg:p-6 p-5">
                                     <div className="bg-white rounded-lg p-6 block">
                                         <a
                                             href="javascript:;"
@@ -208,17 +208,17 @@ const ContactForm = () => {
                                 </div>
                             </div>
                         </div>
-                        <Textarea
+                        <textarea
                             type="text"
                             name="message"
                             onChange={handleChange}
-                            className="w-full h-12 text-gray-600
+                            className="w-full min-h-32 text-gray-600
                             placeholder-gray-400 bg-transparent text-lg
                             shadow-sm font-normal leading-7 rounded-xl border
                             border-gray-200 focus:outline-none pl-4 mb-10"
                             placeholder="Message">
                             {formData.message}
-                        </Textarea>
+                        </textarea>
                         <button
                             type="submit"
                             className="w-full h-12 text-white text-base font-semibold leading-6 rounded-full transition-all duration-700 hover:bg-yellow-400 bg-yellow-300 shadow-sm">

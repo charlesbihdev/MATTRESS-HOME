@@ -6,6 +6,7 @@ use App\Models\Size;
 use App\Models\Price;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use App\Models\ProductPicture;
 use Illuminate\Support\Facades\DB;
@@ -41,7 +42,46 @@ class ProductController extends Controller
 
         return response()->json(['products' => $products]);
     }
+    public function showPayment()
+    {
+        // Fetch all payments (you can modify this based on your requirements)
+        $payments = Payment::all();
 
+        // Return view or JSON response
+        return response()->json($payments);
+    }
+
+    public function CreatePayment(Request $request)
+    {
+        // Validate the request data
+        $validated = $request->validate([
+            'customer_name' => 'nullable|string|max:255',
+            'customer_email' => 'required|email|max:255',
+            'customer_phone' => 'nullable|string|max:20',
+            'customer_address' => 'nullable|string|max:255',
+            'customer_region' => 'nullable|string|max:255',
+            'customer_city' => 'nullable|string|max:255',
+            'currency' => 'required|string|max:10',
+            'amount' => 'required|integer',
+        ]);
+
+        // Create the payment record
+        $payment = Payment::create([
+            'reference' => now()->timestamp,
+            'customer_name' => $validated['customer_name'],
+            'customer_email' => $validated['customer_email'],
+            'customer_phone' => $validated['customer_phone'],
+            'customer_address' => $validated['customer_address'],
+            'customer_region' => $validated['customer_region'],
+            'customer_city' => $validated['customer_city'],
+            'currency' => $validated['currency'],
+            'amount' => $validated['amount'],
+            'status' => 'pending', // or any other default status
+        ]);
+
+        // Return response or redirect
+        return response()->json($payment);
+    }
 
     public function store(Request $request)
     {

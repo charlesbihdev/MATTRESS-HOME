@@ -118,8 +118,21 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
                 setErrors(error.response.data.errors)
                 // setStatus(error.response.data.errors)
             })
+    }
+    const addPayment = async ({ setErrors, setStatus, formData }) => {
+        await csrf()
 
-        console.log(response.data.status)
+        setErrors([])
+        setStatus()
+
+        return axios
+            .post('/api/payments', formData)
+            .then(response => setStatus(response.data.status))
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(error.response.data.errors)
+            })
     }
     const deleteProduct = async ({ setErrors, setStatus, productId }) => {
         await csrf()
@@ -156,6 +169,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         resendEmailVerification,
         logout,
         addProduct,
+        addPayment,
         deleteProduct,
     }
 }

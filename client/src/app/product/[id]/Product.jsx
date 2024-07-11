@@ -5,6 +5,7 @@ import Image from 'next/image'
 import BackArrow from '@/components/BackArrow'
 // import sizes from '@/data/SizeData'
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 
 export default function Product({ product }) {
     const [chosenSize, setChosenSize] = useState(1)
@@ -181,24 +182,28 @@ export default function Product({ product }) {
                             </div>
                         </div>
                         <div className="flex flex-col gap-4 mt-10">
-                            <button className="relative flex items-center justify-center w-full px-5 py-2.5 text-white bg-yellow-400 border border-transparent rounded-lg shadow-sm hover:bg-yellow-500">
-                                <span className="absolute left-0 flex items-center pl-3">
-                                    <svg
-                                        className="w-5 h-5 text-white"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor">
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M17 8h2a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V10a2 2 0 012-2h2m5-6h4a2 2 0 012 2v4a2 2 0 01-2 2h-4a2 2 0 01-2-2V4a2 2 0 012-2z"
-                                        />
-                                    </svg>
-                                </span>
-                                Buy Now
-                            </button>
+                            <Link
+                                href={`/pay/${product.id}?size=${chosenSize}`}>
+                                {' '}
+                                <button className="relative flex items-center justify-center w-full px-5 py-2.5 text-white bg-yellow-400 border border-transparent rounded-lg shadow-sm hover:bg-yellow-500">
+                                    <span className="absolute left-0 flex items-center pl-3">
+                                        <svg
+                                            className="w-5 h-5 text-white"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                d="M17 8h2a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V10a2 2 0 012-2h2m5-6h4a2 2 0 012 2v4a2 2 0 01-2 2h-4a2 2 0 01-2-2V4a2 2 0 012-2z"
+                                            />
+                                        </svg>
+                                    </span>
+                                    Buy Now
+                                </button>
+                            </Link>
                         </div>
                         <div className="mt-10">
                             <h3 className="text-lg font-semibold text-gray-800">
