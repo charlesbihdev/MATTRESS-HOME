@@ -57,7 +57,7 @@ const ContactForm = () => {
                         <div className="group w-full h-full">
                             <div className="relative h-full">
                                 <img
-                                    src="/images/helpdesk1.jpg"
+                                    src="/images/helpdesk1.png"
                                     alt="ContactUs tailwind section"
                                     className="w-full h-full lg:rounded-l-2xl rounded-2xl bg-blend-multiply"
                                 />
@@ -66,9 +66,7 @@ const ContactForm = () => {
                                 </h1>
                                 <div className="absolute bottom-0 w-full lg:p-6 p-5">
                                     <div className="bg-white rounded-lg p-6 block">
-                                        <a
-                                            href="javascript:;"
-                                            className="flex items-center mb-6">
+                                        <div className="flex items-center mb-6">
                                             <svg
                                                 width="30"
                                                 height="30"
@@ -84,12 +82,10 @@ const ContactForm = () => {
                                                 />
                                             </svg>
                                             <h5 className="text-black text-base font-normal leading-6 ml-5">
-                                                470-601-1911
+                                                +233 24 428 1122
                                             </h5>
-                                        </a>
-                                        <a
-                                            href="https://veilmail.io/irish-geoff"
-                                            className="flex items-center mb-6">
+                                        </div>
+                                        <div className="flex items-center mb-6">
                                             <svg
                                                 width="30"
                                                 height="30"
@@ -104,12 +100,10 @@ const ContactForm = () => {
                                                 />
                                             </svg>
                                             <h5 className="text-black text-base font-normal leading-6 ml-5">
-                                                mattresshome@gmail.com
+                                                wconsult@yahoo.com
                                             </h5>
-                                        </a>
-                                        <a
-                                            href="javascript:;"
-                                            className="flex items-center">
+                                        </div>
+                                        <div className="flex items-center">
                                             <svg
                                                 width="30"
                                                 height="30"
@@ -128,9 +122,9 @@ const ContactForm = () => {
                                                 />
                                             </svg>
                                             <h5 className="text-black text-base font-normal leading-6 ml-5">
-                                                Ghana, Accra
+                                                Kumasi, Ghana
                                             </h5>
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

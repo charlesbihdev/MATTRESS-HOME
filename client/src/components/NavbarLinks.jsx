@@ -32,13 +32,14 @@ const NavbarLinks = () => {
                 href="/shop">
                 Shop
             </NavLink>
-            <NavLink href="#" prefetch={false}>
+            <NavLink
+                className={pathname == '/services' ? active : ''}
+                href="/services">
                 Services
             </NavLink>
             <NavLink
                 className={pathname == '/about' ? active : ''}
-                href="/about"
-                prefetch={false}>
+                href="/about">
                 About
             </NavLink>
 

@@ -199,7 +199,7 @@ export default function Product({ product }) {
                         </div>
                         <div className="flex flex-col gap-4 mt-10">
                             <Link
-                                href={`/pay/${product.id}?size=${chosenSize}`}>
+                                href={`/billing/${product.id}?size=${chosenSize}`}>
                                 {' '}
                                 <button className="relative flex items-center justify-center w-full px-5 py-2.5 text-white bg-yellow-400 border border-transparent rounded-lg shadow-sm hover:bg-yellow-500">
                                     <span className="absolute left-0 flex items-center pl-3">
