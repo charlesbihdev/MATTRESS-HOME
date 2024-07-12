@@ -3,13 +3,16 @@ import axios from '@/lib/axios'
 
 const fetcher = url => axios.get(url).then(res => res.data)
 
-export const useFetch = () => {
+export const useFetch = query => {
     // Fetch all products
     const {
         data: products,
         error: productsError,
         mutate: mutateProducts,
-    } = useSWR('/api/products', fetcher)
+    } = useSWR(
+        query ? `/api/products/search/${query}` : '/api/products',
+        fetcher,
+    )
 
     const fetchWithAllPrices = () => {
         const { data, error } = useSWR('/api/products/sizes', fetcher)

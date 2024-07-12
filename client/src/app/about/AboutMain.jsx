@@ -4,18 +4,19 @@ const AboutMain = () => {
     return (
         <div className="mt-[110px] py-16 bg-white">
             <div className="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
-                <div className="space-y-6 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
-                    <div className="md:5/12 lg:w-5/12">
+                <div className="space-y-6 md:space-y-0 lg:flex lg:flex-col-reverse md:gap-6 lg:items-center lg:gap-12">
+                    <div className="w-full lg:w-1/2 mb-6">
                         <Image
                             src="/images/helpdesk1.png"
+                            className="mx-auto"
                             alt="image"
                             loading="lazy"
                             width={500}
                             height={500}
                         />
                     </div>
-                    <div className="md:7/12 lg:w-6/12">
-                        <h2 className="text-2xl text-gray-900 font-bold md:text-4xl">
+                    <div className="lg:w-1/2">
+                        <h2 className="text-2xl text-gray-900 font-bold md:text-center md:text-4xl">
                             About Mattress Home
                         </h2>
                         <p className="mt-6 text-gray-600">

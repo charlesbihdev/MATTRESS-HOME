@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Size;
 use App\Models\Price;
+use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Payment;
 use Illuminate\Http\Request;
 use App\Models\ProductPicture;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -39,6 +40,36 @@ class ProductController extends Controller
             },
 
         ])->orderBy('id', 'desc')->get();
+
+        return response()->json(['products' => $products]);
+    }
+
+    public function searchProduct($query)
+    {
+        $products = Product::with([
+            'prices' => function ($query) {
+                $query->whereIn('size_id', function ($subQuery) {
+                    $subQuery->select('id')
+                        ->from('sizes')
+                        ->orderBy('id', 'asc')
+                        ->limit(1)
+                        ->union(
+                            DB::table('sizes')
+                                ->select('id')
+                                ->orderBy('id', 'desc')
+                                ->limit(1)
+                        );
+                });
+            },
+            'prices.size',
+            'pictures' => function ($query) {
+                $query->orderBy('id', 'asc')->limit(1); // Fetch the first image
+            },
+        ])
+            ->where('name', 'like', '%' . $query . '%')
+            ->orWhere('description', 'like', '%' . $query . '%')
+            ->orderBy('id', 'desc')
+            ->get();
 
         return response()->json(['products' => $products]);
     }
@@ -154,15 +185,34 @@ class ProductController extends Controller
             // Find the product by ID
             $product = Product::findOrFail($id);
 
+            // Get the associated pictures
+            $pictures = $product->pictures;
+
+            Log::info('Deleting product pictures', ['pictures' => $pictures->pluck('image_path')]);
+
+
             // Delete the product (this will also delete related records due to cascade)
             $product->delete();
+
+            // Delete the images from storage
+            foreach ($pictures as $picture) {
+                $imagePath = public_path($picture->image_path); // Directly access the public path
+                if (file_exists($imagePath)) {
+                    unlink($imagePath); // Use unlink to delete the file
+                    Log::info('Deleted image from storage', ['path' => $imagePath]);
+                } else {
+                    Log::warning('Image file not found in storage', ['path' => $imagePath]);
+                }
+            }
+
 
             DB::commit();
 
             return response()->json(['status' => 'Product deleted successfully'], 200);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['errors' => ['An error occurred while deleting the product']], 500);
+            Log::error('Error occurred while deleting product', ['exception' => $e->getMessage()]);
+            return response()->json(['errors' => ['An error occurred while deleting the product and its images']], 500);
         }
     }
     public function showWithSizesAndPrices()
@@ -176,7 +226,7 @@ class ProductController extends Controller
                 $query->orderBy('id', 'asc'); // Fetch the first image
             },
 
-        ])->get();
+        ])->orderBy('id', 'desc')->get();
 
         return response()->json(['products' => $products]);
     }

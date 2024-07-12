@@ -1,5 +1,6 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import NavbarLinks from './NavbarLinks'
 
@@ -44,6 +45,7 @@ const Navbar = () => {
                     <div className="flex items-center">
                         <Link
                             href="/"
+                            scroll={false}
                             className="flex-shrink-0"
                             prefetch={false}>
                             <FlagIcon className="h-14 w-36" />
@@ -55,12 +57,10 @@ const Navbar = () => {
 
                     <div className="flex gap-6 md:h-14 md:w-36">
                         <a target="_blank" href="tel:+233548715098">
-                            <div>
-                                <img
-                                    src="/svg/phone-white.svg"
-                                    className="w-8 h-8 mt-4"
-                                />
-                            </div>
+                            <img
+                                src="/svg/phone-white.svg"
+                                className="w-8 h-8 mt-4"
+                            />
                         </a>
                     </div>
                 </div>
@@ -84,31 +84,64 @@ const Navbar = () => {
 }
 
 const SearchInput = () => {
+    const router = useRouter()
+    const searchParams = useSearchParams()
+    const pathname = usePathname()
+
+    const searchQuery = searchParams.get('query')
+    const [query, setQuery] = useState(searchQuery ? searchQuery : '')
+
+    // const inputRef = useRef(null)
+
+    const handleSubmit = e => {
+        e.preventDefault()
+
+        if (query.trim() !== '') {
+            router.push(`/shop?query=${encodeURIComponent(query)}`, {
+                scroll: false,
+            })
+        }
+    }
+
+    useEffect(() => {
+        if (pathname == '/shop') {
+            router.push(`/shop?query=${encodeURIComponent(query)}`, {
+                scroll: false,
+            })
+        }
+    }, [query])
+
     return (
         <div className="order-1 sm:order-none pt-2 mx-auto mb-4 relative text-gray-600">
-            <input
-                className="border-2 border-gray-300 bg-[#f8f8f8] h-10 w-80 px-5 pr-10 rounded-lg text-sm focus:outline-none"
-                type="search"
-                name="search"
-                placeholder="Search"
-            />
-            <button type="submit" className="absolute right-0 top-0 mt-5 mr-4">
-                <svg
-                    className="text-gray-600 h-4 w-4 fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                    version="1.1"
-                    id="Capa_1"
-                    x="0px"
-                    y="0px"
-                    viewBox="0 0 56.966 56.966"
-                    style={{ enableBackground: 'new 0 0 56.966 56.966' }}
-                    xmlSpace="preserve"
-                    width="512px"
-                    height="512px">
-                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
-                </svg>
-            </button>
+            <form onSubmit={handleSubmit}>
+                <input
+                    className="border-2 border-gray-300 bg-[#f8f8f8] h-10 w-80 px-5 pr-10 rounded-lg text-sm focus:outline-none"
+                    type="search"
+                    value={query}
+                    onChange={e => setQuery(e.target.value)}
+                    name="search"
+                    placeholder="Search"
+                />
+                <button
+                    type="submit"
+                    className="absolute right-0 top-0 mt-5 mr-4">
+                    <svg
+                        className="text-gray-800 h-6 w-7 fill-current"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                        version="1.1"
+                        id="Capa_1"
+                        x="0px"
+                        y="0px"
+                        viewBox="0 0 56.966 56.966"
+                        style={{ enableBackground: 'new 0 0 56.966 56.966' }}
+                        xmlSpace="preserve"
+                        width="512px"
+                        height="512px">
+                        <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                    </svg>
+                </button>
+            </form>
         </div>
     )
 }

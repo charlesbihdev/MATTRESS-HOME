@@ -39,6 +39,7 @@ const FeaturedProducts = ({ products }) => {
                                     </div>
                                 )}
                                 <Link
+                                    scroll={false}
                                     href={`/product/${product.id}`}
                                     title={product.name}>
                                     <div className="flex items-start justify-between mt-4 space-x-4">

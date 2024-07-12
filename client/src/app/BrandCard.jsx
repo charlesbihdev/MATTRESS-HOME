@@ -22,6 +22,7 @@ const BrandCard = ({ brand }) => {
                 </div>
                 <div className="flex items-center">
                     <Link
+                        scroll={false}
                         href={brand.url}
                         className="px-6 py-2 rounded-xl bg-white hover:bg-gray-600 text-black border !border-gray-600 !active:text-white hover:text-white font-bold">
                         {' '}

@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import { Pagination } from 'flowbite-react'
 import { useFetch } from '@/hooks/fetch'
 import Image from 'next/image'
+import Loader from '@/components/Loader'
 
 // Define category colors and names
 const getCategoryLabelColor = category => {
@@ -38,7 +39,9 @@ const ItemList = ({ fetchCategory }) => {
     const searchParams = useSearchParams()
     const router = useRouter()
     const pathname = usePathname()
-    const { products, productsError } = useFetch()
+    const searchQuery = searchParams.get('query')
+
+    const { products, productsError } = useFetch(searchQuery)
 
     const [filteredItems, setFilteredItems] = useState([])
     const [filterList, setFilterList] = useState(() => {
@@ -100,6 +103,10 @@ const ItemList = ({ fetchCategory }) => {
     const itemsToShow = filteredItems.slice(start, end)
     const totalPages = Math.ceil(filteredItems.length / perPage)
 
+    if (!products) {
+        return <Loader />
+    }
+
     return (
         <>
             <h2 className="text-xl text-center mb-5 font-bold">
@@ -127,6 +134,7 @@ const ItemList = ({ fetchCategory }) => {
                 className="flex gap-3 flex-wrap justify-center mx-4 sm:mx-12">
                 {itemsToShow.map(item => (
                     <Link
+                        scroll={false}
                         href={`/product/${item.id}`}
                         key={item.id}
                         className="block transform transition-transform duration-300 hover:scale-105">
