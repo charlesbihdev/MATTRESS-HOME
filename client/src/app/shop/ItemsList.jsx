@@ -156,7 +156,7 @@ const ItemList = ({ fetchCategory }) => {
                                     {`${item.prices[0].price} ${' - '} GH₵ ${item.prices[1].price}`}
                                 </h4>
                                 <p className="text-gray-700 text-sm mb-4">
-                                    {item.description}
+                                    {item.description.substr(0, 88)}
                                 </p>
                                 <button
                                     href={`/product/${item.id}`}

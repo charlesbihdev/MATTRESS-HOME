@@ -25,6 +25,6 @@ Route::get('/products/{product}', [ProductController::class, 'show']);
 
 Route::get('/categories', [ProductController::class, 'getCategories']);
 
-Route::get('/payments', [ProductController::class, 'showPayment']);
+Route::get('/payments', [ProductController::class, 'showPayment'])->middleware('auth');
 
 Route::post('/payments', [ProductController::class, 'createPayment'])->middleware('auth');

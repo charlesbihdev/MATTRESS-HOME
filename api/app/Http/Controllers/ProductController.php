@@ -38,7 +38,7 @@ class ProductController extends Controller
                 $query->orderBy('id', 'asc')->limit(1); // Fetch the first image
             },
 
-        ])->get();
+        ])->orderBy('id', 'desc')->get();
 
         return response()->json(['products' => $products]);
     }
@@ -206,7 +206,7 @@ class ProductController extends Controller
                 $query->orderBy('id', 'asc')->limit(1);
             },
             'category'
-        ])->limit($limit)->get();
+        ])->limit($limit)->orderBy('id', 'desc')->get();
 
         return response()->json(['products' => $products]);
     }
