@@ -8,7 +8,8 @@ import WhatsAppLinkButton from './WhatsAppLinkButton'
 export default function Product({ product }) {
     const [chosenSize, setChosenSize] = useState(1)
     const [productPrice, setProductPrice] = useState(
-        product.sizes[0].pivot.price,
+        parseFloat(product.sizes[0].pivot.price) +
+            parseFloat(process.env.NEXT_PUBLIC_ADDED_PROFIT || '100'),
     )
     const [activeImage, setActiveImage] = useState(
         process.env.NEXT_PUBLIC_BACKEND_URL +
@@ -32,7 +33,10 @@ export default function Product({ product }) {
     }
 
     useEffect(() => {
-        setProductPrice(product.sizes[chosenSize - 1].pivot.price)
+        setProductPrice(
+            parseFloat(product.sizes[chosenSize - 1].pivot.price) +
+                parseFloat(process.env.NEXT_PUBLIC_ADDED_PROFIT || '100'),
+        )
     }, [chosenSize])
 
     const getCategoryName = category => {

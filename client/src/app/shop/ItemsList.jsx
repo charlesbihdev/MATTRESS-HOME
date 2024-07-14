@@ -166,7 +166,7 @@ const ItemList = ({ fetchCategory }) => {
                                 </h4>
                                 <h4 className="font-bold text-red-500 text-lg mb-2">
                                     GH₵{' '}
-                                    {`${item.prices[0].price} ${' - '} GH₵ ${item.prices[1].price}`}
+                                    {`${parseFloat(item.prices[0].price) + parseFloat(process.env.NEXT_PUBLIC_ADDED_PROFIT || '100')} ${' - '} GH₵ ${parseFloat(item.prices[1].price) + parseFloat(process.env.NEXT_PUBLIC_ADDED_PROFIT || '100')}`}
                                 </h4>
                                 <p className="text-gray-700 text-sm mb-4">
                                     {item.description.substr(0, 88)}
