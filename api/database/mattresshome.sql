@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2024 at 05:09 PM
+-- Generation Time: Jul 14, 2024 at 07:19 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -215,37 +215,6 @@ CREATE TABLE `prices` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `prices`
---
-
-INSERT INTO `prices` (`id`, `product_id`, `size_id`, `price`, `created_at`, `updated_at`) VALUES
-(61, 16, 1, '276.00', '2024-06-28 09:53:55', '2024-06-28 09:53:55'),
-(62, 16, 2, '605.00', '2024-06-28 09:53:55', '2024-06-28 09:53:55'),
-(63, 16, 3, '921.00', '2024-06-28 09:53:55', '2024-06-28 09:53:55'),
-(64, 16, 4, '351.00', '2024-06-28 09:53:55', '2024-06-28 09:53:55'),
-(65, 16, 5, '61.00', '2024-06-28 09:53:55', '2024-06-28 09:53:55'),
-(66, 17, 1, '276.00', '2024-06-28 09:54:52', '2024-06-28 09:54:52'),
-(67, 17, 2, '605.00', '2024-06-28 09:54:52', '2024-06-28 09:54:52'),
-(68, 17, 3, '921.00', '2024-06-28 09:54:52', '2024-06-28 09:54:52'),
-(69, 17, 4, '351.00', '2024-06-28 09:54:52', '2024-06-28 09:54:52'),
-(70, 17, 5, '61.00', '2024-06-28 09:54:52', '2024-06-28 09:54:52'),
-(71, 18, 1, '362.00', '2024-06-28 10:06:43', '2024-06-28 10:06:43'),
-(72, 18, 2, '14.00', '2024-06-28 10:06:43', '2024-06-28 10:06:43'),
-(73, 18, 3, '776.00', '2024-06-28 10:06:43', '2024-06-28 10:06:43'),
-(74, 18, 4, '196.00', '2024-06-28 10:06:43', '2024-06-28 10:06:43'),
-(75, 18, 5, '703.00', '2024-06-28 10:06:43', '2024-06-28 10:06:43'),
-(76, 19, 1, '362.00', '2024-06-28 10:10:48', '2024-06-28 10:10:48'),
-(77, 19, 2, '14.00', '2024-06-28 10:10:48', '2024-06-28 10:10:48'),
-(78, 19, 3, '776.00', '2024-06-28 10:10:48', '2024-06-28 10:10:48'),
-(79, 19, 4, '196.00', '2024-06-28 10:10:48', '2024-06-28 10:10:48'),
-(80, 19, 5, '703.00', '2024-06-28 10:10:48', '2024-06-28 10:10:48'),
-(121, 28, 1, '859.30', '2024-07-13 22:24:17', '2024-07-14 15:08:38'),
-(122, 28, 2, '730.00', '2024-07-13 22:24:17', '2024-07-14 15:06:02'),
-(123, 28, 3, '621.00', '2024-07-13 22:24:17', '2024-07-14 15:06:02'),
-(124, 28, 4, '573.00', '2024-07-13 22:24:17', '2024-07-14 15:06:02'),
-(125, 28, 5, '411.00', '2024-07-13 22:24:17', '2024-07-14 15:06:02');
-
 -- --------------------------------------------------------
 
 --
@@ -262,17 +231,6 @@ CREATE TABLE `products` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`id`, `name`, `stars`, `category_id`, `description`, `created_at`, `updated_at`) VALUES
-(16, 'Benedict Morgan', 5, 1, 'Qui quam maxime eius', '2024-06-28 09:53:55', '2024-06-28 09:53:55'),
-(17, 'Benedict Morgan', 5, 1, 'Qui quam maxime eius', '2024-06-28 09:54:52', '2024-06-28 09:54:52'),
-(18, 'Justin Malonekk', 1, 3, 'Perferendis beatae f', '2024-06-28 10:06:43', '2024-06-28 10:06:43'),
-(19, 'Justin Malonekk', 1, 3, 'Perferendis beatae f', '2024-06-28 10:10:48', '2024-06-28 10:10:48'),
-(28, 'Charles Baah Bih', 3, 2, 'Description of a product', '2024-07-13 22:24:17', '2024-07-14 15:08:38');
-
 -- --------------------------------------------------------
 
 --
@@ -286,19 +244,6 @@ CREATE TABLE `product_pictures` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `product_pictures`
---
-
-INSERT INTO `product_pictures` (`id`, `product_id`, `image_path`, `created_at`, `updated_at`) VALUES
-(27, 16, 'images/1719568435_Background image.png', '2024-06-28 09:53:55', '2024-06-28 09:53:55'),
-(28, 17, 'images/1719568492_Background image.png', '2024-06-28 09:54:52', '2024-06-28 09:54:52'),
-(29, 18, 'images/1719569203_eid.jpg', '2024-06-28 10:06:43', '2024-06-28 10:06:43'),
-(30, 19, 'images/1719569448_eid.jpg', '2024-06-28 10:10:48', '2024-06-28 10:10:48'),
-(46, 28, 'images/1720969562_WhatsApp Image 2023-01-19 at 23.13.45.jpg', '2024-07-14 15:06:02', '2024-07-14 15:06:02'),
-(47, 28, 'images/1720969562_WhatsApp Image 2023-07-06 at 17.19.14.jpg', '2024-07-14 15:06:02', '2024-07-14 15:06:02'),
-(48, 28, 'images/1720969562_WhatsApp_Image_2023-05-18_at_03.47.25-removebg-preview.png', '2024-07-14 15:06:02', '2024-07-14 15:06:02');
 
 -- --------------------------------------------------------
 
@@ -320,11 +265,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('GxzBM2r88l1G1oYDGS9VM0YHsLEH2emUEUbQTyCF', 2, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicXk2eU0wbFRSN1ltVTBTdEpJWVlWWEFPemxBbXRaV0xQdnFwODFZVCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MjtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJ5JDEyJG8uS1NydFJTSkFla0xNS0wyTHFMME93TThUU0FjYm5jU1p4bHAyblZSVUJ0SllPNjFnb1U2Ijt9', 1720969753),
-('iSakUsP4e6b2yB3RQSbq5Wp1zJDScJoSMlPpKKCO', NULL, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiUEQ4bnV3bUpkSms1TGhRcXJwRm1FWFhodEZWR2xRWGk3dzM4M3NuciI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1720964891),
-('kVKOu7JDR3ZBomxHJWUpW0tryELRsJIub9KX3lJI', NULL, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiTnBoenF4anZGQW5XYXVOZlpsdmQxcTVzUXh0M3F2Sjc4TUlDU3hBcyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1720964893),
-('SqQGRDJMeh2cEZipbQfkmWz2AdSHzfTTYzfkGxJF', NULL, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoicE40UDBIM29XaFg1NXRpMEtjcTdPU1BkcTlDNEtrT1BSYjN3OWlDRCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1720964889),
-('wI4mFGquDiyZz1xsDvEdd68goY1O3p9vMmcvBNbi', NULL, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiS1ViTzdQeXZ3NW9NbDVkamFsSGhDUWJKUUZsQTdvZ0JRaEtCd3FwZiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1720964892);
+('GxzBM2r88l1G1oYDGS9VM0YHsLEH2emUEUbQTyCF', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicXk2eU0wbFRSN1ltVTBTdEpJWVlWWEFPemxBbXRaV0xQdnFwODFZVCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MjtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJ5JDEyJG8uS1NydFJTSkFla0xNS0wyTHFMME93TThUU0FjYm5jU1p4bHAyblZSVUJ0SllPNjFnb1U2Ijt9', 1720977554);
 
 -- --------------------------------------------------------
 
