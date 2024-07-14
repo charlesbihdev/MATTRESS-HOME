@@ -16,5 +16,7 @@ const page = () => {
         </div>
     )
 }
-
+export const metadata = {
+    title: 'Contact Us',
+}
 export default page

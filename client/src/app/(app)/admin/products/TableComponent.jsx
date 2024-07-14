@@ -7,6 +7,7 @@ import { useFetch } from '@/hooks/fetch'
 import { useAuth } from '@/hooks/auth'
 import Loader from '@/components/Loader'
 import { useRouter } from 'next/navigation'
+import EditProductModal from './EditPoductModal'
 
 const getCategoryName = category => {
     switch (category) {
@@ -31,12 +32,15 @@ const TableComponent = () => {
     const [status, setStatus] = useState(null)
 
     const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const [showEditModal, setShowEditModal] = useState(false)
     const [showAddProductModal, setShowAddProductModal] = useState(false)
     const [selectedProductId, setSelectedProductId] = useState(null)
 
     const handleClick = (setState, id) => {
         setState(true)
         setSelectedProductId(id)
+
+        // console.log(showEditModal)
     }
 
     const handleDeleteProduct = async (setErrors, setStatus, productId) => {
@@ -151,7 +155,7 @@ const TableComponent = () => {
                                         className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <div className="flex items-center mr-3">
                                             <img
-                                                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${product.pictures[0].image_path}`}
+                                                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${product.pictures[0]?.image_path}`}
                                                 alt={product.name}
                                                 className="h-8 w-auto mr-3"
                                             />
@@ -168,46 +172,19 @@ const TableComponent = () => {
 
                                     <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <div className="flex items-center">
-                                            <svg
-                                                aria-hidden="true"
-                                                className="w-5 h-5 text-yellow-400"
-                                                fill="currentColor"
-                                                viewBox="0 0 20 20"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </svg>
-                                            <svg
-                                                aria-hidden="true"
-                                                className="w-5 h-5 text-yellow-400"
-                                                fill="currentColor"
-                                                viewBox="0 0 20 20"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </svg>
-                                            <svg
-                                                aria-hidden="true"
-                                                className="w-5 h-5 text-yellow-400"
-                                                fill="currentColor"
-                                                viewBox="0 0 20 20"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </svg>
-                                            <svg
-                                                aria-hidden="true"
-                                                className="w-5 h-5 text-yellow-400"
-                                                fill="currentColor"
-                                                viewBox="0 0 20 20"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </svg>
-                                            <svg
-                                                aria-hidden="true"
-                                                className="w-5 h-5 text-gray-300 dark:text-gray-500"
-                                                fill="currentColor"
-                                                viewBox="0 0 20 20"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </svg>
+                                            {Array.from({ length: 5 }).map(
+                                                (_, index) => (
+                                                    <svg
+                                                        key={index}
+                                                        aria-hidden="true"
+                                                        className={`w-5 h-5 ${index < product.stars ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-500'}`}
+                                                        fill="currentColor"
+                                                        viewBox="0 0 20 20"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                    </svg>
+                                                ),
+                                            )}
                                         </div>
                                     </td>
                                     <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -244,6 +221,26 @@ const TableComponent = () => {
                                             </svg>
                                             Delete
                                         </button>
+
+                                        <button
+                                            type="button"
+                                            className="flex items-center text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
+                                            onClick={() =>
+                                                handleClick(
+                                                    setShowEditModal,
+                                                    product.id,
+                                                )
+                                            }>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="h-4 w-4 mr-2 -ml-0.5"
+                                                viewBox="0 0 20 20"
+                                                fill="currentColor"
+                                                aria-hidden="true">
+                                                <path d="M17.414 2.586a2 2 0 00-2.828 0l-1.172 1.172 2.828 2.828 1.172-1.172a2 2 0 000-2.828zM3 17a1 1 0 001 1h4a1 1 0 00.707-.293l10-10-4.828-4.828-10 10A1 1 0 004 13v4a1 1 0 01-1 1zM4 15v-2.586l9-9 2.586 2.586-9 9H4z" />
+                                            </svg>
+                                            Edit
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
@@ -265,6 +262,14 @@ const TableComponent = () => {
                         <AddProductModal
                             showAddProductModal={showAddProductModal}
                             setShowAddProductModal={setShowAddProductModal}
+                        />
+                    )}
+
+                    {showEditModal && (
+                        <EditProductModal
+                            productId={selectedProductId}
+                            showEditModal={showEditModal}
+                            setShowEditModal={setShowEditModal}
                         />
                     )}
                 </>

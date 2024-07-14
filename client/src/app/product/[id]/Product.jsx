@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import BackArrow from '@/components/BackArrow'
 import { useState, useEffect } from 'react'
-// import Link from 'next/link'
 import WhatsAppLinkButton from './WhatsAppLinkButton'
 
 export default function Product({ product }) {
@@ -60,6 +59,10 @@ export default function Product({ product }) {
             default:
                 return 'bg-black text-white'
         }
+    }
+
+    const metadata = {
+        title: product.name,
     }
 
     // console.log(product)

@@ -119,6 +119,28 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
                 // setStatus(error.response.data.errors)
             })
     }
+
+    const editProduct = async ({
+        setErrors,
+        setStatus,
+        formData,
+        productId,
+    }) => {
+        await csrf()
+
+        setErrors([])
+        setStatus()
+
+        return axios
+            .post(`/api/products/${productId}`, formData)
+            .then(response => setStatus(response.data.status))
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(error.response.data.errors)
+            })
+    }
+
     const addPayment = async ({ setErrors, setStatus, formData }) => {
         await csrf()
 
@@ -169,6 +191,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         resendEmailVerification,
         logout,
         addProduct,
+        editProduct,
         addPayment,
         deleteProduct,
     }

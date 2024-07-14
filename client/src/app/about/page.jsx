@@ -15,4 +15,8 @@ const page = () => {
     )
 }
 
+export const metadata = {
+    title: 'About',
+}
+
 export default page

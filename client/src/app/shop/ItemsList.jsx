@@ -7,6 +7,7 @@ import { Pagination } from 'flowbite-react'
 import { useFetch } from '@/hooks/fetch'
 import Image from 'next/image'
 import Loader from '@/components/Loader'
+import ZeroProducts from '@/components/ZeroProducts'
 
 // Define category colors and names
 const getCategoryLabelColor = category => {
@@ -105,6 +106,10 @@ const ItemList = ({ fetchCategory }) => {
 
     if (!products) {
         return <Loader />
+    }
+
+    if (products.products.length == 0) {
+        return <ZeroProducts />
     }
 
     return (

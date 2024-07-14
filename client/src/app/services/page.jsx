@@ -14,5 +14,7 @@ const page = () => {
         </>
     )
 }
-
+export const metadata = {
+    title: 'Services',
+}
 export default page

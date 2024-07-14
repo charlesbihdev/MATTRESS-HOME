@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Size;
-use App\Models\Price;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Category;
@@ -18,48 +17,36 @@ class ProductController extends Controller
     // Fetch all products
     public function index()
     {
-
+        // Fetch products with prices and related details
         $products = Product::with([
             'prices' => function ($query) {
-                $query->whereIn('size_id', function ($subQuery) {
-                    $subQuery->select('id')
-                        ->from('sizes')
-                        ->orderBy('id', 'asc')
-                        ->limit(1)
-                        ->union(
-                            DB::table('sizes')
-                                ->select('id')
-                                ->orderBy('id', 'desc')
-                                ->limit(1)
-                        );
-                });
+                // Subquery to get min and max size_id
+                $minSizeId = DB::table('sizes')->select('id')->orderBy('id', 'asc')->limit(1)->first()->id;
+                $maxSizeId = DB::table('sizes')->select('id')->orderBy('id', 'desc')->limit(1)->first()->id;
+
+                // Fetch prices using whereIn with both min and max size_id
+                $query->whereIn('size_id', [$minSizeId, $maxSizeId]);
             },
             'prices.size',
             'pictures' => function ($query) {
                 $query->orderBy('id', 'asc')->limit(1); // Fetch the first image
             },
-
         ])->orderBy('id', 'desc')->get();
 
         return response()->json(['products' => $products]);
     }
 
+
     public function searchProduct($query)
     {
         $products = Product::with([
             'prices' => function ($query) {
-                $query->whereIn('size_id', function ($subQuery) {
-                    $subQuery->select('id')
-                        ->from('sizes')
-                        ->orderBy('id', 'asc')
-                        ->limit(1)
-                        ->union(
-                            DB::table('sizes')
-                                ->select('id')
-                                ->orderBy('id', 'desc')
-                                ->limit(1)
-                        );
-                });
+                // Subquery to get min and max size_id
+                $minSizeId = DB::table('sizes')->select('id')->orderBy('id', 'asc')->limit(1)->first()->id;
+                $maxSizeId = DB::table('sizes')->select('id')->orderBy('id', 'desc')->limit(1)->first()->id;
+
+                // Fetch prices using whereIn with both min and max size_id
+                $query->whereIn('size_id', [$minSizeId, $maxSizeId]);
             },
             'prices.size',
             'pictures' => function ($query) {
@@ -177,6 +164,94 @@ class ProductController extends Controller
         return response()->json(['status' => 'Product added successfully'], 201);
     }
 
+    public function update(Request $request, $id)
+    {
+        // Validate incoming request
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'ratings' => 'required|integer|min:1|max:5',
+            'category_id' => 'required|exists:categories,id',
+            'description' => 'nullable|string',
+            'ks' => 'required|numeric',
+            'qs' => 'required|numeric',
+            'ls' => 'required|numeric',
+            'ms' => 'required|numeric',
+            'ss' => 'required|numeric',
+            'images.*' => 'image|mimes:jpeg,png,jpg|max:3078',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        // Proceed with updating the product
+        $product = Product::findOrFail($id);
+        $product->name = $request->name;
+        $product->stars = $request->ratings;
+        $product->category_id = $request->category_id;
+        $product->description = $request->description;
+        $product->save();
+
+        // Save prices
+        $prices = [
+            ['size' => 'K/S', 'price' => $request->ks],
+            ['size' => 'Q/S', 'price' => $request->qs],
+            ['size' => 'L/S', 'price' => $request->ls],
+            ['size' => 'M/S', 'price' => $request->ms],
+            ['size' => 'S/S', 'price' => $request->ss],
+        ];
+
+        foreach ($prices as $price) {
+            $sizeId = Size::where('name', $price['size'])->value('id');
+            if ($sizeId) {
+                $product->prices()->updateOrCreate(
+                    ['size_id' => $sizeId],
+                    ['price' => $price['price']]
+                );
+            }
+        }
+
+        // if user uploaded new images pictures
+        if ($request->hasFile('images')) {
+
+            try {
+                // Get the old associated pictures and delete
+                DB::beginTransaction();
+
+                $pictures = $product->pictures;
+
+                foreach ($pictures as $picture) {
+                    $imagePath = public_path($picture->image_path); // Directly access the public path
+                    if (file_exists($imagePath)) {
+                        unlink($imagePath); // Use unlink to delete the file
+                    }
+                    $picture->delete(); // Delete the record from the database
+                }
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                Log::error('Error occurred while deleting old pictures', ['exception' => $e->getMessage()]);
+                return response()->json(['errors' => ['An error occurred while deleting old images']], 500);
+            }
+
+
+
+            foreach ($request->file('images') as $image) {
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('images'), $imageName);
+
+                $productPicture = new ProductPicture();
+                $productPicture->product_id = $product->id;
+                $productPicture->image_path = 'images/' . $imageName;
+                $productPicture->save();
+            }
+        }
+
+        return response()->json(['status' => 'Product updated successfully'], 200);
+    }
+
+
+
     public function destroy($id)
     {
         try {
@@ -188,7 +263,7 @@ class ProductController extends Controller
             // Get the associated pictures
             $pictures = $product->pictures;
 
-            Log::info('Deleting product pictures', ['pictures' => $pictures->pluck('image_path')]);
+            // Log::info('Deleting product pictures', ['pictures' => $pictures->pluck('image_path')]);
 
 
             // Delete the product (this will also delete related records due to cascade)
@@ -199,9 +274,7 @@ class ProductController extends Controller
                 $imagePath = public_path($picture->image_path); // Directly access the public path
                 if (file_exists($imagePath)) {
                     unlink($imagePath); // Use unlink to delete the file
-                    Log::info('Deleted image from storage', ['path' => $imagePath]);
-                } else {
-                    Log::warning('Image file not found in storage', ['path' => $imagePath]);
+                    // Log::info('Deleted image from storage', ['path' => $imagePath]);
                 }
             }
 
@@ -238,28 +311,23 @@ class ProductController extends Controller
         // Fetch products with a limit
         $products = Product::with([
             'prices' => function ($query) {
-                $query->whereIn('size_id', function ($subQuery) {
-                    $subQuery->select('id')
-                        ->from('sizes')
-                        ->orderBy('id', 'asc')
-                        ->limit(1)
-                        ->union(
-                            DB::table('sizes')
-                                ->select('id')
-                                ->orderBy('id', 'desc')
-                                ->limit(1)
-                        );
-                });
+                // Subquery to get min and max size_id
+                $minSizeId = DB::table('sizes')->select('id')->orderBy('id', 'asc')->limit(1)->first()->id;
+                $maxSizeId = DB::table('sizes')->select('id')->orderBy('id', 'desc')->limit(1)->first()->id;
+
+                // Fetch prices using whereIn with both min and max size_id
+                $query->whereIn('size_id', [$minSizeId, $maxSizeId]);
             },
             'prices.size',
             'pictures' => function ($query) {
                 $query->orderBy('id', 'asc')->limit(1);
             },
             'category'
-        ])->limit($limit)->orderBy('id', 'desc')->get();
+        ])->orderBy('id', 'desc')->limit($limit)->get();
 
         return response()->json(['products' => $products]);
     }
+
 
     // Fetch a specific product by product_id
     public function show(Product $product)
