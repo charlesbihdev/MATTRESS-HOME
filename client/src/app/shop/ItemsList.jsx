@@ -2,7 +2,7 @@
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import './Pagination.css'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { Pagination } from 'flowbite-react'
 import { useFetch } from '@/hooks/fetch'
 import Image from 'next/image'
@@ -138,53 +138,60 @@ const ItemList = ({ fetchCategory }) => {
                 ))}
             </div>
             {/* Render filtered items */}
-            <div
-                id="items"
-                className="flex gap-3 flex-wrap justify-center mx-4 sm:mx-12">
-                {itemsToShow.map(item => (
-                    <Link
-                        scroll={false}
-                        href={`/product/${item.id}`}
-                        key={item.id}
-                        className="block transform transition-transform duration-300 hover:scale-105">
-                        <div
-                            className="relative card bg-white shadow-md rounded-lg overflow-hidden mb-6 lg:mb-4 w-[320px] lg:w-[260px]"
-                            style={{ minHeight: '420px' }}>
+
+            <Suspense>
+                <div
+                    id="items"
+                    className="flex gap-3 flex-wrap justify-center mx-4 sm:mx-12">
+                    {itemsToShow.map(item => (
+                        <Link
+                            scroll={false}
+                            href={`/product/${item.id}`}
+                            key={item.id}
+                            className="block transform transition-transform duration-300 hover:scale-105">
                             <div
-                                className={`absolute top-0 right-0 text-white text-sm font-bold px-2 py-1 rounded-bl ${getCategoryLabelColor(
-                                    item.category_id,
-                                )}`}>
-                                {getCategoryName(item.category_id)}
+                                className="relative card bg-white shadow-md rounded-lg overflow-hidden mb-6 lg:mb-4 w-[320px] lg:w-[260px]"
+                                style={{ minHeight: '450px' }}>
+                                <div
+                                    className={`absolute top-0 right-0 text-white text-sm font-bold px-2 py-1 rounded-bl ${getCategoryLabelColor(
+                                        item.category_id,
+                                    )}`}>
+                                    {getCategoryName(item.category_id)}
+                                </div>
+                                <Image
+                                    className="w-full h-48 object-cover"
+                                    src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${item.pictures[0].image_path}`}
+                                    alt={item.name}
+                                    width={200}
+                                    height={200}
+                                />
+                                <hr className="m-0" />
+                                <div className="card-body p-4">
+                                    <h4 className="font-bold text-black text-lg mb-2">
+                                        {item.name}
+                                    </h4>
+                                    <h4 className="font-bold text-red-500 text-lg mb-2">
+                                        GH₵{' '}
+                                        {`${parseFloat(item.prices[0].price) + parseFloat(process.env.NEXT_PUBLIC_ADDED_PROFIT || '100')} ${' - '} GH₵ ${parseFloat(item.prices[1].price) + parseFloat(process.env.NEXT_PUBLIC_ADDED_PROFIT || '100')}`}
+                                    </h4>
+                                    <p className="text-gray-700 text-sm mb-4">
+                                        {item.description.length > 88
+                                            ? item.description.substr(0, 90) +
+                                              '....'
+                                            : item.description}
+                                    </p>
+                                    <button
+                                        href={`/product/${item.id}`}
+                                        className="inline-block px-4 py-2 text-sm text-white bg-gray-700 rounded-md hover:bg-gray-800">
+                                        View Product
+                                    </button>
+                                </div>
                             </div>
-                            <Image
-                                className="w-full h-48 object-cover"
-                                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${item.pictures[0].image_path}`}
-                                alt={item.name}
-                                width={200}
-                                height={200}
-                            />
-                            <hr className="m-0" />
-                            <div className="card-body p-4">
-                                <h4 className="font-bold text-black text-lg mb-2">
-                                    {item.name}
-                                </h4>
-                                <h4 className="font-bold text-red-500 text-lg mb-2">
-                                    GH₵{' '}
-                                    {`${parseFloat(item.prices[0].price) + parseFloat(process.env.NEXT_PUBLIC_ADDED_PROFIT || '100')} ${' - '} GH₵ ${parseFloat(item.prices[1].price) + parseFloat(process.env.NEXT_PUBLIC_ADDED_PROFIT || '100')}`}
-                                </h4>
-                                <p className="text-gray-700 text-sm mb-4">
-                                    {item.description.substr(0, 88)}
-                                </p>
-                                <button
-                                    href={`/product/${item.id}`}
-                                    className="inline-block px-4 py-2 text-sm text-white bg-gray-700 rounded-md hover:bg-gray-800">
-                                    View Product
-                                </button>
-                            </div>
-                        </div>
-                    </Link>
-                ))}
-            </div>
+                        </Link>
+                    ))}
+                </div>
+            </Suspense>
+
             <Pagination
                 id="pagination"
                 className="block mb-8 mx-4 md:mx-10"

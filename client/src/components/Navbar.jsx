@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import NavbarLinks from './NavbarLinks'
@@ -52,8 +52,9 @@ const Navbar = () => {
                             <span className="sr-only">Logo</span>
                         </Link>
                     </div>
-
-                    <SearchInput />
+                    <Suspense>
+                        <SearchInput />
+                    </Suspense>
 
                     <div className="flex gap-6 md:h-14 md:w-36">
                         <a
