@@ -1,6 +1,3 @@
-// import { PhoneArrowUpRightIcon } from '@heroicons/react/24/outline'
-import Link from 'next/link'
-
 const FloatingButton = () => {
     return (
         <div className="group fixed right-16 bottom-6 p-2 flex items-end justify-end w-36 h-36">
@@ -15,6 +12,7 @@ const FloatingButton = () => {
             <a
                 href="https://wa.me/+233244281122?text=Hello,%20I%20need%20help%20with%20....."
                 target="_blank"
+                rel="noreferrer"
                 className="absolute rounded-full transition-all duration-[0.2s] ease-out scale-y-0 group-hover:scale-y-100 group-hover:-translate-x-16 flex p-2 hover:p-3 bg-green-400 hover:bg-green-500 text-white">
                 <div>
                     <img
@@ -26,6 +24,7 @@ const FloatingButton = () => {
             {/* Sub Button Top */}
             <a
                 target="_blank"
+                rel="noreferrer"
                 className="absolute rounded-full transition-all duration-[0.2s] ease-out scale-x-0 group-hover:scale-x-100 group-hover:-translate-y-16 flex p-2 hover:p-3 bg-yellow-300 hover:bg-yellow-400 text-white"
                 href="tel:+233548715098">
                 <div>

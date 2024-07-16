@@ -2,7 +2,7 @@
 import React from 'react'
 import { PaystackButton } from 'react-paystack'
 // import './App.css'
-import ApplicationLogo from './ApplicationLogo'
+// import ApplicationLogo from './ApplicationLogo'
 
 const config = {
     reference: new Date().getTime().toString(),
@@ -17,15 +17,15 @@ function PayStack() {
     // you can call this function anything
     const handlePaystackSuccessAction = reference => {
         // Implementation for whatever you want to do with reference and after success call.
-        console.log(reference)
-        alert(reference.message)
+        // console.log(reference)
+        // alert(reference.message)
         // alert('Payment complete! Reference: ' + reference)
     }
 
     // you can call this function anything
     const handlePaystackCloseAction = () => {
         // implementation for  whatever you want to do when the Paystack dialog closed.
-        console.log('closed')
+        // console.log('closed')
     }
 
     const componentProps = {

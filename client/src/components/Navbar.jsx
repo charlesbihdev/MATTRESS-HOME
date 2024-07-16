@@ -56,7 +56,10 @@ const Navbar = () => {
                     <SearchInput />
 
                     <div className="flex gap-6 md:h-14 md:w-36">
-                        <a target="_blank" href="tel:+233548715098">
+                        <a
+                            target="_blank"
+                            rel="noreferrer"
+                            href="tel:+233548715098">
                             <img
                                 src="/svg/phone-white.svg"
                                 className="w-8 h-8 mt-4"

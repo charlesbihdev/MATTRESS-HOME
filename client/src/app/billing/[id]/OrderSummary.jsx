@@ -1,14 +1,14 @@
 'use client'
 import { useState } from 'react'
 import { PaystackButton } from 'react-paystack'
-import { useAuth } from '@/hooks/auth'
+// import { useAuth } from '@/hooks/auth'
 import BackArrow from '@/components/BackArrow'
 
 const OrderSummary = ({ product }) => {
     // const { addPayment } = useAuth()
 
-    const [errors, setErrors] = useState([])
-    const [status, setStatus] = useState(null)
+    // const [errors, setErrors] = useState([])
+    // const [status, setStatus] = useState(null)
     const [formData, setFormData] = useState({
         region: 'Greater Accra',
         city: '',
@@ -31,11 +31,11 @@ const OrderSummary = ({ product }) => {
     }
 
     const handlePaystackSuccessAction = response => {
-        alert('Payment complete! Reference: ' + response.status)
+        // alert('Payment complete! Reference: ' + response.status)
     }
 
     const handlePaystackCloseAction = () => {
-        console.log('Payment dialog closed')
+        // console.log('Payment dialog closed')
     }
 
     const componentProps = {

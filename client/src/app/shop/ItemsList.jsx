@@ -104,7 +104,7 @@ const ItemList = ({ fetchCategory }) => {
     const itemsToShow = filteredItems.slice(start, end)
     const totalPages = Math.ceil(filteredItems.length / perPage)
 
-    if (!products) {
+    if (!products || productsError) {
         return <Loader />
     }
 

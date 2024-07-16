@@ -19,8 +19,6 @@ const page = () => {
     }
     const payments = data
 
-    console.log(payments)
-
     return <div className="pt-20 px-4 sm:px-6">payment</div>
 }
 

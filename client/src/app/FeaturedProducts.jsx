@@ -3,7 +3,6 @@ import React from 'react'
 import Image from 'next/image'
 
 const FeaturedProducts = ({ products }) => {
-    const addProfits = 100
     return (
         <div>
             <section className="py-12 bg-white sm:py-16 lg:py-20">

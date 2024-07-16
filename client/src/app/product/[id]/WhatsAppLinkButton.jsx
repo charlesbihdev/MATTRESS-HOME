@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import React from 'react'
 
 const WhatsAppLinkButton = ({ product, size, productPrice }) => {
@@ -15,7 +14,7 @@ const WhatsAppLinkButton = ({ product, size, productPrice }) => {
 
     return (
         <>
-            <a target="_blank" href={whatsappUrl}>
+            <a target="_blank" rel="noreferrer" href={whatsappUrl}>
                 <button className="relative flex items-center justify-center w-full px-5 py-2.5 text-white bg-yellow-400 border border-transparent rounded-lg shadow-sm hover:bg-yellow-500">
                     <span className="absolute left-0 flex items-center pl-3">
                         <svg

@@ -1,5 +1,5 @@
 'use client'
-import { Textarea } from 'flowbite-react'
+// import { Textarea } from 'flowbite-react'
 import React, { useState } from 'react'
 
 const ContactForm = () => {
@@ -22,7 +22,6 @@ const ContactForm = () => {
     const handleSubmit = async e => {
         e.preventDefault()
         // Handle form submission logic here
-        console.log(formData)
         try {
             const response = await fetch('https://fabform.io/f/xxxxx', {
                 method: 'POST',

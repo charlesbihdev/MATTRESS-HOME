@@ -4,11 +4,6 @@ import { useAuth } from '@/hooks/auth'
 import Navigation from '@/app/(app)/Navigation'
 import Loading from '@/app/(app)/Loading'
 
-// import Sidebar from '@/components/Sidebar'
-
-import { useState } from 'react'
-import Sidebar from './Sidebar'
-
 const AppLayout = ({ children }) => {
     const { user } = useAuth({ middleware: 'auth' })
 
