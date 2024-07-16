@@ -105,12 +105,13 @@ const EditProductModal = ({ showEditModal, setShowEditModal, productId }) => {
             formData.append(key, productData.prices[key])
         })
 
-        isFileInputTriggered &&
+        if (isFileInputTriggered) {
             images.forEach((image, index) => {
                 if (typeof image === 'object') {
                     formData.append(`images[${index}]`, image)
                 }
             })
+        }
 
         try {
             await editProduct({ setErrors, setStatus, formData, productId })

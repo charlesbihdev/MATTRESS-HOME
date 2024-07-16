@@ -31,11 +31,11 @@ const OrderSummary = ({ product }) => {
     }
 
     const handlePaystackSuccessAction = response => {
-        // alert('Payment complete! Reference: ' + response.status)
+        alert('Payment complete! Reference: ' + response.status)
     }
 
     const handlePaystackCloseAction = () => {
-        // console.log('Payment dialog closed')
+        alert('Payment dialog closed')
     }
 
     const componentProps = {

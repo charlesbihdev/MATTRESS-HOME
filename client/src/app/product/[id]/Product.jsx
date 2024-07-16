@@ -65,10 +65,6 @@ export default function Product({ product }) {
         }
     }
 
-    const metadata = {
-        title: product.name,
-    }
-
     // console.log(product)
 
     return (
