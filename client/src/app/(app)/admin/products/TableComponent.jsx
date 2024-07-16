@@ -59,7 +59,7 @@ const TableComponent = () => {
         setState(false)
     }
 
-    if (error) {
+    if (error || errors) {
         return <div>Error fetching product details</div>
     }
 

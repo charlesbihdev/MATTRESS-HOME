@@ -210,7 +210,8 @@ const ContactForm = () => {
                             placeholder-gray-400 bg-transparent text-lg
                             shadow-sm font-normal leading-7 rounded-xl border
                             border-gray-200 focus:outline-none pl-4 mb-10"
-                            placeholder="Message"></textarea>
+                            placeholder="Message"
+                        />
                         <button
                             type="submit"
                             className="w-full h-12 text-white text-base font-semibold leading-6 rounded-full transition-all duration-700 hover:bg-yellow-400 bg-yellow-300 shadow-sm">

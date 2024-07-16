@@ -104,6 +104,7 @@ const EditProductModal = ({ showEditModal, setShowEditModal, productId }) => {
         Object.keys(productData.prices).forEach(key => {
             formData.append(key, productData.prices[key])
         })
+
         isFileInputTriggered &&
             images.forEach((image, index) => {
                 if (typeof image === 'object') {

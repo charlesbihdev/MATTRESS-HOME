@@ -13,7 +13,7 @@ const DeleteModal = ({
             className={`fixed inset-0 flex items-center justify-center z-50 ${
                 showModal ? '' : 'hidden'
             }`}>
-            <div className="fixed inset-0 bg-black opacity-50"></div>
+            <div className="fixed inset-0 bg-black opacity-50" />
             <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
                 <div className="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div className="sm:flex sm:items-start">
