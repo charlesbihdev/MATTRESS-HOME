@@ -1,5 +1,0 @@
-/* Assuming #pagination is the parent nav element */
-#pagination > ul {
-    display: flex;
-    justify-content: flex-end !important;
-}
