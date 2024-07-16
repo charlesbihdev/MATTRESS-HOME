@@ -158,7 +158,7 @@ export default function Product({ product }) {
                             </p>
                             <p className="text-gray-400 text-base">
                                 <strike>
-                                    GH₵ {Math.round(productPrice + 26)}
+                                    GH₵ {Math.round(productPrice + 113)}
                                 </strike>{' '}
                                 <span className="text-sm ml-1">
                                     Tax included

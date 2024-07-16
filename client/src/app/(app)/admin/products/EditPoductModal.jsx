@@ -425,7 +425,7 @@ const EditProductModal = ({ showEditModal, setShowEditModal, productId }) => {
                                     <button
                                         type="submit"
                                         className="inline-flex items-center py-2.5 px-5 font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900">
-                                        Edit Product
+                                        Update Product
                                     </button>
                                 </div>
                             </div>

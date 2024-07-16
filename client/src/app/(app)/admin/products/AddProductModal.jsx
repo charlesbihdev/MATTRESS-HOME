@@ -77,6 +77,20 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
         try {
             await addProduct({ setErrors, setStatus, formData })
             router.refresh()
+            setProductData({
+                name: '',
+                ratings: '',
+                category_id: '',
+                description: '',
+                prices: {
+                    ks: '',
+                    qs: '',
+                    ls: '',
+                    ms: '',
+                    ss: '',
+                },
+            })
+            setImages([])
         } catch (error) {
             // Handle any other errors that might occur
             setErrors(['An unexpected error occurred. Please try again.'])
@@ -341,8 +355,7 @@ const AddProductModal = ({ setShowAddProductModal, showAddProductModal }) => {
                             {status && (
                                 <div
                                     className={`mt-4 p-3 text-sm ${
-                                        status ===
-                                        'Product updated successfully'
+                                        status === 'Product added successfully'
                                             ? 'text-green-700 bg-green-100'
                                             : 'text-red-700 bg-red-100'
                                     }`}>

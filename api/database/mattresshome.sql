@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2024 at 07:19 PM
+-- Generation Time: Jul 16, 2024 at 03:32 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -215,6 +215,67 @@ CREATE TABLE `prices` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `prices`
+--
+
+INSERT INTO `prices` (`id`, `product_id`, `size_id`, `price`, `created_at`, `updated_at`) VALUES
+(131, 30, 1, '5090.00', '2024-07-14 17:59:15', '2024-07-14 21:39:56'),
+(132, 30, 2, '4260.00', '2024-07-14 17:59:15', '2024-07-14 21:39:56'),
+(133, 30, 3, '3230.00', '2024-07-14 17:59:15', '2024-07-14 21:39:56'),
+(134, 30, 4, '2555.00', '2024-07-14 17:59:16', '2024-07-14 21:39:56'),
+(135, 30, 5, '2211.00', '2024-07-14 17:59:16', '2024-07-14 21:39:56'),
+(136, 31, 1, '7635.00', '2024-07-14 18:07:07', '2024-07-14 21:42:42'),
+(137, 31, 2, '6545.00', '2024-07-14 18:07:07', '2024-07-14 21:42:42'),
+(138, 31, 3, '4930.00', '2024-07-14 18:07:07', '2024-07-14 21:42:42'),
+(139, 31, 4, '3830.00', '2024-07-14 18:07:07', '2024-07-14 21:42:42'),
+(140, 31, 5, '3302.00', '2024-07-14 18:07:07', '2024-07-14 21:42:42'),
+(141, 32, 1, '11870.00', '2024-07-14 18:14:01', '2024-07-14 21:44:14'),
+(142, 32, 2, '10175.00', '2024-07-14 18:14:01', '2024-07-14 21:44:14'),
+(143, 32, 3, '7635.00', '2024-07-14 18:14:01', '2024-07-14 21:44:14'),
+(144, 32, 4, '5940.00', '2024-07-14 18:14:01', '2024-07-14 21:44:14'),
+(145, 32, 5, '5085.00', '2024-07-14 18:14:01', '2024-07-14 21:44:14'),
+(146, 33, 1, '6250.00', '2024-07-14 18:20:12', '2024-07-14 21:46:18'),
+(147, 33, 2, '5525.00', '2024-07-14 18:20:12', '2024-07-14 21:46:18'),
+(148, 33, 3, '4040.00', '2024-07-14 18:20:12', '2024-07-14 21:46:18'),
+(149, 33, 4, '3180.00', '2024-07-14 18:20:12', '2024-07-14 21:46:18'),
+(150, 33, 5, '2775.00', '2024-07-14 18:20:12', '2024-07-14 21:46:18'),
+(151, 34, 1, '9105.00', '2024-07-14 18:26:56', '2024-07-14 21:48:22'),
+(152, 34, 2, '7825.00', '2024-07-14 18:26:56', '2024-07-14 21:48:22'),
+(153, 34, 3, '5875.00', '2024-07-14 18:26:56', '2024-07-14 21:48:22'),
+(154, 34, 4, '4565.00', '2024-07-14 18:26:56', '2024-07-14 21:48:22'),
+(155, 34, 5, '3920.00', '2024-07-14 18:26:56', '2024-07-14 21:48:23'),
+(156, 35, 1, '4494.00', '2024-07-14 19:11:42', '2024-07-14 19:11:42'),
+(157, 35, 2, '3847.00', '2024-07-14 19:11:42', '2024-07-14 19:11:42'),
+(158, 35, 3, '2888.00', '2024-07-14 19:11:42', '2024-07-14 19:11:42'),
+(159, 35, 4, '2299.00', '2024-07-14 19:11:42', '2024-07-14 19:11:42'),
+(160, 35, 5, '1929.00', '2024-07-14 19:11:42', '2024-07-14 19:11:42'),
+(161, 36, 1, '2500.00', '2024-07-14 19:14:33', '2024-07-14 19:14:33'),
+(162, 36, 2, '2100.00', '2024-07-14 19:14:33', '2024-07-14 19:14:33'),
+(163, 36, 3, '1800.00', '2024-07-14 19:14:33', '2024-07-14 19:14:33'),
+(164, 36, 4, '1500.00', '2024-07-14 19:14:33', '2024-07-14 19:14:33'),
+(165, 36, 5, '1200.00', '2024-07-14 19:14:33', '2024-07-14 19:14:33'),
+(166, 37, 1, '5090.00', '2024-07-14 19:17:49', '2024-07-14 19:17:49'),
+(167, 37, 2, '4260.00', '2024-07-14 19:17:49', '2024-07-14 19:17:49'),
+(168, 37, 3, '3230.00', '2024-07-14 19:17:49', '2024-07-14 19:17:49'),
+(169, 37, 4, '2555.00', '2024-07-14 19:17:49', '2024-07-14 19:17:49'),
+(170, 37, 5, '2213.00', '2024-07-14 19:17:49', '2024-07-14 19:17:49'),
+(171, 38, 1, '2886.00', '2024-07-14 21:54:05', '2024-07-14 21:54:05'),
+(172, 38, 2, '2470.00', '2024-07-14 21:54:05', '2024-07-14 21:54:05'),
+(173, 38, 3, '1884.00', '2024-07-14 21:54:05', '2024-07-14 21:54:05'),
+(174, 38, 4, '1482.00', '2024-07-14 21:54:05', '2024-07-14 21:54:05'),
+(175, 38, 5, '1260.00', '2024-07-14 21:54:05', '2024-07-14 21:54:05'),
+(176, 39, 1, '2646.00', '2024-07-14 21:58:31', '2024-07-14 21:58:31'),
+(177, 39, 2, '2269.00', '2024-07-14 21:58:31', '2024-07-14 21:58:31'),
+(178, 39, 3, '1699.00', '2024-07-14 21:58:31', '2024-07-14 21:58:31'),
+(179, 39, 4, '1331.00', '2024-07-14 21:58:31', '2024-07-14 21:58:31'),
+(180, 39, 5, '1136.00', '2024-07-14 21:58:31', '2024-07-14 21:58:31'),
+(181, 40, 1, '3241.00', '2024-07-14 22:03:43', '2024-07-14 22:03:43'),
+(182, 40, 2, '2757.00', '2024-07-14 22:03:43', '2024-07-14 22:03:43'),
+(183, 40, 3, '2069.00', '2024-07-14 22:03:43', '2024-07-14 22:03:43'),
+(184, 40, 4, '1602.00', '2024-07-14 22:03:43', '2024-07-14 22:03:43'),
+(185, 40, 5, '1393.00', '2024-07-14 22:03:43', '2024-07-14 22:03:43');
+
 -- --------------------------------------------------------
 
 --
@@ -231,6 +292,23 @@ CREATE TABLE `products` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `stars`, `category_id`, `description`, `created_at`, `updated_at`) VALUES
+(30, 'Orthopaedic honeymoon mattress', 5, 2, 'A composite mattress made up of heat-treated spring coils completely filled and wrapped with High Density Foam and covered with Belgium Jacquard Quilts, it is ideal for back pain', '2024-07-14 17:59:15', '2024-07-14 17:59:15'),
+(31, 'Princess honeymoon spring mattress', 5, 2, 'A composite mattress made up of heat-treated spring coils completely filled with High Density Foam and wrapped with High Resilient Foam and covered with Jacquard Quilts. It is ideal for back pain.', '2024-07-14 18:07:07', '2024-07-14 18:07:07'),
+(32, 'Prestige pocketed mattress', 5, 2, 'Over 1,500 nested Pocket Springs (in a standard double size), each protected in its own individual pocket, compress and expand individually complying with your body shape. This mattress is divided in 5 zones, each of a different type of spring, providing health support while sleeping. In addition, a layer of High Resilient foam is fitted at the surface, enabling the mattress to mold to your body at the highest precision, hence providing you with truly healthy recuperative sleep', '2024-07-14 18:14:01', '2024-07-14 18:14:01'),
+(33, 'Ultraflex 8 foam mattress', 4, 2, 'An ultra flexible, High Resilience Polyurethane foam mattress covered with Belgium Jacquard Quilts that provides excellent relaxation and body support.', '2024-07-14 18:20:12', '2024-07-14 18:20:12'),
+(34, 'Anti-stress \'10 memory foam mattress', 5, 2, 'Latex Foam Anti-Stress pressure reducing memory foam mattresses are made of advanced hypo-allergenic fungi and anti-microbial Visco-Elastic foam. This technology was originally developed by NASA space program and was used on space shuttles, to relieve pressure on astronauts caused by G-Force during takeoff. Today, Latex Foam is using this technology in manufacturing the new Anti-Stress mattress, to provide the perfect amount of support over an extended period of time.', '2024-07-14 18:26:55', '2024-07-14 18:26:55'),
+(35, 'Memory Foam Flex mattress', 5, 3, 'Introducing our Memory Foam Flex mattress for the best sleep of your life!\r\n– 🌟 Affordable memory foam technology for ultimate comfort.\r\n– 🙌 Say goodbye to joint pain and pressure points.\r\n– 🛌 Enjoy motion isolation for undisturbed sleep.\r\n– ☁️ Experience a cloud-like feel with a firm base.\r\n– 💤 Ideal for all sleep positions.\r\n– 💰 Get the benefits of memory foam at an affordable price.\r\n😴 Don’t miss out on the sleep upgrade you deserve!', '2024-07-14 19:11:41', '2024-07-14 19:11:41'),
+(36, 'Bueno Mattress', 5, 3, 'Perfect for side and back sleepers. Individually foam-wrapped springs evenly distribute body weight for a restful night’s sleep.', '2024-07-14 19:14:33', '2024-07-14 19:14:33'),
+(37, 'Orthopaedic Mattress', 5, 3, 'Orthopaedic mattresses are highly recommended to people with back and joint problems. Fully supportive of your spine, our Orthopaedic Mattress is made of Bonnell spring coils, which are infused with high-density foam and trimmed. An extra sheet of foam is added to each side of the mattress for extra support and comfort, relieving you from aches and pains each morning. The quilted jacquard cover provides a luxurious experience for every sleeper.', '2024-07-14 19:17:48', '2024-07-14 19:17:48'),
+(38, 'Polyester Covered 9inch High Density Foam Mattess', 5, 2, 'A complete foam mattress of high density foam covered with Belgium Jacquard Quilts for good sleeping comfort.', '2024-07-14 21:54:05', '2024-07-14 22:04:59'),
+(39, 'Polyester  Covered 8inch High Density Foam Mattress', 5, 2, 'A complete 8inch foam mattress of high density foam covered with Belgium Jacquard Quilts for good sleeping comfort.', '2024-07-14 21:58:31', '2024-07-14 22:04:26'),
+(40, 'Polyester Covered 10inch  High Density Foam Mattess', 5, 2, 'An 10 inch complete foam mattress of high density foam covered with Belgium Jacquard Quilts for good sleeping comfort.', '2024-07-14 22:03:43', '2024-07-14 22:03:43');
+
 -- --------------------------------------------------------
 
 --
@@ -244,6 +322,49 @@ CREATE TABLE `product_pictures` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `product_pictures`
+--
+
+INSERT INTO `product_pictures` (`id`, `product_id`, `image_path`, `created_at`, `updated_at`) VALUES
+(49, 30, 'images/1720979956_orthopedicspringmattress.jpg', '2024-07-14 17:59:16', '2024-07-14 17:59:16'),
+(50, 30, 'images/1720979956_orthopedicspringmattress02.jpg', '2024-07-14 17:59:16', '2024-07-14 17:59:16'),
+(51, 30, 'images/1720979956_orthopedicspringmattress03.jpg', '2024-07-14 17:59:16', '2024-07-14 17:59:16'),
+(52, 31, 'images/1720980427_princessspring.jpg', '2024-07-14 18:07:07', '2024-07-14 18:07:07'),
+(53, 31, 'images/1720980427_princessspring02.jpg', '2024-07-14 18:07:07', '2024-07-14 18:07:07'),
+(54, 31, 'images/1720980427_princessspring03.jpg', '2024-07-14 18:07:07', '2024-07-14 18:07:07'),
+(55, 31, 'images/1720980427_princessspring05.jpg', '2024-07-14 18:07:07', '2024-07-14 18:07:07'),
+(56, 31, 'images/1720980427_princessspring07.jpg', '2024-07-14 18:07:07', '2024-07-14 18:07:07'),
+(57, 32, 'images/1720980841_prestigespringmattress.jpg', '2024-07-14 18:14:01', '2024-07-14 18:14:01'),
+(58, 32, 'images/1720980841_prestigespringmattress02.jpg', '2024-07-14 18:14:01', '2024-07-14 18:14:01'),
+(59, 32, 'images/1720980841_prestigespringmattress03.jpg', '2024-07-14 18:14:01', '2024-07-14 18:14:01'),
+(60, 32, 'images/1720980841_prestigespringmattress05.jpg', '2024-07-14 18:14:01', '2024-07-14 18:14:01'),
+(61, 32, 'images/1720980841_prestigespringmattress06.jpg', '2024-07-14 18:14:01', '2024-07-14 18:14:01'),
+(62, 32, 'images/1720980841_prestigespringmattress08.jpg', '2024-07-14 18:14:01', '2024-07-14 18:14:01'),
+(63, 32, 'images/1720980841_prestigespringmattress10.jpg', '2024-07-14 18:14:01', '2024-07-14 18:14:01'),
+(64, 32, 'images/1720980841_prestigespringmattress11.jpg', '2024-07-14 18:14:01', '2024-07-14 18:14:01'),
+(65, 33, 'images/1720981212_ultraflexfoammattress.jpg', '2024-07-14 18:20:12', '2024-07-14 18:20:12'),
+(66, 33, 'images/1720981212_ultraflexfoammattress03.jpg', '2024-07-14 18:20:12', '2024-07-14 18:20:12'),
+(67, 33, 'images/1720981212_ultraflexfoammattress02.jpg', '2024-07-14 18:20:12', '2024-07-14 18:20:12'),
+(68, 34, 'images/1720981616_antistressfoammattress.jpg', '2024-07-14 18:26:56', '2024-07-14 18:26:56'),
+(69, 34, 'images/1720981616_antistressfoammattress05.jpg', '2024-07-14 18:26:56', '2024-07-14 18:26:56'),
+(70, 34, 'images/1720981616_antistressfoammattress02.jpg', '2024-07-14 18:26:56', '2024-07-14 18:26:56'),
+(71, 34, 'images/1720981616_antistressfoammattress03.jpg', '2024-07-14 18:26:56', '2024-07-14 18:26:56'),
+(72, 34, 'images/1720981616_antistressfoammattress04.jpg', '2024-07-14 18:26:56', '2024-07-14 18:26:56'),
+(73, 35, 'images/1720984302_WhatsApp-Image-2023-10-11-at-1.28.34-PM.jpeg', '2024-07-14 19:11:42', '2024-07-14 19:11:42'),
+(74, 36, 'images/1720984473_Bueno.jpg', '2024-07-14 19:14:33', '2024-07-14 19:14:33'),
+(75, 36, 'images/1720984473_BUeno-1-600x600.jpg', '2024-07-14 19:14:33', '2024-07-14 19:14:33'),
+(76, 36, 'images/1720984473_BUeno-2-600x600.jpg', '2024-07-14 19:14:33', '2024-07-14 19:14:33'),
+(77, 37, 'images/1720984669_Ortho-600x600.jpg', '2024-07-14 19:17:49', '2024-07-14 19:17:49'),
+(78, 37, 'images/1720984669_ORtho-1.jpg', '2024-07-14 19:17:49', '2024-07-14 19:17:49'),
+(79, 38, 'images/1720994046_WhatsApp Image 2024-07-14 at 21.48.18_cd620d99.jpg', '2024-07-14 21:54:06', '2024-07-14 21:54:06'),
+(80, 38, 'images/1720994046_highdensityfoammattress04.jpg', '2024-07-14 21:54:06', '2024-07-14 21:54:06'),
+(81, 39, 'images/1720994311_highdensityfoammattress07.jpg', '2024-07-14 21:58:31', '2024-07-14 21:58:31'),
+(82, 39, 'images/1720994311_highdensityfoammattress08.jpg', '2024-07-14 21:58:31', '2024-07-14 21:58:31'),
+(83, 40, 'images/1720994623_highdensityfoammattress03.jpg', '2024-07-14 22:03:43', '2024-07-14 22:03:43'),
+(84, 40, 'images/1720994623_highdensityfoammattress04.jpg', '2024-07-14 22:03:43', '2024-07-14 22:03:43'),
+(85, 40, 'images/1720994623_highdensityfoammattress.jpg', '2024-07-14 22:03:43', '2024-07-14 22:03:43');
 
 -- --------------------------------------------------------
 
@@ -265,7 +386,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('GxzBM2r88l1G1oYDGS9VM0YHsLEH2emUEUbQTyCF', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicXk2eU0wbFRSN1ltVTBTdEpJWVlWWEFPemxBbXRaV0xQdnFwODFZVCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MjtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJ5JDEyJG8uS1NydFJTSkFla0xNS0wyTHFMME93TThUU0FjYm5jU1p4bHAyblZSVUJ0SllPNjFnb1U2Ijt9', 1720977554);
+('O4OeupAsr1SfVsqvOHRaR2TEvGQDrjomC4l28UZ7', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiM0pQQXVudXFuNTdmeHBLUXcwVjE5dG1adElzeEhZNllJa3JLSXFHMyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1721006810);
 
 -- --------------------------------------------------------
 
@@ -470,19 +591,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `prices`
 --
 ALTER TABLE `prices`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `product_pictures`
 --
 ALTER TABLE `product_pictures`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `sizes`
