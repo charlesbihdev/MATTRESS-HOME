@@ -5,13 +5,11 @@
 /.pnp
 .pnp.js
 
-/admin
-
 # testing
 /coverage
 
 # next.js
-/.next/
+/.next*
 /out/
 
 # production
