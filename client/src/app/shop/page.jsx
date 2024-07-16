@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ItemsList from './ItemsList'
 import FloatingButton from '@/components/FloatingButton'
+import { Suspense } from 'react'
 
 const fetchCategory = [
     { id: 1, name: 'Royal Foam' },
@@ -15,7 +16,9 @@ const Shop = () => {
         <>
             <Navbar />
             <div className="mt-[160px]">
-                <ItemsList fetchCategory={fetchCategory} />
+                <Suspense>
+                    <ItemsList fetchCategory={fetchCategory} />
+                </Suspense>
             </div>
             <FloatingButton />
 
