@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 import WhatsAppLinkButton from './WhatsAppLinkButton'
 
 export default function Product({ product }) {
-    const [chosenSize, setChosenSize] = useState(1)
+    const [chosenSize, setChosenSize] = useState(3)
     const [productPrice, setProductPrice] = useState(
         parseFloat(product.sizes[0].pivot.price) +
             parseFloat(process.env.NEXT_PUBLIC_ADDED_PROFIT || '100'),

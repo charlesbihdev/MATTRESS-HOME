@@ -31,7 +31,10 @@ class ProductController extends Controller
             'pictures' => function ($query) {
                 $query->orderBy('id', 'asc')->limit(1); // Fetch the first image
             },
-        ])->orderBy('id', 'desc')->get();
+        ])
+            // ->orderBy('id', 'desc')
+            ->inRandomOrder()
+            ->get();
 
         return response()->json(['products' => $products]);
     }
@@ -306,11 +309,44 @@ class ProductController extends Controller
 
 
     // get products with limit 
+    // public function getProductsWithLimit($limit)
+    // {
+    //     // Fetch one product from each category until the limit is reached
+    //     $products = Product::with([
+    //         'prices' => function ($query) {
+    //             // Subquery to get min and max size_id
+    //             $minSizeId = DB::table('sizes')->select('id')->orderBy('id', 'asc')->limit(1)->first()->id;
+    //             $maxSizeId = DB::table('sizes')->select('id')->orderBy('id', 'desc')->limit(1)->first()->id;
+
+    //             // Fetch prices using whereIn with both min and max size_id
+    //             $query->whereIn('size_id', [$minSizeId, $maxSizeId]);
+    //         },
+    //         'prices.size',
+    //         'pictures' => function ($query) {
+    //             $query->orderBy('id', 'asc')->limit(1);
+    //         },
+    //         'category'
+    //     ])
+    //         ->select('products.*')
+    //         ->inRandomOrder()
+    //         ->limit($limit)
+    //         ->get();
+
+    //     return response()->json(['products' => $products]);
+    // }
+
+
     public function getProductsWithLimit($limit)
     {
-        // Fetch products with a limit
-        $products = Product::with([
-            'prices' => function ($query) {
+        // Initialize an empty collection to store the final products
+        $finalProducts = collect();
+
+        // Get the categories with their products
+        $categories = Category::with([
+            'products' => function ($query) {
+                $query->orderBy('created_at', 'desc'); // Order by latest created
+            },
+            'products.prices' => function ($query) {
                 // Subquery to get min and max size_id
                 $minSizeId = DB::table('sizes')->select('id')->orderBy('id', 'asc')->limit(1)->first()->id;
                 $maxSizeId = DB::table('sizes')->select('id')->orderBy('id', 'desc')->limit(1)->first()->id;
@@ -318,15 +354,40 @@ class ProductController extends Controller
                 // Fetch prices using whereIn with both min and max size_id
                 $query->whereIn('size_id', [$minSizeId, $maxSizeId]);
             },
-            'prices.size',
-            'pictures' => function ($query) {
+            'products.prices.size',
+            'products.pictures' => function ($query) {
                 $query->orderBy('id', 'asc')->limit(1);
-            },
-            'category'
-        ])->orderBy('id', 'desc')->limit($limit)->get();
+            }
+        ])->get();
 
-        return response()->json(['products' => $products]);
+        $categoryIndex = 0;
+
+        while ($finalProducts->count() < $limit) {
+            $category = $categories[$categoryIndex];
+
+            if ($category->products->isNotEmpty()) {
+                $product = $category->products->shift(); // Get and remove the first product
+                $finalProducts->push($product);
+            }
+
+            // Move to the next category
+            $categoryIndex++;
+
+            // If we've gone through all categories, start again from the beginning
+            if ($categoryIndex >= $categories->count()) {
+                $categoryIndex = 0;
+            }
+
+            // Break if we can't find enough products
+            if ($finalProducts->count() >= $limit || $finalProducts->count() == $categories->sum(fn ($category) => $category->products->count())) {
+                break;
+            }
+        }
+
+        return response()->json(['products' => $finalProducts]);
     }
+
+
 
 
     // Fetch a specific product by product_id

@@ -18,14 +18,14 @@ const brandData = [
     },
     {
         id: 3,
-        name: 'Ash Foam',
+        name: 'AshFoam',
         imageUrl: '/images/ashfoam.jpg',
-        description: 'Ash foam mattresses for premium comfort',
+        description: 'Ashfoam mattresses for premium comfort',
         url: '/shop?filters=3',
     },
     {
         id: 4,
-        name: 'Other Brand',
+        name: 'Foreign Brands',
         imageUrl: '/images/sleepscience.jpg',
         description: 'Other brand mattresses for various needs',
         url: '/shop?filters=4',

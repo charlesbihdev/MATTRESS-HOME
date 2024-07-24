@@ -59,8 +59,12 @@ const TableComponent = () => {
         setState(false)
     }
 
-    if (error || errors) {
+    if (error) {
         return <div>Error fetching product details</div>
+    }
+
+    if (errors.length > 0) {
+        return <div>Error Deleting product details</div>
     }
 
     if (!data) {

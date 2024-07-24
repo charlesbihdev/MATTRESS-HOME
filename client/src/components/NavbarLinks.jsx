@@ -3,13 +3,13 @@ import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-const NavLink = ({ href, children, prefetch, className }) => {
+const NavLink = ({ href, children, className }) => {
     return (
         <Link
             className={`text-white hover:text-[#f6d00c] hover:border-b border-[#f6d00c] dark:hover:text-white px-3 py-1 mb-1 rounded-md text-lg font-bold block ${className}`}
             href={href}
             scroll={false}
-            prefetch={prefetch}>
+            prefetch={true}>
             {children}
         </Link>
     )
