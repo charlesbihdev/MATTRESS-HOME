@@ -51,6 +51,7 @@ const ItemList = ({ fetchCategory }) => {
     })
     const [page, setPage] = useState(() => {
         const pageParam = searchParams.get('page')
+
         return pageParam ? Number(pageParam) : 1
     })
 
@@ -63,6 +64,7 @@ const ItemList = ({ fetchCategory }) => {
                 )
             }
             setFilteredItems(itemsToDisplay)
+            setPage(1) // Reset to first page when new products are fetched
         }
     }, [filterList, products])
 
