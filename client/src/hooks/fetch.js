@@ -12,10 +12,18 @@ export const useFetch = query => {
     } = useSWR(
         query ? `/api/products/search/${query}` : '/api/products',
         fetcher,
+        {
+            refreshInterval: 50000, // 30 seconds
+            revalidateOnFocus: false, // don't refetch on tab switch
+            revalidateIfStale: false, // don't auto refetch stale data
+            revalidateOnReconnect: false,
+        },
     )
 
     const fetchWithAllPrices = () => {
-        const { data, error } = useSWR('/api/products/sizes', fetcher)
+        const { data, error } = useSWR('/api/products/sizes', fetcher, {
+            refreshInterval: 50000, // 30 seconds
+        })
         return { data, error }
     }
 
@@ -24,6 +32,9 @@ export const useFetch = query => {
         const { data, error } = useSWR(
             id ? `/api/products/${id}` : null,
             fetcher,
+            {
+                refreshInterval: 50000, // 30 seconds
+            },
         )
         return { data, error }
     }

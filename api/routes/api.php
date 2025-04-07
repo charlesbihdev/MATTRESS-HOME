@@ -17,7 +17,7 @@ Route::post('/products/{id}', [ProductController::class, 'update']);
 
 Route::get('/products/{product}/size/{size}', [ProductController::class, 'showWithPrice']);
 
-Route::get('/products/sizes', [ProductController::class, 'showWithSizesAndPrices'])->middleware('auth');
+Route::get('/products/sizes', [ProductController::class, 'showWithSizesAndPrices'])->middleware('guest');
 
 Route::get('/products/limit/{limit}', [ProductController::class, 'getProductsWithLimit']);
 
