@@ -31,6 +31,12 @@ module.exports = {
             },
             {
                 protocol: 'https',
+                hostname: 'ecommerce-api.event-pulse.com',
+                port: '',
+                pathname: '/images/**',
+            },
+            {
+                protocol: 'https',
                 hostname: 'random-image-pepebigotes.vercel.app',
                 port: '',
                 // pathname: '/images/**',
