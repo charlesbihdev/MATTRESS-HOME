@@ -2,6 +2,7 @@
 import React from 'react'
 import { useFetch } from '@/hooks/fetch'
 import FeaturedProducts from './FeaturedProducts'
+import Loader from '@/components/Loader'
 
 const FetchFeaturedProducts = ({ number }) => {
     const { data, error } = useFetch().fetchProductWithLimit(number)
@@ -11,7 +12,7 @@ const FetchFeaturedProducts = ({ number }) => {
     }
 
     if (!data) {
-        return <div className="text-center my-20"> Loading...</div>
+        return <Loader />
     }
 
     // console.log(data.products)

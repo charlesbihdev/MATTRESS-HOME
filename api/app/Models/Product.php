@@ -11,7 +11,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'category'];
+    protected $fillable = ['name', 'description', 'stars', 'category_id'];
 
     public function sizes()
     {

@@ -1,5 +1,5 @@
 'use client'
-import { Textarea } from 'flowbite-react'
+// import { Textarea } from 'flowbite-react'
 import React, { useState } from 'react'
 
 const ContactForm = () => {
@@ -22,7 +22,6 @@ const ContactForm = () => {
     const handleSubmit = async e => {
         e.preventDefault()
         // Handle form submission logic here
-        console.log(formData)
         try {
             const response = await fetch('https://fabform.io/f/xxxxx', {
                 method: 'POST',
@@ -57,18 +56,16 @@ const ContactForm = () => {
                         <div className="group w-full h-full">
                             <div className="relative h-full">
                                 <img
-                                    src="https://pagedone.io/asset/uploads/1696488602.png"
+                                    src="/images/helpdesk1.png"
                                     alt="ContactUs tailwind section"
-                                    className="w-full h-full lg:rounded-l-2xl rounded-2xl bg-blend-multiply bg-yellow-300"
+                                    className="w-full h-full lg:rounded-l-2xl rounded-2xl bg-blend-multiply"
                                 />
                                 <h1 className="font-manrope text-white text-4xl font-bold leading-10 absolute top-11 left-11">
                                     Contact us
                                 </h1>
-                                <div className="absolute bottom-0 w-full lg:p-11 p-5">
+                                <div className="absolute bottom-0 w-full lg:p-6 p-5">
                                     <div className="bg-white rounded-lg p-6 block">
-                                        <a
-                                            href="javascript:;"
-                                            className="flex items-center mb-6">
+                                        <div className="flex items-center mb-6">
                                             <svg
                                                 width="30"
                                                 height="30"
@@ -84,12 +81,10 @@ const ContactForm = () => {
                                                 />
                                             </svg>
                                             <h5 className="text-black text-base font-normal leading-6 ml-5">
-                                                470-601-1911
+                                                +233 24 428 1122
                                             </h5>
-                                        </a>
-                                        <a
-                                            href="https://veilmail.io/irish-geoff"
-                                            className="flex items-center mb-6">
+                                        </div>
+                                        <div className="flex items-center mb-6">
                                             <svg
                                                 width="30"
                                                 height="30"
@@ -104,12 +99,10 @@ const ContactForm = () => {
                                                 />
                                             </svg>
                                             <h5 className="text-black text-base font-normal leading-6 ml-5">
-                                                mattresshome@gmail.com
+                                                wconsult@yahoo.com
                                             </h5>
-                                        </a>
-                                        <a
-                                            href="javascript:;"
-                                            className="flex items-center">
+                                        </div>
+                                        <div className="flex items-center">
                                             <svg
                                                 width="30"
                                                 height="30"
@@ -128,9 +121,9 @@ const ContactForm = () => {
                                                 />
                                             </svg>
                                             <h5 className="text-black text-base font-normal leading-6 ml-5">
-                                                Ghana, Accra
+                                                Kumasi, Ghana
                                             </h5>
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -208,17 +201,17 @@ const ContactForm = () => {
                                 </div>
                             </div>
                         </div>
-                        <Textarea
+                        <textarea
                             type="text"
                             name="message"
+                            value={formData.message}
                             onChange={handleChange}
-                            className="w-full h-12 text-gray-600
+                            className="w-full min-h-32 text-gray-600
                             placeholder-gray-400 bg-transparent text-lg
                             shadow-sm font-normal leading-7 rounded-xl border
                             border-gray-200 focus:outline-none pl-4 mb-10"
-                            placeholder="Message">
-                            {formData.message}
-                        </Textarea>
+                            placeholder="Message"
+                        />
                         <button
                             type="submit"
                             className="w-full h-12 text-white text-base font-semibold leading-6 rounded-full transition-all duration-700 hover:bg-yellow-400 bg-yellow-300 shadow-sm">

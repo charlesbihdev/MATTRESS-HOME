@@ -3,6 +3,7 @@
 import React from 'react'
 import Product from './Product'
 import { useFetch } from '@/hooks/fetch' // Adjust the import path as per your project structure
+import Loader from '@/components/Loader'
 
 const FetchProduct = ({ id }) => {
     const { data, error } = useFetch().fetchProductById(id)
@@ -12,7 +13,7 @@ const FetchProduct = ({ id }) => {
     }
 
     if (!data) {
-        return <div className="text-center my-20"> Loading...</div>
+        return <Loader />
     }
 
     return <Product product={data.product} /> // Assuming `data` contains `{ product: {...} }`

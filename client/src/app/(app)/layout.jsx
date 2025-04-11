@@ -7,6 +7,8 @@ import Loading from '@/app/(app)/Loading'
 const AppLayout = ({ children }) => {
     const { user } = useAuth({ middleware: 'auth' })
 
+    // const [sidebarOpen, setSidebarOpen] = useState(false)
+
     if (!user) {
         return <Loading />
     }
@@ -15,7 +17,7 @@ const AppLayout = ({ children }) => {
         <div className="min-h-screen bg-gray-100">
             <Navigation user={user} />
 
-            <main>{children}</main>
+            <main className="md:ml-[16rem]">{children}</main>
         </div>
     )
 }

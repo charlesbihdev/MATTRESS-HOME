@@ -2,6 +2,7 @@ import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
 import React from 'react'
 import ContactForm from './ContactForm'
+import FloatingButton from '@/components/FloatingButton'
 
 const page = () => {
     return (
@@ -10,9 +11,12 @@ const page = () => {
             <main className="mt-[160px]">
                 <ContactForm />
             </main>
+            <FloatingButton />
             <Footer />
         </div>
     )
 }
-
+export const metadata = {
+    title: 'Contact Us',
+}
 export default page

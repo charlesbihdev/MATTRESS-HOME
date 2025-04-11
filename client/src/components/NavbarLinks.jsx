@@ -3,12 +3,13 @@ import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-const NavLink = ({ href, children, prefetch, className }) => {
+const NavLink = ({ href, children, className }) => {
     return (
         <Link
             className={`text-white hover:text-[#f6d00c] hover:border-b border-[#f6d00c] dark:hover:text-white px-3 py-1 mb-1 rounded-md text-lg font-bold block ${className}`}
             href={href}
-            prefetch={prefetch}>
+            scroll={false}
+            prefetch={true}>
             {children}
         </Link>
     )
@@ -32,10 +33,14 @@ const NavbarLinks = () => {
                 href="/shop">
                 Shop
             </NavLink>
-            <NavLink href="#" prefetch={false}>
+            <NavLink
+                className={pathname == '/services' ? active : ''}
+                href="/services">
                 Services
             </NavLink>
-            <NavLink href="#" prefetch={false}>
+            <NavLink
+                className={pathname == '/about' ? active : ''}
+                href="/about">
                 About
             </NavLink>
 

@@ -1,8 +1,10 @@
+import Link from 'next/link'
+
 const NotFoundPage = () => {
     return (
         <div className="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
             <div className="max-w-xl mx-auto sm:px-6 lg:px-8">
-                <div className="flex items-center pt-8 sm:justify-start sm:pt-0">
+                <div className="flex items-center pt-8 sm:justify-start sm:pt-0 mb-4">
                     <div className="px-4 text-lg text-gray-500 border-r border-gray-400 tracking-wider">
                         404
                     </div>
@@ -11,6 +13,12 @@ const NotFoundPage = () => {
                         Not Found
                     </div>
                 </div>
+                <Link
+                    className="ml-4 text-lg text-white px-3 mx-auto py-1 rounded-md mt-4 bg-blue-500 uppercase tracking-wider"
+                    scroll={false}
+                    href="/">
+                    Go back
+                </Link>
             </div>
         </div>
     )

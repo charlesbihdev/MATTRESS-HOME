@@ -1,26 +1,72 @@
 'use client'
 
 import Image from 'next/image'
-import items from '@/data/ProductData'
 import BackArrow from '@/components/BackArrow'
-import sizes from '@/data/SizeData'
 import { useState, useEffect } from 'react'
+import WhatsAppLinkButton from './WhatsAppLinkButton'
 
 export default function Product({ product }) {
-    const [chosenSize, setChosenSize] = useState(1)
+    const [chosenSize, setChosenSize] = useState(3)
     const [productPrice, setProductPrice] = useState(
-        product.sizes[0].pivot.price,
+        parseFloat(product.sizes[0].pivot.price) +
+            parseFloat(process.env.NEXT_PUBLIC_ADDED_PROFIT || '100'),
     )
+    const [activeImage, setActiveImage] = useState(
+        process.env.NEXT_PUBLIC_BACKEND_URL +
+            '/' +
+            product.pictures[0].image_path,
+    )
+
     // const product = items.find(item => item.id === Number(id))
 
     const handleSizeChange = id => {
         setChosenSize(id)
     }
 
+    const handleImageChange = id => {
+        // console.log(id)
+        setActiveImage(
+            process.env.NEXT_PUBLIC_BACKEND_URL +
+                '/' +
+                product.pictures[id].image_path,
+        )
+    }
+
     useEffect(() => {
-        console.log(chosenSize)
-        setProductPrice(product.sizes[chosenSize - 1].pivot.price)
+        setProductPrice(
+            parseFloat(product.sizes[chosenSize - 1].pivot.price) +
+                parseFloat(process.env.NEXT_PUBLIC_ADDED_PROFIT || '100'),
+        )
     }, [chosenSize])
+
+    const getCategoryName = category => {
+        switch (category) {
+            case 1:
+                return 'Royal Foam'
+            case 2:
+                return 'Latex Foam'
+            case 3:
+                return 'Ashfoam'
+            default:
+                return 'Foreign Brands'
+        }
+    }
+
+    const getCategoryLabelColor = category => {
+        switch (category) {
+            case 1:
+                return 'bg-[#7e00a9]'
+            case 2:
+                return 'bg-red-500'
+            case 3:
+                return 'bg-[#f6d00c] !text-black'
+            default:
+                return 'bg-black text-white'
+        }
+    }
+
+    // console.log(product)
+
     return (
         <div className="my-7 pt-2 mx-5 font-sans bg-[honeydew]">
             <BackArrow />
@@ -29,8 +75,8 @@ export default function Product({ product }) {
                 <div className="grid bg-white items-start grid-cols-1 lg:grid-cols-5 gap-12 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] p-6 rounded-lg">
                     <div className=" lg:col-span-3 w-full lg:sticky top-0 text-center">
                         <div className="px-4 py-10 rounded-lg shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] relative">
-                            <img
-                                src={product.pictures[0].image_path}
+                            <Image
+                                src={activeImage}
                                 alt={product.name}
                                 className="w-3/4 rounded object-cover mx-auto"
                                 width={300}
@@ -52,11 +98,15 @@ export default function Product({ product }) {
                             </button>
                         </div>
                         <div className="mt-6 flex flex-wrap justify-center gap-6 mx-auto">
-                            {product.pictures.map(picture => {
+                            {product.pictures.map((picture, index) => {
+                                // console.log(picture)
                                 return (
-                                    <div className="w-24 h-20 flex items-center justify-center rounded-lg p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] cursor-pointer">
-                                        <img
-                                            src={picture.image_path}
+                                    <div
+                                        onClick={() => handleImageChange(index)}
+                                        key={picture.id}
+                                        className="w-24 h-20 flex items-center justify-center rounded-lg p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] cursor-pointer">
+                                        <Image
+                                            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${picture.image_path}`}
                                             alt={product.name}
                                             className="w-full"
                                             width={100}
@@ -71,44 +121,31 @@ export default function Product({ product }) {
                         <h2 className="text-2xl font-extrabold text-gray-800">
                             {product.name}
                         </h2>
-                        <div className="flex space-x-2 mt-4">
-                            <svg
-                                className="w-5 fill-blue-600"
-                                viewBox="0 0 14 13"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                            <svg
-                                className="w-5 fill-blue-600"
-                                viewBox="0 0 14 13"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                            <svg
-                                className="w-5 fill-blue-600"
-                                viewBox="0 0 14 13"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                            <svg
-                                className="w-5 fill-blue-600"
-                                viewBox="0 0 14 13"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                            <svg
-                                className="w-5 fill-[#CED5D8]"
-                                viewBox="0 0 14 13"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                            </svg>
-                            <h4 className="text-gray-800 text-base">
-                                500 Reviews
+                        <div className="sm:flex justify-between mt-2 sm:mt-0">
+                            <div className="flex space-x-2 mt-4">
+                                {Array.from({ length: 5 }).map((_, index) => (
+                                    <svg
+                                        key={index}
+                                        className={`w-5 ${index < product.stars ? 'fill-blue-600' : 'fill-[#CED5D8]'} `}
+                                        viewBox="0 0 14 13"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                                    </svg>
+                                ))}
+
+                                {/* <svg
+                                    className="w-5 fill-[#CED5D8]"
+                                    viewBox="0 0 14 13"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                                </svg> */}
+                            </div>
+
+                            <h4
+                                className={`${getCategoryLabelColor(product.category_id)} text-white px-3 py-1 mt-5 font-mono text-lg rounded-lg text-center w-1/2 sm:w-auto`}>
+                                {getCategoryName(product.category_id)}
                             </h4>
                         </div>
                         <div className="flex flex-wrap gap-4 mt-8">
@@ -117,7 +154,7 @@ export default function Product({ product }) {
                             </p>
                             <p className="text-gray-400 text-base">
                                 <strike>
-                                    GH₵ {Math.round(productPrice + 26)}
+                                    GH₵ {Math.round(productPrice + 113)}
                                 </strike>{' '}
                                 <span className="text-sm ml-1">
                                     Tax included
@@ -129,7 +166,7 @@ export default function Product({ product }) {
                                 Select Size:
                             </h3>
                             <div className="mb-4">
-                                <div className="flex items-center mt-2">
+                                <div className="flex flex-wrap items-center mt-2">
                                     {product.sizes.map(size => {
                                         return (
                                             <button
@@ -137,7 +174,7 @@ export default function Product({ product }) {
                                                     handleSizeChange(size.id)
                                                 }}
                                                 key={size.id}
-                                                className={`bg-gray-300 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600 ${chosenSize == size.id ? '!bg-blue-400' : ''}`}>
+                                                className={`bg-gray-300 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600 my-1 ${chosenSize == size.id ? '!bg-blue-400' : ''}`}>
                                                 {size.name}
                                             </button>
                                         )
@@ -146,24 +183,11 @@ export default function Product({ product }) {
                             </div>
                         </div>
                         <div className="flex flex-col gap-4 mt-10">
-                            <button className="relative flex items-center justify-center w-full px-5 py-2.5 text-white bg-yellow-400 border border-transparent rounded-lg shadow-sm hover:bg-yellow-500">
-                                <span className="absolute left-0 flex items-center pl-3">
-                                    <svg
-                                        className="w-5 h-5 text-white"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor">
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M17 8h2a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V10a2 2 0 012-2h2m5-6h4a2 2 0 012 2v4a2 2 0 01-2 2h-4a2 2 0 01-2-2V4a2 2 0 012-2z"
-                                        />
-                                    </svg>
-                                </span>
-                                Buy Now
-                            </button>
+                            <WhatsAppLinkButton
+                                size={chosenSize}
+                                product={product}
+                                productPrice={productPrice}
+                            />
                         </div>
                         <div className="mt-10">
                             <h3 className="text-lg font-semibold text-gray-800">

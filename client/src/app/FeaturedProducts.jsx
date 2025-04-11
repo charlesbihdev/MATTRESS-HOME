@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
+import Image from 'next/image'
 
 const FeaturedProducts = ({ products }) => {
     return (
@@ -22,9 +23,11 @@ const FeaturedProducts = ({ products }) => {
                                 key={product.id}
                                 className="relative group mb-12 md:mb-8">
                                 <div className="overflow-hidden aspect-w-1 aspect-h-1 h-4/5">
-                                    <img
+                                    <Image
                                         className="object-cover w-full h-full transition-all duration-300 group-hover:scale-125"
-                                        src={product.pictures[0].image_path}
+                                        height={200}
+                                        width={200}
+                                        src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${product.pictures[0].image_path}`}
                                         alt={product.name}
                                     />
                                 </div>
@@ -36,6 +39,7 @@ const FeaturedProducts = ({ products }) => {
                                     </div>
                                 )}
                                 <Link
+                                    scroll={false}
                                     href={`/product/${product.id}`}
                                     title={product.name}>
                                     <div className="flex items-start justify-between mt-4 space-x-4">
@@ -61,7 +65,18 @@ const FeaturedProducts = ({ products }) => {
                                         </div>
                                         <div className="text-right">
                                             <p className="text-xs font-bold text-gray-900 sm:text-sm md:text-base">
-                                                GH₵ {product.prices[0].price}
+                                                {'GH₵ ' +
+                                                    (
+                                                        parseFloat(
+                                                            product.prices[0]
+                                                                .price,
+                                                        ) +
+                                                        parseFloat(
+                                                            process.env
+                                                                .NEXT_PUBLIC_ADDED_PROFIT ||
+                                                                '100',
+                                                        )
+                                                    ).toFixed(2)}
                                             </p>
                                         </div>
                                     </div>

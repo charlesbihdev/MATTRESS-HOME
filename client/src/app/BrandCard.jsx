@@ -10,7 +10,8 @@ const BrandCard = ({ brand }) => {
             <div
                 className="h-40 sm:h-48 lg:h-auto lg:w-1/2 flex-none bg-cover bg-center"
                 style={{ backgroundImage: `url(${brand.imageUrl})` }}
-                title={brand.name}></div>
+                title={brand.name}
+            />
             <div className="lg:w-1/2 p-4 flex flex-col justify-between leading-normal">
                 <div className="mb-20">
                     <div className="text-black font-bold text-xl my-3">
@@ -22,6 +23,7 @@ const BrandCard = ({ brand }) => {
                 </div>
                 <div className="flex items-center">
                     <Link
+                        scroll={false}
                         href={brand.url}
                         className="px-6 py-2 rounded-xl bg-white hover:bg-gray-600 text-black border !border-gray-600 !active:text-white hover:text-white font-bold">
                         {' '}

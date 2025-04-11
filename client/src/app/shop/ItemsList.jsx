@@ -5,6 +5,9 @@ import './Pagination.css'
 import { useState, useEffect } from 'react'
 import { Pagination } from 'flowbite-react'
 import { useFetch } from '@/hooks/fetch'
+import Image from 'next/image'
+import Loader from '@/components/Loader'
+import ZeroProducts from '@/components/ZeroProducts'
 
 // Define category colors and names
 const getCategoryLabelColor = category => {
@@ -37,7 +40,9 @@ const ItemList = ({ fetchCategory }) => {
     const searchParams = useSearchParams()
     const router = useRouter()
     const pathname = usePathname()
-    const { products, productsError } = useFetch()
+    const searchQuery = searchParams.get('query')
+
+    const { products, productsError } = useFetch(searchQuery)
 
     const [filteredItems, setFilteredItems] = useState([])
     const [filterList, setFilterList] = useState(() => {
@@ -46,6 +51,7 @@ const ItemList = ({ fetchCategory }) => {
     })
     const [page, setPage] = useState(() => {
         const pageParam = searchParams.get('page')
+
         return pageParam ? Number(pageParam) : 1
     })
 
@@ -58,6 +64,7 @@ const ItemList = ({ fetchCategory }) => {
                 )
             }
             setFilteredItems(itemsToDisplay)
+            setPage(1) // Reset to first page when new products are fetched
         }
     }, [filterList, products])
 
@@ -99,6 +106,18 @@ const ItemList = ({ fetchCategory }) => {
     const itemsToShow = filteredItems.slice(start, end)
     const totalPages = Math.ceil(filteredItems.length / perPage)
 
+    if (!products) {
+        return <Loader />
+    }
+
+    if (productsError) {
+        return <h2>Error fetching product</h2>
+    }
+
+    if (products.products.length == 0) {
+        return <ZeroProducts />
+    }
+
     return (
         <>
             <h2 className="text-xl text-center mb-5 font-bold">
@@ -121,27 +140,31 @@ const ItemList = ({ fetchCategory }) => {
                 ))}
             </div>
             {/* Render filtered items */}
+
             <div
                 id="items"
                 className="flex gap-3 flex-wrap justify-center mx-4 sm:mx-12">
                 {itemsToShow.map(item => (
                     <Link
+                        scroll={false}
                         href={`/product/${item.id}`}
                         key={item.id}
                         className="block transform transition-transform duration-300 hover:scale-105">
                         <div
                             className="relative card bg-white shadow-md rounded-lg overflow-hidden mb-6 lg:mb-4 w-[320px] lg:w-[260px]"
-                            style={{ minHeight: '420px' }}>
+                            style={{ minHeight: '450px' }}>
                             <div
                                 className={`absolute top-0 right-0 text-white text-sm font-bold px-2 py-1 rounded-bl ${getCategoryLabelColor(
                                     item.category_id,
                                 )}`}>
                                 {getCategoryName(item.category_id)}
                             </div>
-                            <img
+                            <Image
                                 className="w-full h-48 object-cover"
-                                src={item.pictures[0].image_path}
-                                alt="Card image cap"
+                                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${item.pictures[0].image_path}`}
+                                alt={item.name}
+                                width={200}
+                                height={200}
                             />
                             <hr className="m-0" />
                             <div className="card-body p-4">
@@ -150,10 +173,13 @@ const ItemList = ({ fetchCategory }) => {
                                 </h4>
                                 <h4 className="font-bold text-red-500 text-lg mb-2">
                                     GH₵{' '}
-                                    {`${item.prices[0].price} ${' - '} GH₵ ${item.prices[1].price}`}
+                                    {`${parseFloat(item.prices[1].price) + parseFloat(process.env.NEXT_PUBLIC_ADDED_PROFIT || '100')} ${' - '} GH₵ ${parseFloat(item.prices[0].price) + parseFloat(process.env.NEXT_PUBLIC_ADDED_PROFIT || '100')}`}
                                 </h4>
                                 <p className="text-gray-700 text-sm mb-4">
-                                    {item.description}
+                                    {item.description.length > 88
+                                        ? item.description.substr(0, 90) +
+                                          '....'
+                                        : item.description}
                                 </p>
                                 <button
                                     href={`/product/${item.id}`}
@@ -165,6 +191,7 @@ const ItemList = ({ fetchCategory }) => {
                     </Link>
                 ))}
             </div>
+
             <Pagination
                 id="pagination"
                 className="block mb-8 mx-4 md:mx-10"

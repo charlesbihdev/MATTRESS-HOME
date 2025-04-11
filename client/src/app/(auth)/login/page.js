@@ -110,7 +110,9 @@ const Login = () => {
                         Forgot your password?
                     </Link>
 
-                    <Button className="ml-3">Login</Button>
+                    <Button className="ml-3 bg-blue-500 hover:bg-blue-600 py-1 px-5 rounded text-white">
+                        Login
+                    </Button>
                 </div>
             </form>
         </>

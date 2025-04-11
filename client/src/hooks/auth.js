@@ -7,7 +7,11 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     const router = useRouter()
     const params = useParams()
 
-    const { data: user, error, mutate } = useSWR('/api/user', () =>
+    const {
+        data: user,
+        error,
+        mutate,
+    } = useSWR('/api/user', () =>
         axios
             .get('/api/user')
             .then(res => res.data)
@@ -99,6 +103,74 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         window.location.pathname = '/login'
     }
 
+    const addProduct = async ({ setErrors, setStatus, formData }) => {
+        await csrf()
+
+        setErrors([])
+        setStatus()
+
+        return axios
+            .post('/api/products', formData)
+            .then(response => setStatus(response.data.status))
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(error.response.data.errors)
+                // setStatus(error.response.data.errors)
+            })
+    }
+
+    const editProduct = async ({
+        setErrors,
+        setStatus,
+        formData,
+        productId,
+    }) => {
+        await csrf()
+
+        setErrors([])
+        setStatus()
+
+        return axios
+            .post(`/api/products/${productId}`, formData)
+            .then(response => setStatus(response.data.status))
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(error.response.data.errors)
+            })
+    }
+
+    const addPayment = async ({ setErrors, setStatus, formData }) => {
+        await csrf()
+
+        setErrors([])
+        setStatus()
+
+        return axios
+            .post('/api/payments', formData)
+            .then(response => setStatus(response.data.status))
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(error.response.data.errors)
+            })
+    }
+    const deleteProduct = async ({ setErrors, setStatus, productId }) => {
+        await csrf()
+
+        setErrors([])
+        setStatus(null)
+
+        return axios
+            .delete(`/api/products/${productId}`)
+            .then(response => setStatus(response.data.status))
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(error.response.data.errors)
+            })
+    }
     useEffect(() => {
         if (middleware === 'guest' && redirectIfAuthenticated && user)
             router.push(redirectIfAuthenticated)
@@ -118,5 +190,9 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         resetPassword,
         resendEmailVerification,
         logout,
+        addProduct,
+        editProduct,
+        addPayment,
+        deleteProduct,
     }
 }
