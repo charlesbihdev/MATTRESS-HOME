@@ -18,6 +18,8 @@ export const useFetch = query => {
             revalidateIfStale: false, // don't auto refetch stale data
             revalidateOnReconnect: false,
         },
+
+
     )
 
     const fetchWithAllPrices = () => {
