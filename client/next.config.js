@@ -25,7 +25,7 @@ module.exports = {
             },
             {
                 protocol: 'https',
-                hostname: 'ecommerce-api.event-pulse.com',
+                hostname: 'api.mattresshomegh.com',
                 port: '',
                 pathname: '/images/**',
             },
