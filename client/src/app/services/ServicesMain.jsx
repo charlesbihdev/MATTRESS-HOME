@@ -3,114 +3,178 @@ import React from 'react'
 
 const ServicesMain = () => {
     return (
-        <section className="overflow-hidden bg-white py-8 sm:py-16">
-            <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
-                    <div className="lg:pr-8 lg:pt-4">
-                        <div className="lg:max-w-lg">
-                            <h2 className="text-2xl font-semibold leading-7 text-yellow-300">
-                                Sleep Better
+        <section className="bg-white py-12 sm:py-20 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Header Section */}
+                <div className="text-center mb-12">
+                    <span className="inline-block px-4 py-1 rounded-full bg-yellow-100 text-yellow-600 text-sm font-semibold mb-3">
+                        Mattress Experts & Sleep Advisors
+                    </span>
+                    <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+                        Our Services
+                    </h1>
+                    <p className="max-w-2xl mx-auto text-lg text-gray-600">
+                        At Mattress Home, we are committed to offering top-notch
+                        solutions for your sleep needs. From buying a new
+                        mattress to restoring your old one, we've got you
+                        covered.
+                    </p>
+                </div>
+
+                {/* Main Content Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    {/* Left Column - Service Information */}
+                    <div className="space-y-10">
+                        {/* Service Cards */}
+                        <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-2xl p-6 shadow-lg border border-yellow-200">
+                            <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                                <span className="bg-yellow-400 text-white p-2 rounded-full mr-3 inline-flex items-center justify-center w-8 h-8">
+                                    1
+                                </span>
+                                Walk-in Mattress Prices
                             </h2>
-                            <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                                Our Services | Mattress Home
-                            </p>
-                            <p className="mt-6 text-lg leading-8 text-gray-600">
-                                At Mattress Home, we are dedicated to providing
-                                top-notch services that cater to your sleep
-                                needs. Whether you need a new mattress or wish
-                                to restore your old one, we have the perfect
-                                solution for you.
-                            </p>
-                            <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
-                                <div className="relative pl-9">
-                                    <dt className="inline font-semibold text-gray-900">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20"
-                                            fill="currentColor"
-                                            aria-hidden="true"
-                                            className="absolute left-1 top-1 h-5 w-5 text-yellow-300">
-                                            <path d="M3.196 12.87l-.825.483a.75.75 0 000 1.294l7.25 4.25a.75.75 0 00.758 0l7.25-4.25a.75.75 0 000-1.294l-.825-.484-5.666 3.322a2.25 2.25 0 01-2.276 0L3.196 12.87z" />
-                                            <path d="M3.196 8.87l-.825.483a.75.75 0 000 1.294l7.25 4.25a.75.75 0 00.758 0l7.25-4.25a.75.75 0 000-1.294l-.825-.484-5.666 3.322a2.25 2.25 0 01-2.276 0L3.196 8.87z" />
-                                            <path d="M10.38 1.103a.75.75 0 00-.76 0l-7.25 4.25a.75.75 0 000 1.294l7.25 4.25a.75.75 0 00.76 0l7.25-4.25a.75.75 0 000-1.294l-7.25-4.25z" />
-                                        </svg>
-                                        New Mattresses
-                                    </dt>
-                                    <dd className="inline ml-2">
-                                        Choose from our wide range of
-                                        high-quality mattresses from popular
-                                        brands like Royal Foam, Latex Foam,
-                                        Ashfoam, and other foreign brands.
-                                    </dd>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                                <div className="bg-white p-4 rounded-lg shadow-sm">
+                                    <h3 className="font-medium text-gray-700">
+                                        Single Size
+                                    </h3>
+                                    <p className="text-2xl font-bold text-gray-900">
+                                        180 GH₵
+                                    </p>
                                 </div>
-                                <div className="relative pl-9">
-                                    <dt className="inline font-semibold text-gray-900">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20"
-                                            fill="currentColor"
-                                            aria-hidden="true"
-                                            className="absolute left-1 top-1 h-5 w-5 text-yellow-300">
-                                            <path
-                                                fillRule="evenodd"
-                                                d="M5.5 17a4.5 4.5 0 01-1.44-8.765 4.5 4.5 0 018.302-3.046 3.5 3.5 0 014.504 4.272A4 4 0 0115 17H5.5zm3.75-2.75a.75.75 0 001.5 0V9.66l1.95 2.1a.75.75 0 101.1-1.02l-3.25-3.5a.75.75 0 00-1.1 0l-3.25 3.5a.75.75 0 101.1 1.02l1.95-2.1v4.59z"
-                                                clipRule="evenodd"
-                                            />
-                                        </svg>
-                                        Restoration Services
-                                    </dt>
-                                    <dd className="inline ml-2">
-                                        Give your old mattress a new life with
-                                        our professional restoration services,
-                                        ensuring comfort and durability.
-                                    </dd>
+                                <div className="bg-white p-4 rounded-lg shadow-sm">
+                                    <h3 className="font-medium text-gray-700">
+                                        Medium Size
+                                    </h3>
+                                    <p className="text-2xl font-bold text-gray-900">
+                                        200 GH₵
+                                    </p>
                                 </div>
-                                <div className="relative pl-9">
-                                    <dt className="inline font-semibold text-gray-900">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20"
-                                            fill="currentColor"
-                                            aria-hidden="true"
-                                            className="absolute left-1 top-1 h-5 w-5 text-yellow-300">
-                                            <path
-                                                fillRule="evenodd"
-                                                d="M14.5 10a4.5 4.5 0 004.284-5.882c-.105-.324-.51-.391-.752-.15L15.34 6.66a.454.454 0 01-.493.11 3.01 3.01 0 01-1.618-1.616.455.455 0 01.11-.494l2.694-2.692c.24-.241.174-.647-.15-.752a4.5 4.5 0 00-5.873 4.575c.055.873-.128 1.808-.8 2.368l-7.23 6.024a2.724 2.724 0 103.837 3.837l6.024-7.23c.56-.672 1.495-.855 2.368-.8.096.007.193.01.291.01zM5 16a1 1 0 11-2 0 1 1 0 012 0z"
-                                                clipRule="evenodd"
-                                            />
-                                            <path d="M14.5 11.5c.173 0 .345-.007.514-.022l3.754 3.754a2.5 2.5 0 01-3.536 3.536l-4.41-4.41 2.172-2.607c.052-.063.147-.138.342-.196.202-.06.469-.087.777-.067.128.008.257.012.387.012zM6 4.586l2.33 2.33a.452.452 0 01-.08.09L6.8 8.214 4.586 6H3.309a.5.5 0 01-.447-.276l-1.7-3.402a.5.5 0 01.093-.577l.49-.49a.5.5 0 01.577-.094l3.402 1.7A.5.5 0 016 3.31v1.277z" />
-                                        </svg>
-                                        Customer Support
-                                    </dt>
-                                    <dd className="inline ml-2 ">
-                                        We are here to solve your sleep needs.
-                                        Give us a call or chat with us for
-                                        personalized recommendations and
-                                        assistance.
-                                    </dd>
+                                <div className="bg-white p-4 rounded-lg shadow-sm">
+                                    <h3 className="font-medium text-gray-700">
+                                        Full Size
+                                    </h3>
+                                    <p className="text-2xl font-bold text-gray-900">
+                                        550 GH₵
+                                    </p>
                                 </div>
-                            </dl>
+                                <div className="bg-white p-4 rounded-lg shadow-sm">
+                                    <h3 className="font-medium text-gray-700">
+                                        Queen Size
+                                    </h3>
+                                    <p className="text-2xl font-bold text-gray-900">
+                                        650 GH₵
+                                    </p>
+                                </div>
+                                <div className="bg-white p-4 rounded-lg shadow-sm md:col-span-2">
+                                    <h3 className="font-medium text-gray-700">
+                                        King Size
+                                    </h3>
+                                    <p className="text-2xl font-bold text-gray-900">
+                                        750 GH₵
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div className="mt-10 flex items-center gap-x-6">
+
+                        <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-2xl p-6 shadow-lg border border-yellow-200">
+                            <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                                <span className="bg-yellow-400 text-white p-2 rounded-full mr-3 inline-flex items-center justify-center w-8 h-8">
+                                    2
+                                </span>
+                                Foam Repair & Renovation
+                            </h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                                <div className="bg-white p-4 rounded-lg shadow-sm">
+                                    <h3 className="font-medium text-gray-700">
+                                        Single Size
+                                    </h3>
+                                    <p className="text-2xl font-bold text-gray-900">
+                                        350 GH₵
+                                    </p>
+                                </div>
+                                <div className="bg-white p-4 rounded-lg shadow-sm">
+                                    <h3 className="font-medium text-gray-700">
+                                        Medium Size
+                                    </h3>
+                                    <p className="text-2xl font-bold text-gray-900">
+                                        380 GH₵
+                                    </p>
+                                </div>
+                                <div className="bg-white p-4 rounded-lg shadow-sm">
+                                    <h3 className="font-medium text-gray-700">
+                                        Full Size
+                                    </h3>
+                                    <p className="text-2xl font-bold text-gray-900">
+                                        750 GH₵
+                                    </p>
+                                </div>
+                                <div className="bg-white p-4 rounded-lg shadow-sm">
+                                    <h3 className="font-medium text-gray-700">
+                                        Queen Size
+                                    </h3>
+                                    <p className="text-2xl font-bold text-gray-900">
+                                        950 GH₵
+                                    </p>
+                                </div>
+                                <div className="bg-white p-4 rounded-lg shadow-sm md:col-span-2">
+                                    <h3 className="font-medium text-gray-700">
+                                        King Size
+                                    </h3>
+                                    <p className="text-2xl font-bold text-gray-900">
+                                        1050 GH₵
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* CTA Buttons */}
+                        <div className="flex flex-col sm:flex-row gap-4 pt-4">
                             <a
-                                href="/contact"
-                                className="rounded-md bg-yellow-400 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-yellow-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400">
-                                Contact Us
+                                href="https://wa.link/v5skus"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex-1 rounded-lg bg-yellow-500 px-6 py-4 text-center text-lg font-semibold text-white shadow-md hover:bg-yellow-600 transition-colors duration-200 flex items-center justify-center">
+                                <svg
+                                    className="w-5 h-5 mr-2"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                                </svg>
+                                WhatsApp Us
                             </a>
                             <a
                                 href="/about"
-                                className="text-sm font-semibold leading-6 text-gray-700">
-                                Learn More <span aria-hidden="true">→</span>
+                                className="flex-1 rounded-lg border-2 border-gray-300 px-6 py-4 text-center text-lg font-semibold text-gray-700 hover:bg-gray-50 transition-colors duration-200">
+                                Learn More{' '}
+                                <span className="ml-2" aria-hidden="true">
+                                    →
+                                </span>
                             </a>
                         </div>
                     </div>
-                    <Image
-                        src="/images/helpdesk.png"
-                        alt="Mattress services"
-                        className="w-[48rem] max-w-full rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
-                        width={2432}
-                        height={1442}
-                    />
+
+                    {/* Right Column - Image */}
+                    <div className="relative order-first lg:order-last mb-8 lg:mb-0">
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-400 to-yellow-300 rounded-2xl blur opacity-20"></div>
+                        <div className="relative">
+                            <Image
+                                src="/images/helpdesk.png"
+                                alt="Mattress Home service experts"
+                                className="w-full rounded-2xl shadow-xl"
+                                width={1200}
+                                height={800}
+                                priority
+                            />
+                            <div className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-lg">
+                                <p className="font-semibold text-gray-900">
+                                    Our Mattress Experts or Sleep Advisors are
+                                    ready to assist you
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
