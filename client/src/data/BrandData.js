@@ -30,6 +30,13 @@ const brandData = [
         description: 'Other brand mattresses for various needs',
         url: '/shop?filters=4',
     },
+    {
+        id: 5,
+        name: 'Mattress Home Special',
+        imageUrl: '/images/mattresshomespecial.jpg',
+        description: 'Mattress home special mattress',
+        url: '/shop?filters=5',
+    },
 ]
 
 export default brandData

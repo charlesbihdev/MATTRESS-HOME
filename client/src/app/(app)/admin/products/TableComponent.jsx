@@ -17,6 +17,8 @@ const getCategoryName = category => {
             return 'Latex Foam'
         case 3:
             return 'Ashfoam'
+        case 5:
+            return 'Mattress Home Special'
         default:
             return 'Foreign Brands'
     }
