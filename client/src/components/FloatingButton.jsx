@@ -26,7 +26,7 @@ const FloatingButton = () => {
                 target="_blank"
                 rel="noreferrer"
                 className="absolute rounded-full transition-all duration-[0.2s] ease-out scale-x-0 group-hover:scale-x-100 group-hover:-translate-y-16 flex p-2 hover:p-3 bg-yellow-300 hover:bg-yellow-400 text-white"
-                href="tel:+233548715098">
+                href="tel:+233244281122">
                 <div>
                     <img src="/svg/phone.svg" className="w-8 h-8 text-black" />
                 </div>

@@ -27,6 +27,11 @@ const Footer = () => {
                     <li className="mt-3">
                         <Link href="/contact">Contact Us</Link>
                     </li>
+                    <li className="mt-3">
+                        <Link href="/return-exchange-policy">
+                            Return & Exchange policy
+                        </Link>
+                    </li>
                 </ul>
 
                 <ul className="w-full md:w-1/3 px-10 list-none ml-4 md:ml-0">
@@ -91,7 +96,8 @@ const Footer = () => {
                         Mattress Home is dedicated to providing quality and
                         affordable mattresses for your best rest. Our mission is
                         to ensure that everyone can enjoy a good night's sleep
-                        with our wide range of products.
+                        with our wide range of products. Speak to our Mattress
+                        Experts or Sleep Advisors.
                     </p>
                 </ul>
             </div>
