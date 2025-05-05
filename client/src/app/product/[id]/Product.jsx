@@ -47,6 +47,8 @@ export default function Product({ product }) {
                 return 'Latex Foam'
             case 3:
                 return 'Ashfoam'
+            case 5:
+                return 'Mattress Home Special'
             default:
                 return 'Foreign Brands'
         }
@@ -60,11 +62,12 @@ export default function Product({ product }) {
                 return 'bg-red-500'
             case 3:
                 return 'bg-[#f6d00c] !text-black'
+            case 5:
+                return 'bg-blue-500 !text-white'
             default:
                 return 'bg-black text-white'
         }
     }
-
     // console.log(product)
 
     return (

@@ -9,6 +9,7 @@ const fetchCategory = [
     { id: 2, name: 'Latex Foam' },
     { id: 3, name: 'Ashfoam' },
     { id: 4, name: 'Foreign Brands' },
+    { id: 5, name: 'Mattress Home Special' },
 ]
 
 const Shop = () => {

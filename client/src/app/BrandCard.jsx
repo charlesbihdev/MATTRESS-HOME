@@ -6,7 +6,7 @@ import React from 'react'
 const BrandCard = ({ brand }) => {
     return (
         <div
-            className={`sm:w-1/2 w-full lg:flex rounded-lg overflow-hidden border border-grey-light bg-white ${brand.className}`}>
+            className={`w-full lg:flex rounded-lg overflow-hidden border border-grey-light bg-white ${brand.className}`}>
             <div
                 className="h-40 sm:h-48 lg:h-auto lg:w-1/2 flex-none bg-cover bg-center"
                 style={{ backgroundImage: `url(${brand.imageUrl})` }}

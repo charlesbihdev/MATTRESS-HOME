@@ -202,6 +202,9 @@ const EditProductModal = ({ showEditModal, setShowEditModal, productId }) => {
                                         <option value="4">
                                             Foreign Brands
                                         </option>
+                                        <option value="5">
+                                            Mattress Home Special
+                                        </option>
                                     </select>
                                     <InputError
                                         messages={errors.category_id}

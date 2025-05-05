@@ -32,9 +32,10 @@ const AboutMain = () => {
                             sleep is essential for a healthy and productive
                             life. That’s why we offer a diverse range of
                             mattresses from top brands such as Royal Foam, Latex
-                            Foam, Ashfoam, and various foreign brands. Whether
-                            you're looking for a new mattress or need to
-                            rejuvenate your existing one, we've got you covered.
+                            Foam, Ashfoam, various foreign brands and mattress
+                            Home special. Whether you're looking for a new
+                            mattress or need to rejuvenate your existing one,
+                            we've got you covered.
                         </p>
                         <p className="mt-4 text-gray-700">
                             We are here to solve your sleep needs. Give us a

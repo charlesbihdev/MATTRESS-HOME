@@ -16,8 +16,13 @@ const Home = () => {
             <Navbar />
             <main className="sm:m-12 lg:m-[4.5rem] !mt-[155px] sm:!mt-[170px] lg:!mt-[190px]">
                 <CarouselSlideshow />
-                <div>
-                    <div className="flex flex-col sm:flex-row gap-8 lg:my-6">
+                {/* <div> */}
+                <div className="w-full grid grid-cols-1 gap-6 md:grid-cols-2 my-6">
+                    {brandData.map(brand => (
+                        <BrandCard key={brand.id} brand={brand} />
+                    ))}
+                </div>
+                {/* <div className="flex flex-col sm:flex-row gap-8 lg:my-6">
                         {brandData.slice(0, 2).map(brand => (
                             <BrandCard key={brand.id} brand={brand} />
                         ))}
@@ -27,7 +32,12 @@ const Home = () => {
                             <BrandCard key={brand.id} brand={brand} />
                         ))}
                     </div>
-                </div>
+                    <div className="flex flex-col sm:flex-row gap-8 my-6">
+                        {brandData.slice(4, 6).map(brand => (
+                            <BrandCard key={brand.id} brand={brand} />
+                        ))}
+                    </div> */}
+                {/* </div> */}
 
                 <FetchFeaturedProducts number={8} />
             </main>
