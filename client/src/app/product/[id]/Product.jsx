@@ -11,6 +11,8 @@ export default function Product({ product }) {
         parseFloat(product.sizes[0].pivot.price) +
             parseFloat(process.env.NEXT_PUBLIC_ADDED_PROFIT || '100'),
     )
+    const [discountPrice, setDiscountPrice] = useState(0)
+
     const [activeImage, setActiveImage] = useState(
         process.env.NEXT_PUBLIC_BACKEND_URL +
             '/' +
@@ -33,10 +35,30 @@ export default function Product({ product }) {
     }
 
     useEffect(() => {
-        setProductPrice(
-            parseFloat(product.sizes[chosenSize - 1].pivot.price) +
-                parseFloat(process.env.NEXT_PUBLIC_ADDED_PROFIT || '100'),
+        setDiscountPrice(null)
+
+        const rawPrice = parseFloat(
+            product?.sizes?.[chosenSize - 1]?.pivot?.price,
         )
+        const profit = parseFloat(process.env.NEXT_PUBLIC_ADDED_PROFIT || '100')
+
+        if (!isNaN(rawPrice)) {
+            const finalPrice = rawPrice + profit
+            setDiscountPrice(finalPrice + 113)
+
+            const formattedPrice =
+                finalPrice % 1 === 0
+                    ? finalPrice.toLocaleString(undefined, {
+                          minimumFractionDigits: 0,
+                      })
+                    : finalPrice.toLocaleString(undefined, {
+                          minimumFractionDigits: 1,
+                          maximumFractionDigits: 1,
+                      })
+            setProductPrice(formattedPrice)
+        } else {
+            setProductPrice('–')
+        }
     }, [chosenSize])
 
     const getCategoryName = category => {
@@ -122,18 +144,10 @@ export default function Product({ product }) {
                                         <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
                                     </svg>
                                 ))}
-
-                                {/* <svg
-                                    className="w-5 fill-[#CED5D8]"
-                                    viewBox="0 0 14 13"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                                </svg> */}
                             </div>
 
                             <h4
-                                className={`${getCategoryLabelColor(product.category_id)} text-white px-3 py-1 mt-5 font-mono text-lg rounded-lg text-center w-1/2 sm:w-auto`}>
+                                className={`${getCategoryLabelColor(product.category_id)} text-white px-3 py-1 mt-5 font-mono text-base rounded-lg text-center w-1/2 sm:w-auto`}>
                                 {getCategoryName(product.category_id)}
                             </h4>
                         </div>
@@ -142,9 +156,7 @@ export default function Product({ product }) {
                                 GH₵ {productPrice}
                             </p>
                             <p className="text-gray-400 text-base">
-                                <strike>
-                                    GH₵ {Math.round(productPrice + 113)}
-                                </strike>{' '}
+                                <strike>GH₵ {Math.round(discountPrice)}</strike>{' '}
                                 <span className="text-sm ml-1">
                                     Tax included
                                 </span>

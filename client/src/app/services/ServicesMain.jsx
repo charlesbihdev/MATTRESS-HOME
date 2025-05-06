@@ -31,7 +31,7 @@ const ServicesMain = () => {
                                 <span className="bg-yellow-400 text-white p-2 rounded-full mr-3 inline-flex items-center justify-center w-8 h-8">
                                     1
                                 </span>
-                                Walk-in Mattress Prices
+                                Walk in Re-covering Polyester Fabric
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
                                 <div className="bg-white p-4 rounded-lg shadow-sm">
@@ -39,7 +39,7 @@ const ServicesMain = () => {
                                         Single Size
                                     </h3>
                                     <p className="text-2xl font-bold text-gray-900">
-                                        180 GH₵
+                                        GH₵ 180
                                     </p>
                                 </div>
                                 <div className="bg-white p-4 rounded-lg shadow-sm">
@@ -47,7 +47,7 @@ const ServicesMain = () => {
                                         Medium Size
                                     </h3>
                                     <p className="text-2xl font-bold text-gray-900">
-                                        200 GH₵
+                                        GH₵ 200
                                     </p>
                                 </div>
                                 <div className="bg-white p-4 rounded-lg shadow-sm">
@@ -55,7 +55,7 @@ const ServicesMain = () => {
                                         Full Size
                                     </h3>
                                     <p className="text-2xl font-bold text-gray-900">
-                                        550 GH₵
+                                        GH₵ 550
                                     </p>
                                 </div>
                                 <div className="bg-white p-4 rounded-lg shadow-sm">
@@ -63,7 +63,7 @@ const ServicesMain = () => {
                                         Queen Size
                                     </h3>
                                     <p className="text-2xl font-bold text-gray-900">
-                                        650 GH₵
+                                        GH₵ 650
                                     </p>
                                 </div>
                                 <div className="bg-white p-4 rounded-lg shadow-sm md:col-span-2">
@@ -71,7 +71,7 @@ const ServicesMain = () => {
                                         King Size
                                     </h3>
                                     <p className="text-2xl font-bold text-gray-900">
-                                        750 GH₵
+                                        GH₵ 750
                                     </p>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@ const ServicesMain = () => {
                                         Single Size
                                     </h3>
                                     <p className="text-2xl font-bold text-gray-900">
-                                        350 GH₵
+                                        GH₵ 350
                                     </p>
                                 </div>
                                 <div className="bg-white p-4 rounded-lg shadow-sm">
@@ -98,7 +98,7 @@ const ServicesMain = () => {
                                         Medium Size
                                     </h3>
                                     <p className="text-2xl font-bold text-gray-900">
-                                        380 GH₵
+                                        GH₵ 380
                                     </p>
                                 </div>
                                 <div className="bg-white p-4 rounded-lg shadow-sm">
@@ -106,7 +106,7 @@ const ServicesMain = () => {
                                         Full Size
                                     </h3>
                                     <p className="text-2xl font-bold text-gray-900">
-                                        750 GH₵
+                                        GH₵ 750
                                     </p>
                                 </div>
                                 <div className="bg-white p-4 rounded-lg shadow-sm">
@@ -114,7 +114,7 @@ const ServicesMain = () => {
                                         Queen Size
                                     </h3>
                                     <p className="text-2xl font-bold text-gray-900">
-                                        950 GH₵
+                                        GH₵ 950
                                     </p>
                                 </div>
                                 <div className="bg-white p-4 rounded-lg shadow-sm md:col-span-2">
@@ -122,7 +122,7 @@ const ServicesMain = () => {
                                         King Size
                                     </h3>
                                     <p className="text-2xl font-bold text-gray-900">
-                                        1050 GH₵
+                                        GH₵ 1050
                                     </p>
                                 </div>
                             </div>
