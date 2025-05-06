@@ -176,8 +176,50 @@ const ItemList = ({ fetchCategory }) => {
                                     {item.name}
                                 </h4>
                                 <h4 className="font-bold text-red-500 text-lg mb-2">
-                                    GH₵{' '}
-                                    {`${parseFloat(item.prices[1].price) + parseFloat(process.env.NEXT_PUBLIC_ADDED_PROFIT || '100')} ${' - '} GH₵ ${parseFloat(item.prices[0].price) + parseFloat(process.env.NEXT_PUBLIC_ADDED_PROFIT || '100')}`}
+                                    {(() => {
+                                        const price0 = parseFloat(
+                                            item?.prices?.[0]?.price,
+                                        )
+                                        const price1 = parseFloat(
+                                            item?.prices?.[1]?.price,
+                                        )
+                                        const profit = parseFloat(
+                                            process.env
+                                                .NEXT_PUBLIC_ADDED_PROFIT ||
+                                                '100',
+                                        )
+
+                                        const valid0 = !isNaN(price0)
+                                        const valid1 = !isNaN(price1)
+
+                                        const format = num => {
+                                            const result = num + profit
+                                            return result % 1 === 0
+                                                ? result.toLocaleString(
+                                                      undefined,
+                                                      {
+                                                          minimumFractionDigits: 0,
+                                                      },
+                                                  )
+                                                : result.toLocaleString(
+                                                      undefined,
+                                                      {
+                                                          minimumFractionDigits: 1,
+                                                          maximumFractionDigits: 1,
+                                                      },
+                                                  )
+                                        }
+
+                                        if (valid0 && valid1) {
+                                            return `GH₵ ${format(price1)} - GH₵ ${format(price0)}`
+                                        } else if (valid1) {
+                                            return `${format(price1)}`
+                                        } else if (valid0) {
+                                            return `GH₵ ${format(price0)}`
+                                        } else {
+                                            return '–'
+                                        }
+                                    })()}
                                 </h4>
                                 <p className="text-gray-700 text-sm mb-4">
                                     {item.description.length > 88

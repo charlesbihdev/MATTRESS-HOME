@@ -112,11 +112,11 @@ class ProductController extends Controller
             'ratings' => 'required|integer|min:1|max:5',
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',
-            'ks' => 'required|numeric',
-            'qs' => 'required|numeric',
-            'ls' => 'required|numeric',
-            'ms' => 'required|numeric',
-            'ss' => 'required|numeric',
+            'ks' => 'nullable|numeric',
+            'qs' => 'nullable|numeric',
+            'ls' => 'nullable|numeric',
+            'ms' => 'nullable|numeric',
+            'ss' => 'nullable|numeric',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -175,11 +175,11 @@ class ProductController extends Controller
             'ratings' => 'required|integer|min:1|max:5',
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',
-            'ks' => 'required|numeric',
-            'qs' => 'required|numeric',
-            'ls' => 'required|numeric',
-            'ms' => 'required|numeric',
-            'ss' => 'required|numeric',
+            'ks' => 'nullable|numeric',
+            'qs' => 'nullable|numeric',
+            'ls' => 'nullable|numeric',
+            'ms' => 'nullable|numeric',
+            'ss' => 'nullable|numeric',
             'images.*' => 'image|mimes:jpeg,png,jpg|max:3078',
         ]);
 
@@ -379,7 +379,7 @@ class ProductController extends Controller
             }
 
             // Break if we can't find enough products
-            if ($finalProducts->count() >= $limit || $finalProducts->count() == $categories->sum(fn ($category) => $category->products->count())) {
+            if ($finalProducts->count() >= $limit || $finalProducts->count() == $categories->sum(fn($category) => $category->products->count())) {
                 break;
             }
         }

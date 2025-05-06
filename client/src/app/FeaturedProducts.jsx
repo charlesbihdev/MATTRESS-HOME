@@ -17,11 +17,11 @@ const FeaturedProducts = ({ products }) => {
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-6 mt-10 lg:mt-16 lg:gap-4 lg:grid-cols-4">
+                    <div className="grid grid-cols-2 gap-6 mt-10 lg:mt-16 lg:gap-4 lg:gap-y-8 lg:grid-cols-4">
                         {products.map(product => (
                             <div
                                 key={product.id}
-                                className="relative group mb-12 md:mb-8">
+                                className="relative group mb-12 lg:mb-14">
                                 <div className="overflow-hidden aspect-w-1 aspect-h-1 h-4/5">
                                     <Image
                                         className="object-cover w-full h-full transition-all duration-300 group-hover:scale-125"
@@ -65,18 +65,31 @@ const FeaturedProducts = ({ products }) => {
                                         </div>
                                         <div className="text-right">
                                             <p className="text-xs font-bold text-gray-900 sm:text-sm md:text-base">
-                                                {'GH₵ ' +
-                                                    (
-                                                        parseFloat(
-                                                            product.prices[0]
-                                                                .price,
-                                                        ) +
-                                                        parseFloat(
-                                                            process.env
-                                                                .NEXT_PUBLIC_ADDED_PROFIT ||
-                                                                '100',
-                                                        )
-                                                    ).toFixed(2)}
+                                                {isNaN(
+                                                    parseFloat(
+                                                        product?.prices?.[0]
+                                                            ?.price,
+                                                    ),
+                                                )
+                                                    ? '–'
+                                                    : 'GH₵ ' +
+                                                      (
+                                                          parseFloat(
+                                                              product.prices[0]
+                                                                  .price,
+                                                          ) +
+                                                          parseFloat(
+                                                              process.env
+                                                                  .NEXT_PUBLIC_ADDED_PROFIT ||
+                                                                  '100',
+                                                          )
+                                                      ).toLocaleString(
+                                                          undefined,
+                                                          {
+                                                              minimumFractionDigits: 0,
+                                                              maximumFractionDigits: 2,
+                                                          },
+                                                      )}
                                             </p>
                                         </div>
                                     </div>
